@@ -148,6 +148,10 @@ function initNavDropdowns() {
     const dropdown = item.querySelector('.nav-dropdown');
     if (!btn || !dropdown) return;
 
+    /* Associate button ↔ dropdown panel */
+    if (!dropdown.id) dropdown.id = 'dd-' + Math.random().toString(36).slice(2, 7);
+    btn.setAttribute('aria-controls', dropdown.id);
+
     let closeTimer;
 
     function open() {
@@ -164,14 +168,38 @@ function initNavDropdowns() {
       }, 120);
     }
 
+    /* Focusable items in this dropdown */
+    function focusableItems() {
+      return [...dropdown.querySelectorAll('a[href], button:not([disabled])')];
+    }
+
     item.addEventListener('mouseenter', open);
     item.addEventListener('mouseleave', close);
     btn.addEventListener('click', () => {
-      dropdown.classList.contains('nav-dropdown--open') ? close() : open();
+      const isOpen = dropdown.classList.contains('nav-dropdown--open');
+      isOpen ? close() : open();
+      if (!isOpen) {
+        /* Move focus to first item on keyboard-triggered open */
+        requestAnimationFrame(() => {
+          const first = focusableItems()[0];
+          if (first) first.focus();
+        });
+      }
     });
     btn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowDown') { e.preventDefault(); open(); requestAnimationFrame(() => { const first = focusableItems()[0]; if (first) first.focus(); }); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const isOpen = dropdown.classList.contains('nav-dropdown--open'); isOpen ? close() : open(); }
+      if (e.key === 'Escape') { close(); btn.focus(); }
+    });
+
+    /* Arrow key navigation inside dropdown */
+    dropdown.addEventListener('keydown', (e) => {
+      const items2 = focusableItems();
+      const idx = items2.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (idx < items2.length - 1) items2[idx + 1].focus(); }
+      if (e.key === 'ArrowUp')   { e.preventDefault(); if (idx > 0) items2[idx - 1].focus(); else { close(); btn.focus(); } }
+      if (e.key === 'Escape')    { close(); btn.focus(); }
+      if (e.key === 'Tab')       { close(); }
     });
   });
 
@@ -442,6 +470,13 @@ function initDomainSearch() {
 
   if (!form || !input) return;
 
+  /* Ensure result containers announce to screen readers */
+  if (available) { available.setAttribute('role', 'status'); available.setAttribute('aria-live', 'polite'); available.setAttribute('aria-atomic', 'true'); }
+  if (taken)     { taken.setAttribute('role', 'alert');  taken.setAttribute('aria-live', 'assertive'); taken.setAttribute('aria-atomic', 'true'); }
+
+  /* Label the search input */
+  if (!input.getAttribute('aria-label')) input.setAttribute('aria-label', 'Search for a domain name');
+
   /* TLD chip click — fill input */
   $$('.tld-chip[data-tld]').forEach(chip => {
     chip.addEventListener('click', () => {
@@ -530,6 +565,17 @@ function initDomainSearch() {
 function initFAQ() {
   const items = $$('.faq-item');
   if (!items.length) return;
+
+  /* Wire up aria-controls / id pairs */
+  items.forEach((item, i) => {
+    const btn    = item.querySelector('.faq-q');
+    const answer = item.querySelector('.faq-a');
+    if (!btn || !answer) return;
+    const answerId = 'faq-a-' + i;
+    answer.id = answerId;
+    btn.setAttribute('aria-controls', answerId);
+    answer.setAttribute('role', 'region');
+  });
 
   items.forEach(item => {
     const btn    = item.querySelector('.faq-q');
@@ -723,6 +769,9 @@ function initActiveNav() {
 /* ═══════════════════════════════════════════════
    AUTH MODAL
 ═══════════════════════════════════════════════ */
+/* Track the element that opened the modal so focus returns on close */
+let _authModalOpener = null;
+
 function initAuthModal() {
   const modal   = $('#auth-modal');
   const iframe  = $('#auth-iframe');
@@ -741,9 +790,26 @@ function initAuthModal() {
     });
   });
 
-  /* Close on Escape */
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && !modal.hidden) closeAuthModal();
+  /* Focus trap — cycle focus within modal panel */
+  modal.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closeAuthModal(); return; }
+    if (e.key !== 'Tab') return;
+
+    const panel = modal.querySelector('.auth-modal-panel');
+    if (!panel) return;
+    const focusable = [...panel.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )].filter(el => !el.closest('[hidden]'));
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+    }
   });
 }
 
@@ -751,16 +817,23 @@ function openAuthModal() {
   const modal  = $('#auth-modal');
   const iframe = $('#auth-iframe');
   if (!modal) return;
+
+  /* Remember where focus was */
+  _authModalOpener = document.activeElement;
+
   modal.hidden = false;
   document.body.style.overflow = 'hidden';
+
   /* Load iframe src on first open */
   if (iframe && !iframe.src) iframe.src = '/login.php';
+
   /* Ensure first tab is active */
   const firstTab = $('.auth-tab');
   if (firstTab && !firstTab.classList.contains('auth-tab--active')) firstTab.click();
-  /* Trap focus on close button */
+
+  /* Focus the close button (first focusable element in panel) */
   const closeBtn = modal.querySelector('.auth-modal-close');
-  if (closeBtn) setTimeout(() => closeBtn.focus(), 60);
+  if (closeBtn) setTimeout(() => closeBtn.focus(), 80);
 }
 
 function closeAuthModal() {
@@ -768,6 +841,12 @@ function closeAuthModal() {
   if (!modal) return;
   modal.hidden = true;
   document.body.style.overflow = '';
+
+  /* Return focus to the element that opened the modal */
+  if (_authModalOpener && typeof _authModalOpener.focus === 'function') {
+    setTimeout(() => _authModalOpener.focus(), 60);
+    _authModalOpener = null;
+  }
 }
 
 /* ═══════════════════════════════════════════════
@@ -791,8 +870,12 @@ async function fetchCartCount() {
 function updateCartBadge(count) {
   const badge = $('#cart-count');
   if (!badge) return;
-  badge.textContent = count > 99 ? '99+' : String(count);
+  const label = count > 99 ? '99+' : String(count);
+  badge.textContent = label;
   badge.hidden = count < 1;
+  /* Update accessible label */
+  const cart = badge.closest('#nav-cart');
+  if (cart) cart.setAttribute('aria-label', count > 0 ? `View cart — ${label} item${count !== 1 ? 's' : ''}` : 'View cart');
 }
 
 /* ═══════════════════════════════════════════════
@@ -845,11 +928,14 @@ function showCartToast(href) {
     toast = document.createElement('div');
     toast.id = 'cart-toast';
     toast.className = 'cart-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.setAttribute('aria-atomic', 'true');
     document.body.appendChild(toast);
   }
   toast.innerHTML = `
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Added to cart! <a href="/cart.php">View cart →</a>`;
+    Added to cart! <a href="/cart.php">View cart &#x2192;</a>`;
   toast.classList.add('cart-toast--visible');
   setTimeout(() => toast.classList.remove('cart-toast--visible'), 3500);
 }

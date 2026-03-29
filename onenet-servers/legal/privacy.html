@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:ital,opsz,wght@0,6..12,300;0,6..12,400;1,6..12,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/shared/tokens.css"><link rel="stylesheet" href="/shared/layout.css"><link rel="stylesheet" href="/shared/components.css"><link rel="stylesheet" href="/shared/nav.css"><link rel="stylesheet" href="/shared/footer.css"><link rel="stylesheet" href="/shared/animations.css">
 </head>
-<body>
+<body><a href="#main-content" class="skip-link">Skip to main content</a>
     <header id="main-nav">
     <div class="nav-shell">
       <a class="nav-brand" href="/">
@@ -89,7 +89,7 @@
         </div>
         <a href="/cart.php" class="nav-cart" aria-label="View cart" id="nav-cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span class="cart-count" id="cart-count" hidden>0</span>
+          <span class="cart-count" id="cart-count" aria-live="polite" aria-atomic="true" hidden>0</span>
         </a>
         <button class="btn btn-sm btn-outline nav-signin" type="button" onclick="openAuthModal()">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -179,7 +179,7 @@
     </div>
   </div>
 
-  <main class="page-body"><section class="page-hero-simple"><div class="container"><div class="section-head reveal"><div class="eyebrow">Legal</div><h1>Privacy Policy</h1><p class="lead">This policy explains how OneNet Servers collects, stores, and uses personal information in connection with its services.</p></div></div></section><section class="section"><div class="container"><div class="legal-article"><article class="legal-card reveal"><h2>1. Data we collect</h2><p>We may collect contact details, billing information, account credentials, support communications, and service usage data necessary to provide and secure our services.</p></article><article class="legal-card reveal"><h2>2. Why we collect it</h2><p>We use data to provision services, process payments, provide support, prevent abuse, improve reliability, and meet legal or regulatory obligations.</p></article><article class="legal-card reveal"><h2>3. Data sharing</h2><p>We share data only with essential processors and infrastructure partners where needed to deliver services, process payments, or comply with law.</p></article><article class="legal-card reveal"><h2>4. Your rights</h2><p>You may request access, correction, or deletion of your data, subject to legal and operational retention requirements.</p></article></div></div></section></main>
+  <main id="main-content" class="page-body"><section class="page-hero-simple"><div class="container"><div class="section-head reveal"><div class="eyebrow">Legal</div><h1>Privacy Policy</h1><p class="lead">This policy explains how OneNet Servers collects, stores, and uses personal information in connection with its services.</p></div></div></section><section class="section"><div class="container"><div class="legal-article"><article class="legal-card reveal"><h2>1. Data we collect</h2><p>We may collect contact details, billing information, account credentials, support communications, and service usage data necessary to provide and secure our services.</p></article><article class="legal-card reveal"><h2>2. Why we collect it</h2><p>We use data to provision services, process payments, provide support, prevent abuse, improve reliability, and meet legal or regulatory obligations.</p></article><article class="legal-card reveal"><h2>3. Data sharing</h2><p>We share data only with essential processors and infrastructure partners where needed to deliver services, process payments, or comply with law.</p></article><article class="legal-card reveal"><h2>4. Your rights</h2><p>You may request access, correction, or deletion of your data, subject to legal and operational retention requirements.</p></article></div></div></section></main>
     <footer id="main-footer">
     <div class="container">
       <div class="footer-grid">
