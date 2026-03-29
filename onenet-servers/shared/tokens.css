@@ -476,4 +476,66 @@ h5,.h5 { font-size: 15px; font-weight:600; color:var(--ink); }
 .plan-per  { font-size: 13px; color: var(--muted); align-self: flex-end; padding-bottom: 5px; }
 .plan-ngn  { font-size: 12px; font-weight: 500; color: var(--amber); margin-bottom: 6px; font-family: var(--f-copy); }
 .plan-desc { font-family: var(--f-copy); font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
-.plan-div
+.plan-divider { height: 1px; background: var(--line); margin: 14px 0; }
+
+.plan-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: var(--pill);
+}
+.plan-badge--pop { background: var(--blue); color: #fff; }
+.plan-badge--best { background: var(--green-l); color: var(--green-d); }
+
+.plan-feats li svg { flex-shrink: 0; color: var(--blue); }
+.plan-feats li .feat-muted { color: var(--muted); text-decoration: line-through; }
+
+/* ─── CTA Reassurance ─── */
+.cta-reassurance {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  margin-top: 14px;
+}
+.cta-reassurance-item {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 500; color: var(--muted);
+}
+.cta-reassurance-item svg { color: var(--green); flex-shrink: 0; }
+
+/* ─── Sticky CTA ─── */
+.sticky-cta {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 490;
+  background: var(--ink); color: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 14px 24px;
+  transform: translateY(100%);
+  transition: transform var(--t-slow);
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.sticky-cta--visible { transform: translateY(0); }
+.sticky-cta-text { font-size: 14px; }
+.sticky-cta-text strong { color: #fff; }
+.sticky-cta-actions { display: flex; gap: 10px; }
+.sticky-cta-close {
+  border: none; background: transparent; color: rgba(255,255,255,.6);
+  font-size: 18px; padding: 4px; flex-shrink: 0;
+}
+.btn-white {
+  background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.25);
+}
+.btn-white:hover { background: rgba(255,255,255,.2); }
+
+/* ─── Responsive: plan card price scale ─── */
+@media (max-width: 48em) {
+  .plan-num { font-size: 40px; }
+  .billing-toggle { gap: 10px; }
+  .billing-label { font-size: 13px; }
+}
+
+@media (max-width: 30em) {
+  .plan-num { font-size: 36px; }
+  .plan-card-header { padding: 18px 18px 14px; }
+  .plan-card-body   { padding: 0 18px 16px; }
+  .plan-card-footer { padding: 0 18px 18px; }
+  .cta-reassurance { gap: 10px; }
+  .cta-reassurance-item { font-size: 12px; }
+  .billing-toggle { flex-wrap: wrap; justify-content: center; }
+}
