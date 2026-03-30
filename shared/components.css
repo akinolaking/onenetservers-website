@@ -535,7 +535,7 @@
 }
 
 .page-hero-simple {
-  padding: calc(var(--nav-h) + 54px) 0 72px;
+  padding: 54px 0 72px;
   background:
     radial-gradient(circle at top right, var(--blue-xl) 0%, transparent 42%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
@@ -930,7 +930,7 @@
   .faq-a { padding: 0 18px 16px; }
 
   /* Page hero simple */
-  .page-hero-simple { padding: calc(var(--nav-h) + 40px) 0 52px; }
+  .page-hero-simple { padding: 40px 0 52px; }
 
   /* Sticky CTA → vertical */
   .sticky-cta {

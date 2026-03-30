@@ -22,7 +22,7 @@
 .hero {
   position: relative;
   overflow: hidden;
-  padding: calc(var(--nav-h) + 64px) 0 88px;
+  padding: 64px 0 88px;
   background: linear-gradient(180deg, #fff 0%, var(--blue-xs) 100%);
 }
 
@@ -250,7 +250,7 @@
   .section-sm { padding: 52px 0; }
   .section-lg { padding: 96px 0; }
 
-  .hero { padding: calc(var(--nav-h) + 52px) 0 72px; }
+  .hero { padding: 52px 0 72px; }
   .hero-grid { gap: 40px; }
 }
 
@@ -267,7 +267,7 @@
   .section-head { margin-bottom: 32px; }
 
   /* Hero — stack to single column */
-  .hero { padding: calc(var(--nav-h) + 40px) 0 56px; }
+  .hero { padding: 40px 0 56px; }
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 36px;
