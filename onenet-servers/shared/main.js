@@ -24,33 +24,14 @@
 /* ═══════════════════════════════════════════════
    CONSTANTS
 ═══════════════════════════════════════════════ */
-const PRICES = {
-  /* Web Hosting */
-  wh_starter:  { usd_m: 3.99,  usd_a: 3.91,  gbp_m: 3.71,  gbp_a: 3.63,  ngn_m: 7499,   ngn_a: 7349  },
-  wh_lite:     { usd_m: 9.75,  usd_a: 6.34,  gbp_m: 9.07,  gbp_a: 5.90,  ngn_m: 13999,  ngn_a: 9099  },
-  wh_premium:  { usd_m: 18.20, usd_a: 11.83, gbp_m: 16.95, gbp_a: 11.02, ngn_m: 24999,  ngn_a: 16249 },
-  wh_ultimate: { usd_m: 32.50, usd_a: 21.13, gbp_m: 30.24, gbp_a: 19.66, ngn_m: 44999,  ngn_a: 29249 },
-  /* WordPress Hosting */
-  wp_starter:  { usd_m: 6.78,  usd_a: 4.41,  gbp_m: 6.33,  gbp_a: 4.11,  ngn_m: 10500,  ngn_a: 6825  },
-  wp_lite:     { usd_m: 13.65, usd_a: 8.87,  gbp_m: 12.72, gbp_a: 8.27,  ngn_m: 19999,  ngn_a: 12999 },
-  wp_premium:  { usd_m: 52.49, usd_a: 34.12, gbp_m: 48.88, gbp_a: 31.77, ngn_m: 74999,  ngn_a: 48749 },
-  wp_ultimate: { usd_m: 105.00,usd_a: 68.25, gbp_m: 97.75, gbp_a: 63.54, ngn_m: 149999, ngn_a: 97499 },
-  /* Reseller */
-  rsl_starter:  { usd_m: 5.39,  usd_a: 3.93,  gbp_m: 5.02,  gbp_a: 3.66,  ngn_m: 8999,   ngn_a: 6569  },
-  rsl_lite:     { usd_m: 14.30, usd_a: 9.30,  gbp_m: 13.32, gbp_a: 8.66,  ngn_m: 22999,  ngn_a: 14949 },
-  rsl_grow:     { usd_m: 20.28, usd_a: 13.18, gbp_m: 18.89, gbp_a: 12.28, ngn_m: 31999,  ngn_a: 20799 },
-  rsl_enterprise:{ usd_m: 28.60,usd_a: 18.59, gbp_m: 26.64, gbp_a: 17.32, ngn_m: 44999,  ngn_a: 29249 },
-  /* VPS */
-  vps_starter:  { usd_m: 12.42, usd_a: 11.18, gbp_m: 11.57, gbp_a: 10.41, ngn_m: 19999,  ngn_a: 17999 },
-  vps_lite:     { usd_m: 29.11, usd_a: 26.20, gbp_m: 27.12, gbp_a: 24.41, ngn_m: 44999,  ngn_a: 40499 },
-  vps_premium:  { usd_m: 43.61, usd_a: 39.25, gbp_m: 40.63, gbp_a: 36.57, ngn_m: 67999,  ngn_a: 61199 },
-  vps_ultimate: { usd_m: 92.15, usd_a: 82.94, gbp_m: 85.84, gbp_a: 77.26, ngn_m: 139999, ngn_a: 125999 },
-  /* Business Email */
-  em_starter:   { usd_m: 2.33,  usd_a: 1.80,  gbp_m: 1.79,  gbp_a: 1.17,  ngn_m: 2899,   ngn_a: 1973 },
-};
-
 const CURRENCY_SYMBOLS = { USD: '$', GBP: '£', NGN: '₦' };
 const CURRENCY_LABELS  = { USD: 'USD', GBP: 'GBP', NGN: 'NGN' };
+const CURRENCY_PREFIXES = { USD: 'US', GBP: 'UK', NGN: 'NG' };
+const PLAN_ALIASES = {
+  em_starter: 'email_starter',
+  em_business: 'email_pro',
+  em_enterprise: 'email_proplus'
+};
 
 /* State */
 let currentCurrency = 'USD';
@@ -66,6 +47,75 @@ function formatPrice(amount, currency) {
   if (currency === 'NGN') return '₦' + amount.toLocaleString('en-NG', { maximumFractionDigits: 0 });
   if (currency === 'GBP') return '£' + amount.toFixed(2);
   return '$' + amount.toFixed(2);
+}
+
+function normalizePlanKey(plan) {
+  return PLAN_ALIASES[plan] || plan;
+}
+
+function getPlanCard(plan) {
+  const normalizedPlan = normalizePlanKey(plan);
+  return document.querySelector(`[data-plan="${normalizedPlan}"]`);
+}
+
+function getPlanPriceData(plan) {
+  const planCard = getPlanCard(plan);
+  const priceEl = planCard ? planCard.querySelector('.plan-num') : null;
+  if (!priceEl || !priceEl.dataset) return null;
+  return priceEl.dataset;
+}
+
+function parsePriceValue(value) {
+  if (value === undefined || value === null || value === '') return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function getPreferredPrice(dataset) {
+  if (!dataset) return null;
+
+  const currencyKey = currentCurrency.toLowerCase();
+  const preferredCycle = isAnnual ? 'a' : 'm';
+  const preferred = parsePriceValue(dataset[`${preferredCycle}${currencyKey.charAt(0).toUpperCase()}${currencyKey.slice(1)}`]);
+  if (preferred !== null) return preferred;
+
+  const fallbacks = [
+    `m${currencyKey.charAt(0).toUpperCase()}${currencyKey.slice(1)}`,
+    `a${currencyKey.charAt(0).toUpperCase()}${currencyKey.slice(1)}`,
+    'mUsd', 'aUsd', 'mGbp', 'aGbp', 'mNgn', 'aNgn'
+  ];
+
+  for (const key of fallbacks) {
+    const value = parsePriceValue(dataset[key]);
+    if (value !== null) return value;
+  }
+
+  return null;
+}
+
+function getPlanBillingMode(dataset) {
+  if (!dataset) return 'monthly';
+
+  const hasMonthly = ['mUsd', 'mGbp', 'mNgn'].some(key => parsePriceValue(dataset[key]) !== null);
+  const hasAnnual = ['aUsd', 'aGbp', 'aNgn'].some(key => parsePriceValue(dataset[key]) !== null);
+
+  if (hasMonthly && hasAnnual) return isAnnual ? 'annual-billed-monthly' : 'monthly';
+  if (hasAnnual) return 'annual-only';
+  return 'monthly';
+}
+
+function getPeriodLabel(dataset) {
+  const mode = getPlanBillingMode(dataset);
+  if (mode === 'annual-only') return '/yr';
+  if (mode === 'annual-billed-monthly') return '/mo (billed annually)';
+  return '/mo';
+}
+
+function updateTextByCurrency() {
+  $$('[data-text-usd], [data-text-ngn], [data-text-gbp]').forEach(el => {
+    const attr = `text${currentCurrency.charAt(0) + currentCurrency.slice(1).toLowerCase()}`;
+    if (el.dataset[attr]) el.textContent = el.dataset[attr];
+  });
 }
 
 function debounce(fn, ms = 100) {
@@ -220,8 +270,6 @@ function initCurrencySwitcher() {
   const saved = localStorage.getItem('onenet_currency');
   if (saved && ['USD','GBP','NGN'].includes(saved)) currentCurrency = saved;
 
-  const FLAGS = { USD: '🇺🇸', GBP: '🇬🇧', NGN: '🇳🇬' };
-
   function switchCurrency(currency) {
     currentCurrency = currency;
     localStorage.setItem('onenet_currency', currency);
@@ -229,7 +277,7 @@ function initCurrencySwitcher() {
     /* Update dropdown trigger label */
     const flagEl  = $('#currency-flag-icon');
     const labelEl = $('#currency-label');
-    if (flagEl)  flagEl.textContent  = FLAGS[currency];
+    if (flagEl)  flagEl.textContent  = CURRENCY_PREFIXES[currency];
     if (labelEl) labelEl.textContent = currency;
 
     /* Update desktop dropdown options */
@@ -274,7 +322,15 @@ function initCurrencySwitcher() {
 
   /* Mobile currency buttons */
   $$('.mobile-currency-btn').forEach(btn => {
+    btn.textContent = btn.dataset.currency;
     btn.addEventListener('click', () => switchCurrency(btn.dataset.currency));
+  });
+
+  /* Remove decorative flag glyphs from dropdown options */
+  $$('.currency-option').forEach(opt => {
+    if (opt.firstChild && opt.firstChild.nodeType === Node.TEXT_NODE) {
+      opt.firstChild.textContent = '';
+    }
   });
 
   /* Set initial state */
@@ -327,23 +383,21 @@ function syncPlanCardUrls() {
 ═══════════════════════════════════════════════ */
 function updateAllPrices() {
   const sym = CURRENCY_SYMBOLS[currentCurrency];
-  const period = isAnnual ? '_a' : '_m';
-  const currKey = currentCurrency.toLowerCase() + period;
 
-  /* Update elements with data-plan + data-price-key */
+  /* Update plan cards from live HTML data attributes */
   $$('[data-plan]').forEach(el => {
-    const plan = el.dataset.plan;
-    if (!PRICES[plan]) return;
-    const price = PRICES[plan][currKey];
-    if (price === undefined) return;
-
+    const priceEl = el.querySelector('.plan-num');
     const numEl = el.querySelector('.plan-num');
     const symEl = el.querySelector('.plan-sym');
-    const perEl = el.querySelector('.plan-per') || el.querySelector('.plan-billing-label');
+    const perEl = el.querySelector('.plan-per');
+    const dataset = priceEl ? priceEl.dataset : null;
+    const price = getPreferredPrice(dataset);
+
+    if (price === null) return;
 
     if (numEl) numEl.textContent = currentCurrency === 'NGN' ? Math.round(price).toLocaleString('en-NG') : price.toFixed(2);
     if (symEl) symEl.textContent = sym;
-    if (perEl) perEl.textContent = isAnnual ? '/mo (billed annually)' : '/mo';
+    if (perEl) perEl.textContent = getPeriodLabel(dataset);
 
     /* Show/hide secondary currency lines */
     const ngnLine = el.querySelector('[data-show-currency="NGN"]');
@@ -363,15 +417,19 @@ function updateAllPrices() {
   const stickyCta = $('#sticky-cta[data-sticky-from]');
   if (stickyCta) {
     const plan = stickyCta.dataset.stickyFrom;
-    if (PRICES[plan]) {
-      const ctaPrice = PRICES[plan][currKey];
-      const strong = stickyCta.querySelector('.sticky-cta-text strong');
-      if (strong && ctaPrice !== undefined) {
-        const priceStr = currentCurrency === 'NGN'
-          ? `₦${Math.round(ctaPrice).toLocaleString('en-NG')}/mo`
-          : `${sym}${ctaPrice.toFixed(2)}/mo`;
-        strong.textContent = strong.textContent.replace(/from [$£₦][\d,.]+\/mo/, `from ${priceStr}`);
-      }
+    const priceData = getPlanPriceData(plan);
+    const ctaPrice = getPreferredPrice(priceData);
+    const stickyPrice = stickyCta.querySelector('.sticky-price');
+    const stickyPeriod = stickyCta.querySelector('.sticky-period');
+
+    if (stickyPrice && ctaPrice !== null) {
+      stickyPrice.textContent = formatPrice(
+        currentCurrency === 'NGN' ? Math.round(ctaPrice) : ctaPrice,
+        currentCurrency
+      );
+    }
+    if (stickyPeriod) {
+      stickyPeriod.textContent = getPeriodLabel(priceData);
     }
   }
 
@@ -381,6 +439,8 @@ function updateAllPrices() {
     else if (currentCurrency === 'NGN' && el.dataset.ngn) el.textContent = el.dataset.ngn;
     else if (currentCurrency === 'GBP' && el.dataset.gbp) el.textContent = el.dataset.gbp;
   });
+
+  updateTextByCurrency();
 
   /* Simple data-m / data-a / data-usd / data-gbp / data-ngn fallback */
   $$('[data-m]').forEach(el => {
@@ -667,6 +727,33 @@ function initTableScrollHint() {
   });
 }
 
+function initTestimonials() {
+  const avatarClasses = ['testi-av-a', 'testi-av-b', 'testi-av-c', 'testi-av-d', 'testi-av-e', 'testi-av-f', 'testi-av-g'];
+
+  $$('.testi-card').forEach((card, index) => {
+    const avatar = card.querySelector('.testi-avatar');
+    if (!avatar) return;
+
+    if (!avatar.className.match(/testi-av-[a-z]/)) {
+      avatar.classList.add(avatarClasses[index % avatarClasses.length]);
+    }
+
+    if (!avatar.textContent.trim()) {
+      const sourceName = card.querySelector('.testi-name')?.textContent
+        || card.querySelector('.testi-author strong')?.textContent
+        || '';
+      const initials = sourceName
+        .trim()
+        .split(/\s+/)
+        .slice(0, 2)
+        .map(part => part.charAt(0).toUpperCase())
+        .join('');
+
+      avatar.textContent = initials || 'ON';
+    }
+  });
+}
+
 /* ═══════════════════════════════════════════════
    11. EXIT BAR (85% scroll depth)
 ═══════════════════════════════════════════════ */
@@ -705,9 +792,35 @@ function initExitBar() {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const emailInput = form.querySelector('input[type="email"]');
-      if (!emailInput || !emailInput.value) return;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      let status = form.querySelector('.exit-bar-status');
+
+      if (!emailInput || !emailInput.value.trim()) {
+        if (emailInput) emailInput.focus();
+        return;
+      }
+      if (!emailInput.checkValidity()) {
+        emailInput.reportValidity();
+        return;
+      }
+
+      if (!status) {
+        status = document.createElement('p');
+        status.className = 'exit-bar-status';
+        status.setAttribute('role', 'status');
+        status.setAttribute('aria-live', 'polite');
+        form.appendChild(status);
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
+
       /* In production: POST to /api/subscribe or WHMCS */
-      form.innerHTML = '<p style="color:var(--green);font-weight:600;font-size:14px">✓ Sent! Check your inbox shortly.</p>';
+      status.textContent = 'Sent. Check your inbox shortly.';
+      emailInput.value = '';
+
       setTimeout(() => {
         bar.classList.remove('exit-bar--visible');
         setTimeout(() => { bar.hidden = true; }, 300);
@@ -1003,6 +1116,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDomainSearch();
   initFAQ();
   initTableScrollHint();
+  initTestimonials();
   initExitBar();
   initPricingTabs();
   initLottieFallbacks();
