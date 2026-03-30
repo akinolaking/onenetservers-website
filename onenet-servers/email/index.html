@@ -37,7 +37,7 @@
         "name": "Is this per-user or flat pricing?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Flat pricing. You pay one monthly fee for a pool of addresses — not a fee per person. Pro Plus gives you 100 addresses for one flat price, making it ideal for large teams."
+          "text": "Flat pricing. You pay one monthly fee for a pool of addresses — not a fee per person. Enterprise gives you 100 addresses for one flat price, making it ideal for larger teams."
         }
       },
       {
@@ -332,7 +332,7 @@
       <div class="container">
         <div class="section-head centered reveal">
           <div class="eyebrow eyebrow-center">Plans</div>
-          <h2>Four plans. Flat pricing. <em class="h-em">No per-user surprises.</em></h2>
+          <h2>Three plans. Flat pricing. <em class="h-em">No per-user surprises.</em></h2>
         </div>
         <div class="pricing-proof reveal">
           <div class="proof-avatars"><span></span><span></span><span></span><span></span></div>
@@ -385,50 +385,12 @@
             </div>
           </article>
 
-          <!-- Lite -->
-          <article class="plan-card reveal" data-delay="1" data-plan="email_lite">
-            <div class="plan-card-header">
-              <div class="plan-name">Lite</div>
-              <div class="plan-audience">For small teams up to 25 people</div>
-              <div class="plan-price">
-                <span class="plan-sym" data-ngn-sym="&#8358;" data-gbp-sym="&pound;" data-usd-sym="$">$</span>
-                <span class="plan-num"
-                      data-m-usd="7.80" data-a-usd="5.46"
-                      data-m-ngn="5999" data-a-ngn="4199"
-                      data-m-gbp="5.58" data-a-gbp="3.91">7.80</span>
-                <span class="plan-per">/mo</span>
-              </div>
-              <div class="plan-renewal">Renews at <span
-                data-renew-usd="$65.51/yr"
-                data-renew-ngn="&#8358;50,391/yr"
-                data-renew-gbp="&pound;46.86/yr">$65.51/yr</span></div>
-            </div>
-            <div class="plan-card-body">
-              <div class="plan-divider"></div>
-              <ul class="plan-feats">
-                <li>25 email addresses</li>
-                <li>50 GB SSD storage</li>
-                <li>you@yourdomain.com</li>
-                <li>100-participant video meetings</li>
-                <li>Shared file manager</li>
-                <li>50 MB attachments</li>
-              </ul>
-            </div>
-            <div class="plan-card-footer">
-              <a class="btn btn-md btn-outline"
-                 href="/cart.php?a=add&pid=130&billingcycle=monthly"
-                 data-monthly-url="/cart.php?a=add&pid=130&billingcycle=monthly"
-                 data-annual-url="/cart.php?a=add&pid=130&billingcycle=annually">Get started</a>
-              <div class="plan-mbg">30-day money-back guarantee</div>
-            </div>
-          </article>
-
-          <!-- Pro (Popular) -->
+          <!-- Business (Popular) -->
           <article class="plan-card popular reveal" data-delay="2" data-plan="email_pro">
             <div class="badge-popular">Popular</div>
             <div class="plan-card-header">
-              <div class="plan-name">Pro</div>
-              <div class="plan-audience">For growing businesses</div>
+              <div class="plan-name">Business</div>
+              <div class="plan-audience">For growing teams, client ops, and shared inboxes</div>
               <div class="plan-price">
                 <span class="plan-sym" data-ngn-sym="&#8358;" data-gbp-sym="&pound;" data-usd-sym="$">$</span>
                 <span class="plan-num"
@@ -450,6 +412,7 @@
                 <li>you@yourdomain.com</li>
                 <li>100-participant video meetings</li>
                 <li>Shared file manager</li>
+                <li>Team chat and calendars</li>
                 <li>50 MB attachments</li>
               </ul>
             </div>
@@ -462,11 +425,11 @@
             </div>
           </article>
 
-          <!-- Pro Plus -->
+          <!-- Enterprise -->
           <article class="plan-card reveal" data-delay="3" data-plan="email_proplus">
             <div class="plan-card-header">
-              <div class="plan-name">Pro Plus</div>
-              <div class="plan-audience">For large teams and enterprise</div>
+              <div class="plan-name">Enterprise</div>
+              <div class="plan-audience">For larger teams, multi-brand ops, and leadership mailboxes</div>
               <div class="plan-price">
                 <span class="plan-sym" data-ngn-sym="&#8358;" data-gbp-sym="&pound;" data-usd-sym="$">$</span>
                 <span class="plan-num"
@@ -488,6 +451,7 @@
                 <li>you@yourdomain.com</li>
                 <li>100-participant video meetings</li>
                 <li>Shared file manager</li>
+                <li>Priority migration support</li>
                 <li>50 MB attachments</li>
               </ul>
             </div>
@@ -798,7 +762,7 @@
               <span>+</span>
             </button>
             <div class="faq-a" hidden>
-              Flat pricing. You pay one monthly fee for a pool of addresses — not a fee per person. Pro Plus gives you 100 addresses for one flat price, making it the most cost-effective option for larger teams.
+              Flat pricing. You pay one monthly fee for a pool of addresses — not a fee per person. Enterprise gives you 100 addresses for one flat price, making it the most cost-effective option for larger teams.
             </div>
           </article>
 
@@ -969,7 +933,7 @@
   </button>
 
   <!-- Sticky CTA -->
-  <div id="sticky-cta" class="sticky-cta">
+  <div id="sticky-cta" class="sticky-cta" data-sticky-from="em_starter">
     <div class="sticky-cta-text"><strong>Business Email from $2.33/mo</strong> · Flat pricing · Video meetings included · 30-day guarantee</div>
     <div class="sticky-cta-actions">
       <a class="btn btn-sm btn-white" href="#plans">See plans</a>

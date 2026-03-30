@@ -45,6 +45,8 @@ const PRICES = {
   vps_lite:     { usd_m: 29.11, usd_a: 26.20, gbp_m: 27.12, gbp_a: 24.41, ngn_m: 44999,  ngn_a: 40499 },
   vps_premium:  { usd_m: 43.61, usd_a: 39.25, gbp_m: 40.63, gbp_a: 36.57, ngn_m: 67999,  ngn_a: 61199 },
   vps_ultimate: { usd_m: 92.15, usd_a: 82.94, gbp_m: 85.84, gbp_a: 77.26, ngn_m: 139999, ngn_a: 125999 },
+  /* Business Email */
+  em_starter:   { usd_m: 2.33,  usd_a: 1.80,  gbp_m: 1.79,  gbp_a: 1.17,  ngn_m: 2899,   ngn_a: 1973 },
 };
 
 const CURRENCY_SYMBOLS = { USD: '$', GBP: '£', NGN: '₦' };
