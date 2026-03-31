@@ -211,34 +211,54 @@
 
 /* ── Hero visual — photo mosaic column ─────────────────────────── */
 .hero-visual {
-  position: relative;
-  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* Main tall photo fills the column */
+/* Main tall photo */
 .hero-photo-frame--main {
-  position: absolute;
-  inset: 0;
-  bottom: 160px;  /* leave room for the two thumbnails below */
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 380px;
   min-height: auto;
   border-radius: 28px;
+  overflow: hidden;
 }
 
-/* Two market thumbnails at the bottom */
+.hero-photo-frame--main img {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Row of two market thumbnails */
+.hero-visual-thumbs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Two market thumbnails */
 .hero-photo-frame--lagos,
 .hero-photo-frame--london {
-  position: absolute;
-  bottom: 0;
-  width: calc(50% - 8px);
-  height: 150px;
+  position: relative;
+  height: 152px;
   min-height: auto;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--sh-xl);
 }
 
-.hero-photo-frame--lagos  { left: 0; }
-.hero-photo-frame--london { right: 0; }
+.hero-photo-frame--lagos img,
+.hero-photo-frame--london img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 .hero-photo-frame--lagos figcaption,
 .hero-photo-frame--london figcaption {
@@ -483,28 +503,19 @@
 
   /* Hero visual photo mosaic — tablet */
   .hero-visual {
-    min-height: auto;
     max-width: 620px;
     margin: 0 auto;
   }
   .hero-photo-frame--main {
-    position: relative;
-    inset: auto;
-    height: 400px;
-    width: 100%;
-    min-height: auto;
+    min-height: 340px;
+  }
+  .hero-photo-frame--main img {
+    min-height: 340px;
   }
   .hero-photo-frame--lagos,
   .hero-photo-frame--london {
-    position: relative;
-    display: inline-block;
-    width: calc(50% - 8px);
-    height: 180px;
-    margin-top: 14px;
-    vertical-align: top;
+    height: 160px;
   }
-  .hero-photo-frame--lagos  { margin-right: 16px; }
-  .hero-photo-frame--london { margin-right: 0; }
 
   /* Market intro — tablet */
   .market-intro-grid {
@@ -562,17 +573,14 @@
 
   /* Hero visual — mobile */
   .hero-photo-frame--main {
-    height: 320px;
+    min-height: 280px;
+  }
+  .hero-photo-frame--main img {
+    min-height: 280px;
   }
   .hero-photo-frame--lagos,
   .hero-photo-frame--london {
-    height: 140px;
-  }
-  /* Floating market card becomes static on mobile */
-  .hero-visual .hero-media-card {
-    position: static;
-    max-width: none;
-    margin-top: 14px;
+    height: 130px;
   }
 }
 
@@ -601,12 +609,15 @@
 
   /* Photo frame variants — small phones */
   .hero-photo-frame--main {
-    height: 260px;
+    min-height: 220px;
     border-radius: 20px;
+  }
+  .hero-photo-frame--main img {
+    min-height: 220px;
   }
   .hero-photo-frame--lagos,
   .hero-photo-frame--london {
-    height: 110px;
+    height: 100px;
     border-radius: 14px;
   }
 
