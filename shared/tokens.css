@@ -98,16 +98,6 @@
   --c-green:         #10B981;
   --c-amber:         #F59E0B;
   --c-red:           #EF4444;
-  --c-green-dark:    #059669;   /* success / available-state text */
-  --c-green-deep:    #065f46;   /* domain result available text */
-  --c-green-tint:    #F0FDF4;   /* success background tint */
-  --c-browser-red:   #ff5f57;   /* macOS chrome — close button */
-  --c-browser-yellow:#febc2e;   /* macOS chrome — minimise button */
-  --c-browser-green: #28c840;   /* macOS chrome — expand button */
-  --c-dark-bg-start: #151528;   /* dark section gradient start */
-  --c-dark-bg-end:   #20203c;   /* dark section gradient end */
-  --c-blue-grad-mid: #5d6cff;   /* CTA banner gradient endpoint */
-  --c-blue-grad-light:#8ba2ff;  /* proof-avatar gradient endpoint */
 
   /* Glass / blur */
   --glass-bg: rgba(255,255,255,0.72);
@@ -136,6 +126,18 @@ img, svg, video { display: block; max-width: 100%; }
 ul, ol { list-style: none; }
 button, input, select, textarea { font-family: inherit; }
 button { cursor: pointer; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* ─── LAYOUT ─── */
 .container  { max-width: var(--w-lg); margin: 0 auto; padding: 0 24px; }
@@ -203,7 +205,7 @@ h5,.h5 { font-size: 15px; font-weight:600; color:var(--ink); }
 .btn-secondary {
   background: var(--blue-xl); color: var(--blue);
 }
-.btn-secondary:hover { background: var(--c-primary-xlight); }
+.btn-secondary:hover { background: #E0E0FF; }
 
 .btn-outline {
   background: none; color: var(--blue);
@@ -444,7 +446,7 @@ h5,.h5 { font-size: 15px; font-weight:600; color:var(--ink); }
 .domain-result.taken     .domain-result-icon { background: rgba(239,68,68,.12);  color: var(--red); }
 .domain-result-body { flex: 1; }
 .domain-result-text { font-size: 15px; font-weight: 600; }
-.domain-result.available .domain-result-text { color: var(--c-green-deep); }
+.domain-result.available .domain-result-text { color: #065f46; }
 .domain-result.taken     .domain-result-text { color: var(--red); }
 .domain-result-sub { font-size: 12px; color: var(--muted); margin-top: 2px; font-family: var(--f-copy); }
 

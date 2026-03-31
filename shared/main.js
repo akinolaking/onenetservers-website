@@ -828,6 +828,8 @@ function initTableScrollHint() {
 
 function initTestimonials() {
   const avatarClasses = ['testi-av-a', 'testi-av-b', 'testi-av-c', 'testi-av-d', 'testi-av-e', 'testi-av-f', 'testi-av-g'];
+  const track = $('#testi-track');
+  const navButtons = $$('.testi-nav');
 
   $$('.testi-card').forEach((card, index) => {
     const avatar = card.querySelector('.testi-avatar');
@@ -850,6 +852,30 @@ function initTestimonials() {
 
       avatar.textContent = initials || 'ON';
     }
+  });
+
+  if (!track || !navButtons.length) return;
+
+  const getScrollAmount = () => {
+    const card = track.querySelector('.testi-card');
+    if (!card) return 320;
+    const styles = window.getComputedStyle(track);
+    const gap = parseFloat(styles.columnGap || styles.gap || '0');
+    return card.getBoundingClientRect().width + gap;
+  };
+
+  navButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const direction = button.dataset.direction === 'prev' ? -1 : 1;
+      track.scrollBy({ left: getScrollAmount() * direction, behavior: 'smooth' });
+    });
+  });
+
+  track.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    const direction = event.key === 'ArrowLeft' ? -1 : 1;
+    track.scrollBy({ left: getScrollAmount() * direction, behavior: 'smooth' });
   });
 }
 
