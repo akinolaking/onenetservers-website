@@ -155,7 +155,7 @@
   border-radius: 50%;
   border: 2px solid #fff;
   margin-left: -8px;
-  background: linear-gradient(135deg, var(--blue), #8ba2ff);
+  background: linear-gradient(135deg, var(--blue), var(--c-blue-grad-light));
 }
 
 .proof-avatars span:first-child {
@@ -475,7 +475,7 @@
 .cta-banner-inner {
   padding: 38px;
   border-radius: var(--r6);
-  background: linear-gradient(135deg, var(--blue) 0%, #5d6cff 100%);
+  background: linear-gradient(135deg, var(--blue) 0%, var(--c-blue-grad-mid) 100%);
   color: #fff;
   display: flex;
   align-items: center;

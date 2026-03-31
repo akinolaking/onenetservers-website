@@ -238,9 +238,9 @@
   border-radius: 50%;
 }
 
-.browser-dots span:nth-child(1) { background: #ff5f57; }
-.browser-dots span:nth-child(2) { background: #febc2e; }
-.browser-dots span:nth-child(3) { background: #28c840; }
+.browser-dots span:nth-child(1) { background: var(--c-browser-red); }
+.browser-dots span:nth-child(2) { background: var(--c-browser-yellow); }
+.browser-dots span:nth-child(3) { background: var(--c-browser-green); }
 
 .browser-url {
   flex: 1;
@@ -316,7 +316,7 @@
 }
 
 .mockup-terminal {
-  background: linear-gradient(180deg, #151528 0%, #20203c 100%);
+  background: linear-gradient(180deg, var(--c-dark-bg-start) 0%, var(--c-dark-bg-end) 100%);
   color: rgba(255, 255, 255, 0.82);
   padding: 16px;
   font-family: var(--f-mono);

@@ -205,7 +205,7 @@ h5,.h5 { font-size: 15px; font-weight:600; color:var(--ink); }
 .btn-secondary {
   background: var(--blue-xl); color: var(--blue);
 }
-.btn-secondary:hover { background: #E0E0FF; }
+.btn-secondary:hover { background: var(--c-primary-xlight); }
 
 .btn-outline {
   background: none; color: var(--blue);
@@ -446,7 +446,7 @@ h5,.h5 { font-size: 15px; font-weight:600; color:var(--ink); }
 .domain-result.taken     .domain-result-icon { background: rgba(239,68,68,.12);  color: var(--red); }
 .domain-result-body { flex: 1; }
 .domain-result-text { font-size: 15px; font-weight: 600; }
-.domain-result.available .domain-result-text { color: #065f46; }
+.domain-result.available .domain-result-text { color: var(--c-green-deep); }
 .domain-result.taken     .domain-result-text { color: var(--red); }
 .domain-result-sub { font-size: 12px; color: var(--muted); margin-top: 2px; font-family: var(--f-copy); }
 
