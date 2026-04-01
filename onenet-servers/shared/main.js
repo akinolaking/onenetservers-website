@@ -144,13 +144,35 @@ function initMobileMenu() {
   const hamburger = $('#nav-hamburger');
   const drawer    = $('#mobile-drawer');
   if (!hamburger || !drawer) return;
+  const drawerInner = drawer.querySelector('.mobile-drawer-inner');
+  let lastFocused = null;
+
+  if (drawerInner && !drawer.querySelector('.mobile-drawer-head')) {
+    const header = document.createElement('div');
+    header.className = 'mobile-drawer-head';
+    header.innerHTML = `
+      <div>
+        <span class="mobile-drawer-kicker">Navigation</span>
+        <h2 class="mobile-drawer-title">Pick a product and keep moving.</h2>
+        <p class="mobile-drawer-copy">Domains, hosting, email, and security with a faster path to checkout.</p>
+      </div>
+      <button type="button" class="mobile-drawer-close" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M14 4L4 14M4 4l10 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    `;
+    drawerInner.insertBefore(header, drawerInner.firstChild);
+  }
 
   function openMenu() {
+    lastFocused = document.activeElement;
     drawer.classList.add('mobile-drawer--open');
     drawer.removeAttribute('aria-hidden');
     hamburger.setAttribute('aria-expanded', 'true');
     hamburger.classList.add('nav-hamburger--open');
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('drawer-open');
+    const firstLink = drawer.querySelector('.mobile-nav-group summary, .mobile-drawer-close');
+    if (firstLink) requestAnimationFrame(() => firstLink.focus());
   }
   function closeMenu() {
     drawer.classList.remove('mobile-drawer--open');
@@ -158,16 +180,24 @@ function initMobileMenu() {
     hamburger.setAttribute('aria-expanded', 'false');
     hamburger.classList.remove('nav-hamburger--open');
     document.body.style.overflow = '';
+    document.body.classList.remove('drawer-open');
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
   }
 
   hamburger.addEventListener('click', () => {
     drawer.classList.contains('mobile-drawer--open') ? closeMenu() : openMenu();
   });
 
+  const closeButton = drawer.querySelector('.mobile-drawer-close');
+  if (closeButton) closeButton.addEventListener('click', closeMenu);
+
+  $$('.mobile-nav-sub a, .mobile-drawer-actions a, .mobile-currency-btn', drawer)
+    .forEach(el => el.addEventListener('click', closeMenu));
+
   /* Close on outside click */
   document.addEventListener('click', (e) => {
     if (drawer.classList.contains('mobile-drawer--open') &&
-        !drawer.contains(e.target) &&
+        !drawerInner.contains(e.target) &&
         !hamburger.contains(e.target)) {
       closeMenu();
     }
@@ -177,6 +207,12 @@ function initMobileMenu() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu();
   });
+
+  window.addEventListener('resize', debounce(() => {
+    if (window.innerWidth > 768 && drawer.classList.contains('mobile-drawer--open')) {
+      closeMenu();
+    }
+  }, 50));
 
   /* Mobile nav accordion — handled natively by <details>/<summary> elements */
 }
@@ -828,6 +864,8 @@ function initTableScrollHint() {
 
 function initTestimonials() {
   const avatarClasses = ['testi-av-a', 'testi-av-b', 'testi-av-c', 'testi-av-d', 'testi-av-e', 'testi-av-f', 'testi-av-g'];
+  const track = $('#testi-track');
+  const controls = $$('.testi-nav');
 
   $$('.testi-card').forEach((card, index) => {
     const avatar = card.querySelector('.testi-avatar');
@@ -851,6 +889,51 @@ function initTestimonials() {
       avatar.textContent = initials || 'ON';
     }
   });
+
+  if (!track || !controls.length) return;
+
+  function getStep() {
+    const firstCard = track.querySelector('.testi-card');
+    if (!firstCard) return 320;
+    const styles = window.getComputedStyle(track);
+    const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+    return firstCard.getBoundingClientRect().width + gap;
+  }
+
+  controls.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const direction = btn.dataset.direction === 'prev' ? -1 : 1;
+      track.scrollBy({ left: direction * getStep(), behavior: 'smooth' });
+    });
+  });
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let autoAdvance = null;
+  const startAutoAdvance = () => {
+    if (autoAdvance || track.scrollWidth <= track.clientWidth) return;
+    autoAdvance = window.setInterval(() => {
+      const maxScroll = track.scrollWidth - track.clientWidth - 8;
+      if (track.scrollLeft >= maxScroll) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: getStep(), behavior: 'smooth' });
+      }
+    }, 4800);
+  };
+
+  const stopAutoAdvance = () => {
+    if (!autoAdvance) return;
+    window.clearInterval(autoAdvance);
+    autoAdvance = null;
+  };
+
+  track.addEventListener('mouseenter', stopAutoAdvance);
+  track.addEventListener('mouseleave', startAutoAdvance);
+  track.addEventListener('focusin', stopAutoAdvance);
+  track.addEventListener('focusout', startAutoAdvance);
+
+  startAutoAdvance();
 }
 
 /* ═══════════════════════════════════════════════

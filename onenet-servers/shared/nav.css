@@ -79,7 +79,7 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   flex: 1;
   justify-content: center;
 }
@@ -89,9 +89,10 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 8px 12px;
-  border-radius: var(--r1);
-  font-size: 14px;
+  min-height: 38px;
+  padding: 8px 11px;
+  border-radius: var(--pill);
+  font-size: 13.5px;
   font-weight: 500;
   color: var(--muted);
   background: transparent;
@@ -252,6 +253,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-left: auto;
   flex-shrink: 0;
 }
 
@@ -430,23 +432,33 @@
 /* ─── Hamburger ─── */
 .nav-hamburger {
   display: none;
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: transparent;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(67,67,240,.12);
+  border-radius: 50%;
+  background: rgba(255,255,255,.92);
+  box-shadow: var(--sh-xs);
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
 }
 
 .nav-hamburger span {
-  width: 20px;
+  width: 18px;
   height: 2px;
   background: var(--ink);
   border-radius: 2px;
   transition: transform var(--t-std), opacity var(--t-std);
+}
+
+.nav-hamburger:hover {
+  border-color: rgba(67,67,240,.24);
+  background: var(--blue-xs);
+  box-shadow: var(--sh-sm);
 }
 
 .nav-hamburger--open span:nth-child(1) {
@@ -469,37 +481,122 @@
   right: 0;
   bottom: 0;
   z-index: 499;
-  background: rgba(255,255,255,0.99);
-  overflow-y: auto;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(15,15,26,.38);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  overflow: hidden;
   -webkit-overflow-scrolling: touch;
-  display: none;
-  border-top: 1px solid var(--line);
+  transition: opacity var(--t-std), visibility var(--t-std);
 }
 
 .mobile-drawer--open {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-drawer-inner {
-  padding: 12px 20px 32px;
+  width: min(420px, 100%);
+  min-height: 100%;
+  margin-left: auto;
+  padding: 18px 20px 32px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 8px;
+  background: rgba(255,255,255,.98);
+  border-left: 1px solid rgba(67,67,240,.12);
+  box-shadow: -24px 0 64px rgba(15,15,26,.14);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform var(--t-slow);
+}
+
+.mobile-drawer--open .mobile-drawer-inner {
+  transform: translateX(0);
+}
+
+.mobile-drawer-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: start;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.mobile-drawer-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.mobile-drawer-kicker::before {
+  content: '';
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.mobile-drawer-title {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1.15;
+}
+
+.mobile-drawer-copy {
+  margin: 0;
+  color: var(--body);
+  font-family: var(--f-copy);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.mobile-drawer-close {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--t-fast), background var(--t-fast), color var(--t-fast);
+}
+
+.mobile-drawer-close:hover {
+  border-color: rgba(67,67,240,.2);
+  background: var(--blue-xs);
+  color: var(--blue-d);
 }
 
 /* Native details/summary accordion */
 .mobile-nav-group {
-  border-bottom: 1px solid var(--line);
+  border: 1px solid rgba(67,67,240,.1);
+  border-radius: var(--r3);
+  background: linear-gradient(180deg, rgba(255,255,255,.98) 0%, var(--bg-2) 100%);
+  overflow: hidden;
 }
 
 .mobile-nav-group summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 15px 16px;
   font-size: 15px;
-  font-weight: 500;
-  color: var(--body);
+  font-weight: 600;
+  color: var(--ink);
   cursor: pointer;
   list-style: none;
   user-select: none;
@@ -512,19 +609,19 @@
 }
 
 .mobile-nav-sub {
-  padding: 4px 0 14px 12px;
+  padding: 0 10px 12px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .mobile-nav-sub a {
   display: block;
-  padding: 10px 8px;
+  padding: 11px 12px;
   font-size: 14px;
-  color: var(--muted);
+  color: var(--body);
   text-decoration: none;
-  border-radius: var(--r1);
+  border-radius: var(--r2);
   transition: color var(--t-fast), background var(--t-fast);
 }
 
@@ -538,7 +635,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 16px 0 6px;
+  padding: 12px 0 0;
   flex-wrap: wrap;
 }
 
@@ -569,7 +666,7 @@
 .mobile-drawer-actions {
   display: flex;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .mobile-drawer-actions .btn {
@@ -736,8 +833,8 @@
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
   .nav-shell { gap: 16px; padding: 0 20px; }
-  .nav-links { gap: 0; }
-  .nav-link, .nav-link-btn { padding: 8px 9px; font-size: 13.5px; }
+  .nav-links { gap: 2px; }
+  .nav-link, .nav-link-btn { padding: 8px 9px; font-size: 13px; }
 }
 
 @media (max-width: 768px) {
@@ -747,9 +844,37 @@
   .nav-hamburger { display: flex; }
   .currency-dropdown { display: none; }
   .nav-cart { display: inline-flex; }
+  .nav-shell {
+    padding: 0 16px;
+    gap: 10px;
+  }
+  .nav-brand span {
+    font-size: 14px;
+  }
+  .nav-cart {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 @media (max-width: 480px) {
+  .nav-shell {
+    gap: 8px;
+  }
+  .nav-brand {
+    gap: 8px;
+  }
+  .nav-brand img {
+    width: 32px;
+    height: 32px;
+  }
+  .nav-brand span {
+    max-width: 128px;
+    line-height: 1.1;
+  }
+  .mobile-drawer-inner {
+    padding: 16px 16px 28px;
+  }
   .auth-modal { padding: var(--nav-h) 0 0; align-items: flex-end; }
   .auth-modal-panel {
     width: 100%;

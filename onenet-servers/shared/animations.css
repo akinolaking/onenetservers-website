@@ -244,8 +244,13 @@ a:focus-visible {
 
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .hero-bg-animated::before,
-  .hero-orb { animation: none; }
+  .hero-orb,
+  .live-dot { animation: none; }
   .reveal, .reveal-left, .reveal-right {
     opacity: 1;
     transform: none;
