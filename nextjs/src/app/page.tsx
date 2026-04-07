@@ -1,19 +1,25 @@
-import { AnnouncementBar } from "@/components/sections/AnnouncementBar";
 import { Hero } from "@/components/sections/Hero";
+import { TrustBar } from "@/components/sections/TrustBar";
+import { ValueCards } from "@/components/sections/ValueCards";
+import { PricingBestsellers } from "@/components/sections/PricingBestsellers";
 import { HowItWorks } from "@/components/sections/HowItWorks";
-import { NigeriaSection } from "@/components/sections/NigeriaSection";
-import { PricingPreview } from "@/components/sections/PricingPreview";
-import { ServicesGrid } from "@/components/sections/ServicesGrid";
+import { SocialProof } from "@/components/sections/SocialProof";
+import { Differentiators } from "@/components/sections/Differentiators";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { BottomCTA } from "@/components/sections/BottomCTA";
 
 export default function Home() {
   return (
     <main id="main-content" className="page-shell">
-      <AnnouncementBar />
       <Hero />
-      <ServicesGrid />
+      <TrustBar />
+      <ValueCards />
+      <PricingBestsellers />
       <HowItWorks />
-      <PricingPreview />
-      <NigeriaSection />
+      <SocialProof />
+      <Differentiators />
+      <Testimonials />
+      <BottomCTA />
     </main>
   );
 }
