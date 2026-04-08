@@ -5,6 +5,7 @@ import {
   AvatarGroup,
   AvatarGroupItem,
 } from "@/components/animate-ui/animate/avatar-group";
+import { useCurrency } from "@/lib/currency-context";
 
 /* Placeholder avatar colours — replace src props with real images when available */
 const AVATARS = [
@@ -16,13 +17,15 @@ const AVATARS = [
 ];
 
 const EXT_HINTS = [
-  { ext: ".ng", price: "$23/yr" },
-  { ext: ".com", price: "$15/yr" },
-  { ext: ".co.uk", price: "$8/yr" },
-  { ext: ".com.ng", price: "$11/yr" },
+  { ext: ".ng",     usd: 23 },
+  { ext: ".com",    usd: 15 },
+  { ext: ".co.uk",  usd: 8  },
+  { ext: ".com.ng", usd: 11 },
 ];
 
 export function Hero() {
+  const { format } = useCurrency();
+
   return (
     <section className="hero-home" aria-label="Get your business online">
       <div className="hero-inner shell">
@@ -41,7 +44,7 @@ export function Hero() {
           <div className="hero-ext-hints" aria-label="Popular domain extensions">
             {EXT_HINTS.map((h) => (
               <span key={h.ext} className="hero-ext-hint">
-                <strong>{h.ext}</strong> from {h.price}
+                <strong>{h.ext}</strong> from {format(h.usd, 0)}/yr
               </span>
             ))}
           </div>
