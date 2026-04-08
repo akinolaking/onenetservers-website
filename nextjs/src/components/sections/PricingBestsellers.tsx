@@ -4,13 +4,14 @@ import Link from "next/link";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 import { useCurrency } from "@/lib/currency-context";
+import { CartButton } from "@/components/shared/CartButton";
 
 interface BestsellerCard {
   key: string;
   label: string;
   headline: string;
   description: string;
-  price: { USD: string; NGN: string; GBP: string };
+  priceUsd: number;
   period: string;
   features: string[];
   href: string;
@@ -31,7 +32,7 @@ const CARDS: BestsellerCard[] = [
     label: "Web Hosting",
     headline: "Web Hosting Premium",
     description: "CloudLinux isolation, ImmunifyAV+, and LiteSpeed. Built for serious sites.",
-    price: { USD: "$18.20", NGN: "₦24,999", GBP: "£16.95" },
+    priceUsd: 18.20,
     period: "/mo",
     features: [
       "Unlimited websites",
@@ -56,7 +57,7 @@ const CARDS: BestsellerCard[] = [
     label: "Domain",
     headline: ".COM.NG Domain",
     description: "NiRA-accredited direct registration. WHOIS privacy and DNSSEC included.",
-    price: { USD: "$11.25", NGN: "₦20,750", GBP: "£10.47" },
+    priceUsd: 11.25,
     period: "/yr",
     features: [
       "NiRA direct registration",
@@ -80,7 +81,7 @@ const CARDS: BestsellerCard[] = [
     label: "Business Email",
     headline: "Business Email",
     description: "5–100 addresses on one flat plan. Video calls, team chat, shared storage.",
-    price: { USD: "$2.33", NGN: "₦2,899", GBP: "£1.79" },
+    priceUsd: 2.33,
     period: "/mo",
     features: [
       "Up to 100 email addresses",
@@ -103,7 +104,7 @@ const CARDS: BestsellerCard[] = [
     label: "Cloud VPS",
     headline: "Cloud VPS Starter",
     description: "Root access, unlimited bandwidth, one-click Docker, n8n, and Nextcloud.",
-    price: { USD: "$12.42", NGN: "₦19,999", GBP: "£11.56" },
+    priceUsd: 12.42,
     period: "/mo",
     features: [
       "8GB RAM · 4 vCPU",
@@ -125,19 +126,14 @@ const CARDS: BestsellerCard[] = [
   },
 ];
 
-function PriceDisplay({ price }: { price: { USD: string; NGN: string; GBP: string } }) {
-  const { currency } = useCurrency();
-  return <>{price[currency]}</>;
+function PriceDisplay({ usd }: { usd: number }) {
+  const { format } = useCurrency();
+  return <>{format(usd)}</>;
 }
 
 function CardInner({ card }: { card: BestsellerCard }) {
   const inner = (
     <article className={`pb-card${card.popular ? " pb-card--popular" : ""}`}>
-      {card.popular && (
-        <div className="pb-card__badge" aria-label="Most popular plan">
-          Most Popular
-        </div>
-      )}
       <div className="pb-card__header">
         <div className="pb-card__icon" aria-hidden="true">
           {card.icon}
@@ -148,7 +144,7 @@ function CardInner({ card }: { card: BestsellerCard }) {
       <p className="pb-card__desc">{card.description}</p>
       <div className="pb-card__price">
         <span className="pb-card__amount">
-          <PriceDisplay price={card.price} />
+          <PriceDisplay usd={card.priceUsd} />
         </span>
         <span className="pb-card__period">{card.period}</span>
       </div>
@@ -160,20 +156,34 @@ function CardInner({ card }: { card: BestsellerCard }) {
           </li>
         ))}
       </ul>
-      <Link
-        href={card.href}
-        className={`pb-card__cta${card.popular ? " pb-card__cta--solid" : " pb-card__cta--ghost"}`}
-      >
-        {card.cta}
-      </Link>
+      {card.href.startsWith("/cart.php") ? (
+        <CartButton
+          href={card.href}
+          label={card.cta}
+          variant={card.popular ? "primary" : "ghost"}
+          className={`pb-card__cta${card.popular ? " pb-card__cta--solid" : " pb-card__cta--ghost"}`}
+        />
+      ) : (
+        <Link
+          href={card.href}
+          className={`pb-card__cta${card.popular ? " pb-card__cta--solid" : " pb-card__cta--ghost"}`}
+        >
+          {card.cta}
+        </Link>
+      )}
     </article>
   );
 
   if (card.popular) {
     return (
-      <Shine enableOnHover color="#4343f0" opacity={0.06} duration={1.6}>
-        {inner}
-      </Shine>
+      <div style={{ position: 'relative' }}>
+        <div className="pb-card__badge" aria-label="Most popular plan">
+          Most Popular
+        </div>
+        <Shine enableOnHover color="#4343f0" opacity={0.06} duration={1.6} style={{ borderRadius: '16px', height: '100%' }}>
+          {inner}
+        </Shine>
+      </div>
     );
   }
   return inner;

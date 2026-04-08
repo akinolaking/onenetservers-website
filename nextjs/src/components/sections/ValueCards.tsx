@@ -65,8 +65,8 @@ const CARDS: CardDef[] = [
   {
     key: 'community',
     eyebrow: 'Community & Partners',
-    headline: 'Digital Growth Credit (DGC) for community growth.',
-    body: 'Businesses, communities, non-profits, creators, and enterprises operating for over 12 months are eligible for our partners programme. Approved partners can receive up to NGN 10,000,000 or USD 5,000 in OneNet Digital Growth Credits to help their members get online.',
+    headline: 'Digital Growth Credit (DGC) for Community growth.',
+    body: "Businesses, communities, organisations, non-profits, creators, freelancers, and enterprises operating for over 12 months with a community base are eligible for our partners programme. Approved partners can receive up to NGN 10,000,000 or USD 5,000 in OneNet Servers' Digital Growth Credits to help their members get online and boost their community or startup.",
     bg: '#1a1a3e',
     theme: 'dark',
     lottie: 'https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json',

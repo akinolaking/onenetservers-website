@@ -1,41 +1,280 @@
 "use client";
 
+/**
+ * Nav — OneNet Servers
+ *
+ * TypeUI token layer (three-layer: primitive → semantic → component):
+ *   Primitive  → --blue: #4343F0 | --ink: #0F0F1A | --line: #E4E4F0
+ *   Semantic   → --color-primary: var(--blue) | --color-surface: var(--bg)
+ *   Component  → --nav-bg: var(--glass-bg) | --nav-border: var(--line)
+ *                --nav-h: 72px | --nav-item-radius: var(--r1)
+ *
+ * Animate UI:
+ *   - Sheet (animate-ui/primitives/radix/sheet)        → mobile drawer, spring
+ *   - Accordion (animate-ui/primitives/radix/accordion)→ mobile nav groups
+ *   - Highlight (animate-ui/primitives/effects/highlight) → desktop nav hover pill
+ *   - Fade / Fades (animate-ui/primitives/effects/fade) → dropdown items stagger
+ *   - motion + AnimatePresence (motion/react)           → dropdown panels, chevrons
+ */
+
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { ChevronDown, MessageCircle, Phone, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import {
+  Globe,
+  ChevronDown,
+  X,
+  ShoppingCart,
+  LogIn,
+  ArrowRight,
+  Phone,
+  MessageCircle,
+  Server,
+  Globe2,
+  Mail,
+  Shield,
+  Building2,
+  Cpu,
+  Users,
+} from "lucide-react";
 
+import { Fade, Fades } from "@/components/animate-ui/primitives/effects/fade";
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu";
 import {
+  Highlight,
+  HighlightItem,
+} from "@/components/animate-ui/primitives/effects/highlight";
+import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetHeader,
-  SheetTitle,
+  SheetOverlay,
+  SheetPortal,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "@/components/animate-ui/primitives/radix/sheet";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionHeader,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/animate-ui/primitives/radix/accordion";
+import { AuthModal } from "@/components/shared/AuthModal";
+
 import {
   currencies,
   navGroups,
   quickActions,
-  socialLinks,
   type Currency,
+  type NavGroup,
 } from "@/lib/site-data";
+import { useCurrency } from "@/lib/currency-context";
+import { cn } from "@/lib/utils";
 
+/* ─── group icon map ────────────────────────────────────────────── */
+const groupIcons: Record<string, React.ReactNode> = {
+  "Web Hosting":           <Server className="h-4 w-4" />,
+  "WordPress Hosting":     <Globe className="h-4 w-4" />,
+  "Reseller Hosting":      <Users className="h-4 w-4" />,
+  "Cloud VPS":             <Cpu className="h-4 w-4" />,
+  "Garium Private AI":     <Cpu className="h-4 w-4" />,
+  "Register a Domain":     <Globe2 className="h-4 w-4" />,
+  "Transfer a Domain":     <Globe2 className="h-4 w-4" />,
+  ".NG Domains":           <Globe2 className="h-4 w-4" />,
+  "Business Email":        <Mail className="h-4 w-4" />,
+  "SSL Certificates":      <Shield className="h-4 w-4" />,
+  "OneGuard Security":     <Shield className="h-4 w-4" />,
+  "About Us":              <Building2 className="h-4 w-4" />,
+  "Contact Us":            <Phone className="h-4 w-4" />,
+  "Future of Productivity":<Users className="h-4 w-4" />,
+  "Digital Identity Initiative": <Globe className="h-4 w-4" />,
+};
+
+/* ─── flag SVGs for currency ─────────────────────────────────────── */
+const CurrencyFlag = ({ code }: { code: Currency }) => {
+  if (code === "NGN") return (
+    <svg width="18" height="13" viewBox="0 0 20 14" aria-label="Nigeria" role="img">
+      <rect width="6.67" height="14" fill="#008751"/>
+      <rect x="6.67" width="6.66" height="14" fill="#fff"/>
+      <rect x="13.33" width="6.67" height="14" fill="#008751"/>
+    </svg>
+  );
+  if (code === "GBP") return (
+    <svg width="18" height="13" viewBox="0 0 20 14" aria-label="United Kingdom" role="img">
+      <rect width="20" height="14" fill="#012169"/>
+      <path d="M0 0l20 14M20 0L0 14" stroke="#fff" strokeWidth="3"/>
+      <path d="M10 0v14M0 7h20" stroke="#fff" strokeWidth="4"/>
+      <path d="M10 0v14M0 7h20" stroke="#C8102E" strokeWidth="2.5"/>
+      <path d="M0 0l20 14M20 0L0 14" stroke="#C8102E" strokeWidth="2"/>
+    </svg>
+  );
+  return (
+    <svg width="18" height="13" viewBox="0 0 20 14" aria-label="United States" role="img">
+      <rect width="20" height="14" fill="#B22234"/>
+      <path d="M0 1.08h20M0 3.23h20M0 5.38h20M0 7.54h20M0 9.69h20M0 11.85h20" stroke="#fff" strokeWidth="1.08"/>
+      <rect width="8" height="7.54" fill="#3C3B6E"/>
+    </svg>
+  );
+};
+
+/* ─── Animated desktop dropdown panel ───────────────────────────── */
+function DesktopDropdown({ group }: { group: NavGroup }) {
+  const [open, setOpen] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isWide = group.title === "Hosting";
+
+  const open_ = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(true);
+  };
+  const close_ = () => {
+    closeTimer.current = setTimeout(() => setOpen(false), 120);
+  };
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={open_}
+      onMouseLeave={close_}
+      onFocus={open_}
+      onBlur={close_}
+    >
+      <button
+        type="button"
+        className="nav-trigger"
+        aria-expanded={open}
+        aria-haspopup="true"
+      >
+        {group.title}
+        <motion.span
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 28 }}
+          className="inline-flex"
+        >
+          <ChevronDown className="h-3 w-3" />
+        </motion.span>
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="dropdown"
+            style={{
+              position: "absolute",
+              top: "calc(100% + 8px)",
+              left: isWide ? "50%" : 0,
+              zIndex: 200,
+            }}
+            initial={{ opacity: 0, y: 8, scale: 0.97, x: isWide ? "-50%" : "0%" }}
+            animate={{ opacity: 1, y: 0, scale: 1,   x: isWide ? "-50%" : "0%" }}
+            exit={{   opacity: 0, y: 6, scale: 0.97, x: isWide ? "-50%" : "0%" }}
+            transition={{ type: "spring", stiffness: 340, damping: 30 }}
+            className="nav-dropdown-panel"
+            onMouseEnter={open_}
+            onMouseLeave={close_}
+          >
+            <div className={cn("nav-dropdown-grid", isWide && "nav-dropdown-grid--wide")}>
+              <Fades delay={0} holdDelay={40} inView={false}>
+                {group.items.map((item) =>
+                  item.disabled ? (
+                    <span key={item.label} className="nav-dropdown-item nav-dropdown-item--disabled">
+                      <span className="nav-dropdown-icon" aria-hidden="true">
+                        {groupIcons[item.label] ?? <Globe className="h-4 w-4" />}
+                      </span>
+                      <span className="nav-dropdown-copy">
+                        <strong>{item.label}</strong>
+                        {item.description && <em>{item.description}</em>}
+                      </span>
+                    </span>
+                  ) : (
+                    <Link key={item.label} href={item.href} className="nav-dropdown-item">
+                      <span className="nav-dropdown-icon" aria-hidden="true">
+                        {groupIcons[item.label] ?? <Globe className="h-4 w-4" />}
+                      </span>
+                      <span className="nav-dropdown-copy">
+                        <strong>{item.label}</strong>
+                        {item.description && <em>{item.description}</em>}
+                      </span>
+                    </Link>
+                  )
+                )}
+              </Fades>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ─── Currency dropdown — uses shadcn DropdownMenu (Base UI) for correct portal + positioning ── */
+function CurrencyPicker({
+  active,
+  onChange,
+}: {
+  active: Currency;
+  onChange: (c: Currency) => void;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          className="currency-trigger"
+          aria-expanded={open}
+          aria-haspopup="listbox"
+        >
+          <CurrencyFlag code={active} />
+          <span>{active}</span>
+          <motion.span
+            animate={{ rotate: open ? 180 : 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 28 }}
+            className="inline-flex"
+          >
+            <ChevronDown className="h-3 w-3" />
+          </motion.span>
+        </button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent align="end" sideOffset={10} className="currency-menu w-52">
+        <DropdownMenuRadioGroup
+          value={active}
+          onValueChange={(v) => { onChange(v as Currency); setOpen(false); }}
+        >
+          {currencies.map((c) => (
+            <DropdownMenuRadioItem
+              key={c}
+              value={c}
+              className={cn("currency-option", active === c && "currency-option--active")}
+            >
+              <CurrencyFlag code={c} />
+              <span>{c === "NGN" ? "Nigerian Naira" : c === "GBP" ? "British Pound" : "US Dollar"}</span>
+              <span className="currency-code">{c}</span>
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+/* ─── Main Nav ───────────────────────────────────────────────────── */
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeCurrency, setActiveCurrency] = useState<Currency>("USD");
+  const [authOpen, setAuthOpen] = useState(false);
+  const { currency: activeCurrency, setCurrency: setActiveCurrency } = useCurrency();
   const [isScrolled, setIsScrolled] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  useEffect(() => { setHasMounted(true); }, []);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 24);
@@ -46,241 +285,262 @@ export function Nav() {
 
   return (
     <>
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
 
-      <header className={`site-nav ${isScrolled ? "site-nav--scrolled" : ""}`}>
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
+
+      <header className={cn("site-nav", isScrolled && "site-nav--scrolled")}>
         <div className="shell nav-shell">
+
+          {/* ── Brand ── */}
           <Link href="/" className="nav-brand" aria-label="OneNet Servers home">
-            <Image src="/assets/logo-mark.svg" alt="OneNet Servers" width={34} height={35} priority />
+            <Image
+              src="/assets/logo-mark.svg"
+              alt="OneNet Servers"
+              width={32}
+              height={32}
+              priority
+            />
+            <span className="nav-brand-name">OneNet Servers</span>
           </Link>
 
+          {/* ── Desktop nav ── */}
           <nav className="nav-desktop" aria-label="Primary">
-            <div className="nav-menu-list">
-              {hasMounted
-                ? navGroups.map((group) => (
-                    <DropdownMenu key={group.title}>
-                      <DropdownMenuTrigger className="nav-trigger">
-                        {group.title}
-                        <ChevronDown className="h-3 w-3" />
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        align="center"
-                        sideOffset={12}
-                        className={`nav-dropdown-panel ${
-                          group.title === "Hosting" ? "nav-dropdown-panel--wide" : ""
-                        }`}
-                      >
-                        <div
-                          className={
-                            group.title === "Hosting"
-                              ? "nav-dropdown-grid nav-dropdown-grid--wide"
-                              : "nav-dropdown-grid"
-                          }
-                        >
-                          {group.items.map((item) =>
-                            item.disabled ? (
-                              <span
-                                key={item.label}
-                                className="nav-dropdown-item nav-dropdown-item--disabled"
-                              >
-                                <span className="nav-dropdown-copy">
-                                  <strong>{item.label}</strong>
-                                  {item.description ? <em>{item.description}</em> : null}
-                                </span>
-                              </span>
-                            ) : (
-                              <Link key={item.label} href={item.href} className="nav-dropdown-item">
-                                <span className="nav-dropdown-copy">
-                                  <strong>{item.label}</strong>
-                                  {item.description ? <em>{item.description}</em> : null}
-                                </span>
-                              </Link>
-                            ),
-                          )}
-                        </div>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  ))
-                : navGroups.map((group) => (
-                    <button key={group.title} type="button" className="nav-trigger" aria-label={group.title}>
-                      {group.title}
-                      <ChevronDown className="h-3 w-3" />
-                    </button>
-                  ))}
-            </div>
+            {hasMounted && (
+              <Highlight
+                mode="parent"
+                hover
+                className="rounded-[var(--r1)] bg-[var(--blue-xs)]"
+                transition={{ type: "spring", stiffness: 350, damping: 35 }}
+                containerClassName="nav-menu-list"
+              >
+                {navGroups.map((group) => (
+                  <HighlightItem key={group.title} asChild>
+                    <DesktopDropdown group={group} />
+                  </HighlightItem>
+                ))}
+              </Highlight>
+            )}
           </nav>
 
+          {/* ── Actions ── */}
           <div className="nav-actions">
-            {hasMounted ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger className="currency-trigger">
-                  {activeCurrency}
-                  <ChevronDown className="h-3 w-3" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  sideOffset={10}
-                  className="currency-menu currency-menu--open"
-                >
-                  {currencies.map((currency) => (
-                    <DropdownMenuItem
-                      key={currency}
-                      className={`currency-option ${
-                        activeCurrency === currency ? "currency-option--active" : ""
-                      }`}
-                      onClick={() => setActiveCurrency(currency)}
-                    >
-                      <span>{currency}</span>
-                      {activeCurrency === currency ? <span>Selected</span> : null}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <button type="button" className="currency-trigger" aria-label={`Currency ${activeCurrency}`}>
-                {activeCurrency}
-                <ChevronDown className="h-3 w-3" />
-              </button>
+            {hasMounted && (
+              <CurrencyPicker active={activeCurrency} onChange={setActiveCurrency} />
             )}
 
-            <Link href="/login.php" className="nav-secondary-link">
-              Log in
+            {/* Cart */}
+            <Link href="/cart.php" className="nav-cart" aria-label="View cart">
+              <ShoppingCart className="h-5 w-5" />
             </Link>
-            <Link href="/cart.php?a=add&pid=261&billingcycle=monthly" className="nav-primary-link">
+
+            {/* Log in */}
+            <button
+              type="button"
+              className="nav-secondary-link"
+              onClick={() => setAuthOpen(true)}
+            >
+              <LogIn className="h-3.5 w-3.5" />
+              Log in
+            </button>
+
+            {/* Get started */}
+            <Link
+              href="/cart.php?a=add&pid=261&billingcycle=monthly"
+              className="nav-primary-link"
+            >
               Get started free
+              <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
+          {/* ── Mobile hamburger + Sheet drawer ── */}
           {hasMounted ? (
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger
-                className={`nav-toggle ${mobileOpen ? "nav-toggle--open" : ""}`}
+                className={cn("nav-toggle", mobileOpen && "nav-toggle--open")}
                 aria-label={mobileOpen ? "Close menu" : "Open menu"}
               >
-                <span />
-                <span />
-                <span />
+                <AnimatePresence mode="wait" initial={false}>
+                  {mobileOpen ? (
+                    <motion.span
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0,   opacity: 1 }}
+                      exit={{   rotate: 90,  opacity: 0 }}
+                      transition={{ duration: 0.18 }}
+                      className="flex items-center justify-center"
+                    >
+                      <X className="h-5 w-5" />
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="open"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0,  opacity: 1 }}
+                      exit={{   rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.18 }}
+                      className="flex flex-col gap-[5px] items-center justify-center"
+                    >
+                      <span className="nav-bar" />
+                      <span className="nav-bar" />
+                      <span className="nav-bar" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </SheetTrigger>
 
-              <SheetContent
-                side="right"
-                className="mobile-sheet"
-                showCloseButton={false}
-              >
-                <SheetHeader className="mobile-drawer-head">
-                  <div>
-                    <span className="mobile-kicker">OneNet Servers</span>
-                    <SheetTitle className="mobile-sheet-title">Menu</SheetTitle>
+              <SheetPortal>
+                <SheetOverlay className="mobile-overlay" />
+                <SheetContent
+                  side="right"
+                  className="mobile-sheet"
+                  transition={{ type: "spring", stiffness: 200, damping: 26 }}
+                >
+                  {/* Sheet header */}
+                  <div className="mobile-sheet-head">
+                    <Link
+                      href="/"
+                      className="nav-brand"
+                      aria-label="OneNet Servers home"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <Image
+                        src="/assets/logo-mark.svg"
+                        alt="OneNet Servers"
+                        width={28}
+                        height={28}
+                      />
+                      <span className="nav-brand-name" style={{ fontSize: "14px" }}>
+                        OneNet Servers
+                      </span>
+                    </Link>
+                    <button
+                      type="button"
+                      className="mobile-close"
+                      aria-label="Close menu"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
                   </div>
-                  <SheetClose className="mobile-close" aria-label="Close menu">
-                    <X className="h-4 w-4" />
-                  </SheetClose>
-                </SheetHeader>
 
-                <div className="mobile-drawer-body">
+                  {/* Quick actions */}
                   <div className="mobile-quick-actions">
-                    {quickActions.map((action) => (
-                      <a key={action.label} href={action.href} className="mobile-quick-action">
-                        {action.label.includes("Call") ? (
-                          <Phone className="h-4 w-4" />
-                        ) : (
-                          <MessageCircle className="h-4 w-4" />
-                        )}
-                        <span>{action.label}</span>
-                      </a>
-                    ))}
-                  </div>
-
-                  <div className="mobile-menu-grid">
-                    {navGroups.map((group) => (
-                      <details key={group.title} className="mobile-group" open={group.title === "Hosting"}>
-                        <summary>
-                          <span>{group.title}</span>
-                          <ChevronDown className="h-4 w-4" />
-                        </summary>
-                        <div className="mobile-links">
-                          {group.items.map((item) =>
-                            item.disabled ? (
-                              <span key={item.label} className="mobile-link mobile-link--disabled">
-                                <strong>{item.label}</strong>
-                                {item.description ? <em>{item.description}</em> : null}
-                              </span>
-                            ) : (
-                              <Link
-                                key={item.label}
-                                href={item.href}
-                                className="mobile-link"
-                                onClick={() => setMobileOpen(false)}
-                              >
-                                <strong>{item.label}</strong>
-                                {item.description ? <em>{item.description}</em> : null}
-                              </Link>
-                            ),
-                          )}
-                        </div>
-                      </details>
-                    ))}
-                  </div>
-
-                  <div className="mobile-currency">
-                    <p>Currency</p>
-                    <div className="mobile-currency-grid">
-                      {currencies.map((currency) => (
-                        <button
-                          key={currency}
-                          type="button"
-                          className={`currency-pill ${
-                            activeCurrency === currency ? "currency-pill--active" : ""
-                          }`}
-                          onClick={() => setActiveCurrency(currency)}
+                    {quickActions.map((action) => {
+                      const isExternal = action.href.startsWith("http");
+                      return (
+                        <a
+                          key={action.label}
+                          href={action.href}
+                          className="mobile-quick-action"
+                          {...(isExternal
+                            ? { target: "_blank", rel: "noopener noreferrer" }
+                            : {})}
                         >
-                          {currency}
+                          {action.label.includes("Call") ? (
+                            <Phone className="h-4 w-4" />
+                          ) : (
+                            <MessageCircle className="h-4 w-4" />
+                          )}
+                          <span>{action.label}</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+
+                  {/* Nav groups via Animate UI Accordion */}
+                  <div className="mobile-nav-body">
+                    <Accordion type="multiple" className="mobile-accordion">
+                      {navGroups.map((group) => (
+                        <AccordionItem key={group.title} value={group.title} className="mobile-accordion-item">
+                          <AccordionHeader>
+                            <AccordionTrigger className="mobile-accordion-trigger">
+                              <span>{group.title}</span>
+                              <ChevronDown className="mobile-chevron h-4 w-4" />
+                            </AccordionTrigger>
+                          </AccordionHeader>
+                          <AccordionContent className="mobile-accordion-content">
+                            <div className="mobile-links">
+                              {group.items.map((item) =>
+                                item.disabled ? (
+                                  <span key={item.label} className="mobile-link mobile-link--disabled">
+                                    <span className="mobile-link-icon" aria-hidden="true">
+                                      {groupIcons[item.label] ?? <Globe className="h-3.5 w-3.5" />}
+                                    </span>
+                                    <span>
+                                      <strong>{item.label}</strong>
+                                      {item.description && <em>{item.description}</em>}
+                                    </span>
+                                  </span>
+                                ) : (
+                                  <Link
+                                    key={item.label}
+                                    href={item.href}
+                                    className="mobile-link"
+                                    onClick={() => setMobileOpen(false)}
+                                  >
+                                    <span className="mobile-link-icon" aria-hidden="true">
+                                      {groupIcons[item.label] ?? <Globe className="h-3.5 w-3.5" />}
+                                    </span>
+                                    <span>
+                                      <strong>{item.label}</strong>
+                                      {item.description && <em>{item.description}</em>}
+                                    </span>
+                                  </Link>
+                                )
+                              )}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  </div>
+
+                  {/* Mobile currency */}
+                  <div className="mobile-currency">
+                    <p className="mobile-currency-label">Currency</p>
+                    <div className="mobile-currency-grid">
+                      {currencies.map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          className={cn("currency-pill", activeCurrency === c && "currency-pill--active")}
+                          onClick={() => setActiveCurrency(c)}
+                        >
+                          <CurrencyFlag code={c} />
+                          {c}
                         </button>
                       ))}
                     </div>
                   </div>
 
-                  <div className="mobile-socials" aria-label="Social links">
-                    {socialLinks.map((link) => (
-                      <a key={link.label} href={link.href} className="mobile-social">
-                        {link.label}
-                      </a>
-                    ))}
-                  </div>
-
+                  {/* Mobile CTA actions */}
                   <div className="mobile-actions">
-                    <Link
-                      href="/login.php"
-                      className="nav-secondary-link"
-                      onClick={() => setMobileOpen(false)}
+                    <button
+                      type="button"
+                      className="nav-secondary-link w-full justify-center"
+                      onClick={() => { setMobileOpen(false); setAuthOpen(true); }}
                     >
                       Log in
-                    </Link>
-                    <Link
-                      href="/register.php"
-                      className="nav-secondary-link"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      Create account
-                    </Link>
+                    </button>
                     <Link
                       href="/cart.php?a=add&pid=261&billingcycle=monthly"
-                      className="nav-primary-link"
+                      className="nav-primary-link w-full justify-center"
                       onClick={() => setMobileOpen(false)}
                     >
                       Get started free
+                      <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   </div>
-                </div>
-              </SheetContent>
+                </SheetContent>
+              </SheetPortal>
             </Sheet>
           ) : (
             <button type="button" className="nav-toggle" aria-label="Open menu">
-              <span />
-              <span />
-              <span />
+              <span className="nav-bar" />
+              <span className="nav-bar" />
+              <span className="nav-bar" />
             </button>
           )}
         </div>

@@ -1,19 +1,25 @@
 "use client";
 
 import { useState } from "react";
-
+import Link from "next/link";
 import { pricingCategories } from "@/lib/home-data";
-
 import { SectionHeader } from "@/components/shared/SectionHeader";
+import { useCurrency } from "@/lib/currency-context";
 
 type BillingMode = "monthly" | "annual";
 
 export function PricingPreview() {
   const [activeCategory, setActiveCategory] = useState(pricingCategories[0].key);
   const [billing, setBilling] = useState<BillingMode>("monthly");
+  const { format } = useCurrency();
 
   const category =
     pricingCategories.find((item) => item.key === activeCategory) ?? pricingCategories[0];
+
+  /* Parse "$X.XX/mo" → number */
+  function parseUSD(str: string): number {
+    return parseFloat(str.replace(/[^0-9.]/g, "")) || 0;
+  }
 
   return (
     <section className="homepage-section shell" id="plans">
@@ -67,7 +73,9 @@ export function PricingPreview() {
 
       <div className="pricing-grid">
         {category.plans.map((plan) => {
-          const price = billing === "monthly" ? plan.monthly : plan.annual;
+          const priceObj = billing === "monthly" ? plan.monthly : plan.annual;
+          const usdVal = parseUSD(priceObj.USD);
+          const suffix = activeCategory === "domains" ? "/yr" : "/mo";
 
           return (
             <article
@@ -78,11 +86,15 @@ export function PricingPreview() {
               <h3>{plan.name}</h3>
               <p>{plan.description}</p>
               <div className="pricing-card__price">
-                <strong>{price.USD}</strong>
-                <span>{price.NGN}</span>
-                <span>{price.GBP}</span>
+                <strong>{format(usdVal, 2)}{suffix}</strong>
               </div>
               <p className="pricing-card__renewal">{plan.renewal}</p>
+              <Link
+                href="/cart.php?a=add&pid=261&billingcycle=monthly"
+                className="pricing-card__cta"
+              >
+                Get started →
+              </Link>
             </article>
           );
         })}

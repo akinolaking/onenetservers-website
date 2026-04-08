@@ -1,43 +1,131 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
+import { Slide, Slides } from "@/components/animate-ui/primitives/effects/slide";
+import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 import { nigeriaPoints } from "@/lib/home-data";
 
-import { SectionHeader } from "@/components/shared/SectionHeader";
+/* SVG flag icons — no emoji (UI/UX Pro Max: no-emoji-icons) */
+function FlagNG({ size = 28 }: { size?: number }) {
+  return (
+    <svg width={size} height={size * 0.67} viewBox="0 0 30 20" aria-label="Nigeria flag" role="img">
+      <rect width="10" height="20" fill="#008751" />
+      <rect x="10" width="10" height="20" fill="#ffffff" />
+      <rect x="20" width="10" height="20" fill="#008751" />
+    </svg>
+  );
+}
+
+function FlagUK({ size = 28 }: { size?: number }) {
+  return (
+    <svg width={size} height={size * 0.6} viewBox="0 0 60 36" aria-label="United Kingdom flag" role="img">
+      <rect width="60" height="36" fill="#012169" />
+      <path d="M0,0 L60,36 M60,0 L0,36" stroke="#fff" strokeWidth="6" />
+      <path d="M0,0 L60,36 M60,0 L0,36" stroke="#C8102E" strokeWidth="4" />
+      <path d="M30,0 V36 M0,18 H60" stroke="#fff" strokeWidth="10" />
+      <path d="M30,0 V36 M0,18 H60" stroke="#C8102E" strokeWidth="6" />
+    </svg>
+  );
+}
+
+/* Check icon */
+function CheckIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
+/* Shield icon */
+function ShieldIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <polyline points="9 12 11 14 15 10" />
+    </svg>
+  );
+}
 
 export function NigeriaSection() {
   return (
-    <section className="homepage-section homepage-section--dark">
+    <section className="homepage-section homepage-section--dark" id="nigeria">
       <div className="shell nigeria-grid">
-        <div>
-          <SectionHeader
-            eyebrow="Built for Nigeria"
-            title="Built for Nigeria. Powered from London."
-            lead="We are the only hosting company with roots in Lagos, a registered office in London, and the infrastructure to serve both markets at the same quality standard."
-          />
-          <div className="nigeria-points">
-            {nigeriaPoints.map((point) => (
-              <div key={point} className="nigeria-point">
-                {point}
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Left column — copy */}
+        <Slide inView inViewOnce direction="up">
+          <div>
+            <div className="nigeria-flags" aria-label="Nigeria and United Kingdom">
+              <FlagNG size={32} />
+              <span className="nigeria-flags__sep" aria-hidden="true">+</span>
+              <FlagUK size={32} />
+            </div>
 
-        <div className="nigeria-panel">
-          <h3>Your Nigeria-first advantage</h3>
-          <p>
-            Local domain credibility, naira billing, UK-grade operational discipline, and a team
-            that understands how both markets actually buy.
-          </p>
-          <div className="nigeria-panel__actions">
-            <Link href="/digital-identity" className="nav-primary-link">
-              Explore the DII
-            </Link>
-            <Link href="/domains/ng" className="hero-secondary-link">
-              .NG domain pricing
-            </Link>
+            <h2 className="nigeria-heading">
+              Built for Nigeria.<br />Powered from London.
+            </h2>
+
+            <p className="nigeria-lead">
+              The only UK-registered hosting provider with NiRA accreditation, Naira billing via Paystack, and .ng domain expertise. No conversion fees. No workarounds.
+            </p>
+
+            <div className="nigeria-points">
+              <Slides inView inViewOnce direction="up" holdDelay={80}>
+                {nigeriaPoints.map((point, i) => (
+                  <div key={i} className="nigeria-point">
+                    <CheckIcon />
+                    {point}
+                  </div>
+                ))}
+              </Slides>
+            </div>
           </div>
-        </div>
+        </Slide>
+
+        {/* Right column — panel */}
+        <Slide inView inViewOnce direction="up" delay={200}>
+          <Shine enableOnHover color="#4343f0" opacity={0.12}>
+            <div className="nigeria-panel">
+              <div className="nigeria-panel__accred">
+                <ShieldIcon />
+                NiRA Accredited Registrar
+              </div>
+
+              <h3>Your Nigeria-first advantage</h3>
+
+              <ul className="nigeria-panel__list">
+                <li>
+                  <CheckIcon />
+                  Direct .ng and .com.ng registration — no middleman
+                </li>
+                <li>
+                  <CheckIcon />
+                  Naira billing via Paystack — cards, USSD, bank transfer, Verve
+                </li>
+                <li>
+                  <CheckIcon />
+                  Support team that understands WAT hours and local needs
+                </li>
+                <li>
+                  <CheckIcon />
+                  SCUML registered — compliant under Nigerian law
+                </li>
+                <li>
+                  <CheckIcon />
+                  Digital Identity Initiative — free first year for qualifying founders
+                </li>
+              </ul>
+
+              <div className="nigeria-panel__actions">
+                <Link href="/domains" className="nigeria-cta-primary">
+                  Get your .ng domain →
+                </Link>
+                <Link href="/digital-identity" className="nigeria-cta-secondary">
+                  Apply for free year
+                </Link>
+              </div>
+            </div>
+          </Shine>
+        </Slide>
       </div>
     </section>
   );

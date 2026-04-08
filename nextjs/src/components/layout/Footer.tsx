@@ -10,7 +10,7 @@ export function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <Link href="/" className="footer-logo" aria-label="OneNet Servers home">
-              <Image src="/assets/logo-mark.svg" alt="OneNet Servers" width={28} height={29} />
+              <Image src="/assets/logo-mark.svg" alt="OneNet Servers" width={28} height={28} />
             </Link>
             <p>
               Hosting, domains, email, and infrastructure for businesses operating across Nigeria,
@@ -18,7 +18,14 @@ export function Footer() {
             </p>
             <div className="footer-social">
               {socialLinks.map((link) => (
-                <a key={link.label} href={link.href} className="social-pill" aria-label={`Follow us on ${link.label}`}>
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="social-pill"
+                  aria-label={`Follow us on ${link.label}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {link.label}
                 </a>
               ))}
@@ -27,7 +34,7 @@ export function Footer() {
 
           {footerColumns.map((column) => (
             <div key={column.title} className="footer-column">
-              <h2>{column.title}</h2>
+              <h3>{column.title}</h3>
               <ul>
                 {column.links.map((link) => (
                   <li key={link.label}>
@@ -45,7 +52,7 @@ export function Footer() {
           ))}
 
           <div className="footer-column footer-column--contact">
-            <h2>Contact</h2>
+            <h3>Contact</h3>
             <div className="footer-contact-list">
               {phoneNumbers.map((phone) => (
                 <a key={phone.text} href={phone.href} className="footer-contact-item">

@@ -32,13 +32,11 @@ export function HowItWorks() {
           </div>
         </Fade>
 
-        <ol className="how-steps" aria-label="Steps to go live">
-          {/* connector line — desktop only, aria-hidden */}
-          <li className="how-connector" aria-hidden="true" role="presentation" />
-
+        <div className="how-steps" role="list" aria-label="Steps to go live" style={{ position: "relative" }}>
+          <div className="how-connector" aria-hidden="true" />
           {newSteps.map((step, i) => (
-            <Fade key={step.number} inView inViewOnce delay={i * 140} asChild>
-              <li className="how-step">
+            <Fade key={step.number} inView inViewOnce delay={i * 140}>
+              <div className="how-step" role="listitem">
                 <div className="how-step__icon-wrap">
                   <div className="how-step__icon" aria-hidden="true">{STEP_ICONS[i]}</div>
                   <div className="how-step__num" aria-hidden="true">{step.number}</div>
@@ -51,10 +49,10 @@ export function HowItWorks() {
                     {step.time}
                   </div>
                 </div>
-              </li>
+              </div>
             </Fade>
           ))}
-        </ol>
+        </div>
 
         <Fade inView inViewOnce delay={500}>
           <div className="how-total-row">

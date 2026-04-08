@@ -1,9 +1,22 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { differentiators } from "@/lib/home-data";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import Link from "next/link";
+
+const DotLottieReact = dynamic(
+  () => import("@lottiefiles/dotlottie-react").then((m) => m.DotLottieReact),
+  { ssr: false },
+);
+
+/* Lottie for large cards only */
+const lottieSrc: Record<string, string> = {
+  gift:       "https://assets9.lottiefiles.com/packages/lf20_w51pcehl.json",
+  itana:      "https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json",
+  technation: "https://assets5.lottiefiles.com/packages/lf20_sy6bevyc.json",
+};
 
 /* ── Icon map — SVG per key ── */
 const iconMap: Record<string, React.ReactNode> = {
@@ -81,21 +94,39 @@ export function Differentiators() {
             const accent = accentMap[item.icon] ?? { bg: "var(--blue-xl)", color: "var(--blue)" };
             const isLarge = item.size === "large";
             return (
-              <Fade key={item.icon} inView inViewOnce delay={i * 80} asChild>
+              <Fade
+                key={item.icon}
+                inView
+                inViewOnce
+                delay={i * 80}
+                className={isLarge ? "diff-cell diff-cell--large" : "diff-cell"}
+              >
                 <article
                   className={`diff-mcard${isLarge ? " diff-mcard--large" : ""}`}
                   role="listitem"
                 >
-                  <div
-                    className="diff-mcard__icon"
-                    style={{ background: accent.bg, color: accent.color }}
-                    aria-hidden="true"
-                  >
-                    {iconMap[item.icon]}
+                  <div className="diff-mcard__top">
+                    <div
+                      className="diff-mcard__icon"
+                      style={{ background: accent.bg, color: accent.color }}
+                      aria-hidden="true"
+                    >
+                      {iconMap[item.icon]}
+                    </div>
+                    <div className="diff-mcard__tag">{item.tag}</div>
                   </div>
-                  <div className="diff-mcard__tag">{item.tag}</div>
                   <h3 className="diff-mcard__headline">{item.headline}</h3>
                   <p className="diff-mcard__body">{item.body}</p>
+                  {isLarge && lottieSrc[item.icon] && (
+                    <div className="diff-mcard__lottie" aria-hidden="true">
+                      <DotLottieReact
+                        src={lottieSrc[item.icon]}
+                        loop
+                        autoplay
+                        className="diff-lottie"
+                      />
+                    </div>
+                  )}
                 </article>
               </Fade>
             );

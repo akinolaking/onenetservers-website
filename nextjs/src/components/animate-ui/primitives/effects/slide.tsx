@@ -27,7 +27,7 @@ function Slide({
   transition = { type: 'spring', stiffness: 200, damping: 20 },
   delay = 0,
   inView = false,
-  inViewMargin = '0px',
+  inViewMargin = '200px',
   inViewOnce = true,
   direction = 'up',
   offset = 100,
