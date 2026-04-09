@@ -263,7 +263,7 @@ export default function DomainsTransferPage() {
       {/* ── CTA ── */}
       <section className="homepage-section homepage-section--dark" id="cta">
         <div className="shell" style={{ textAlign: "center" }}>
-          <Shine inView inViewOnce>
+          <Shine>
             <div className="bottom-cta-card">
               <p className="section-eyebrow" style={{ color: "rgba(255,255,255,0.6)" }}>Transfer today</p>
               <h2 style={{ color: "#fff", margin: "12px 0 16px" }}>Your domain. Our infrastructure.</h2>
