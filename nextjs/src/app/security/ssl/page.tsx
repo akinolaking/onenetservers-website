@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ArrowRight, Check, Shield, Lock, Globe, Award, Zap, Eye } from "lucide-react";
 import { SectionHeader } from "@/components/shared/SectionHeader";
+import { FeaturedPricingWrapper } from "@/components/shared/FeaturedPricingWrapper";
+import Card from "@mui/material/Card";
 import { useCurrency } from "@/lib/currency-context";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
@@ -210,39 +212,87 @@ export default function SecuritySslPage() {
 
           <div className="plans-grid plans-grid--4" style={{ marginTop: 48 }}>
             <Slides inView inViewOnce direction="up" holdDelay={70}>
-              {plans.map((plan) => (
-                <article key={plan.key} className={`plan-card${plan.featured ? " plan-card--featured" : ""}`}>
-                  {plan.featured && (
-                    <div className="plan-card__badge">Most Popular</div>
-                  )}
-                  <div className="plan-card__header">
-                    <p className="plan-card__audience">{plan.audience}</p>
-                    <h3>{plan.name}</h3>
-                    <p className="plan-card__desc">{plan.description}</p>
-                  </div>
-                  <div className="plan-card__price">
-                    <span className="plan-card__amount">{format(plan.usd, 2)}</span>
-                    <span className="plan-card__period">/yr</span>
-                  </div>
-                  <ul className="plan-card__features">
-                    {plan.features.map((f) => (
-                      <li key={f}>
-                        <Check size={14} aria-hidden="true" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Shine>
-                    <a
-                      href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=annually`}
-                      className={`btn ${plan.featured ? "btn-primary" : "btn-ghost"} btn-full`}
-                    >
-                      Get {plan.name}
-                    </a>
-                  </Shine>
-                  <p className="plan-card__renewal">Renews at same rate. Cancel anytime.</p>
-                </article>
-              ))}
+              {plans.map((plan) =>
+                plan.featured ? (
+                  /* FeaturedPricingWrapper: MUI Card owns shadow + hover outside Shine's overflow:hidden */
+                  <FeaturedPricingWrapper key={plan.key} badgeAlign="center">
+                    <article className="plan-card plan-card--featured">
+                      <div className="plan-card__header">
+                        <p className="plan-card__audience">{plan.audience}</p>
+                        <h3>{plan.name}</h3>
+                        <p className="plan-card__desc">{plan.description}</p>
+                      </div>
+                      <div className="plan-card__price">
+                        <span className="plan-card__amount">{format(plan.usd, 2)}</span>
+                        <span className="plan-card__period">/yr</span>
+                      </div>
+                      <ul className="plan-card__features">
+                        {plan.features.map((f) => (
+                          <li key={f}>
+                            <Check size={14} aria-hidden="true" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Shine>
+                        <a
+                          href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=annually`}
+                          className="btn btn-primary btn-full"
+                        >
+                          Get {plan.name}
+                        </a>
+                      </Shine>
+                      <p className="plan-card__renewal">Renews at same rate. Cancel anytime.</p>
+                    </article>
+                  </FeaturedPricingWrapper>
+                ) : (
+                  <Card
+                    key={plan.key}
+                    elevation={0}
+                    sx={{
+                      borderRadius: "16px",
+                      border: "1px solid var(--line)",
+                      boxShadow: "0 1px 3px rgb(0 0 0 / 8%), 0 1px 2px rgb(0 0 0 / 6%)",
+                      transition: "box-shadow 0.2s ease, transform 0.2s ease",
+                      "&:hover": {
+                        boxShadow: "0 4px 16px rgb(67 67 240 / 8%), 0 2px 6px rgb(0 0 0 / 4%)",
+                        transform: "translateY(-2px)",
+                      },
+                      height: "100%",
+                      overflow: "visible",
+                    }}
+                  >
+                    <article className="plan-card">
+                      <div className="plan-card__header">
+                        <p className="plan-card__audience">{plan.audience}</p>
+                        <h3>{plan.name}</h3>
+                        <p className="plan-card__desc">{plan.description}</p>
+                      </div>
+                      <div className="plan-card__price">
+                        <span className="plan-card__amount">{format(plan.usd, 2)}</span>
+                        <span className="plan-card__period">/yr</span>
+                      </div>
+                      <ul className="plan-card__features">
+                        {plan.features.map((f) => (
+                          <li key={f}>
+                            <Check size={14} aria-hidden="true" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Shine>
+                        <a
+                          href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=annually`}
+                          className="btn btn-ghost btn-full"
+                        >
+                          Get {plan.name}
+                        </a>
+                      </Shine>
+                      <p className="plan-card__renewal">Renews at same rate. Cancel anytime.</p>
+                    </article>
+                  </Card>
+                )
+              )}
             </Slides>
           </div>
         </div>

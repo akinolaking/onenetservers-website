@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { ArrowRight, Check, Terminal, Cpu, Zap, Shield, Globe, Package } from "lucide-react";
 import { SectionHeader } from "@/components/shared/SectionHeader";
+import { FeaturedPricingWrapper } from "@/components/shared/FeaturedPricingWrapper";
 import { useCurrency } from "@/lib/currency-context";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
-import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
 const plans = [
@@ -237,9 +237,8 @@ export default function VpsPage() {
             <Slides inView inViewOnce direction="up" holdDelay={80}>
               {plans.map((plan) =>
                 plan.featured ? (
-                  <Shine key={plan.name} enableOnHover color="#4343F0" opacity={0.12}>
-                    <div className="pricing-card pricing-card--featured">
-                      <div className="pricing-card__badge">Most popular</div>
+                  <FeaturedPricingWrapper key={plan.name}>
+                    <div className="pricing-card pricing-card--featured pricing-card--mui-inner">
                       <div>
                         <h3>{plan.name}</h3>
                         <p>{plan.audience}</p>
@@ -259,7 +258,7 @@ export default function VpsPage() {
                         Deploy VPS
                       </a>
                     </div>
-                  </Shine>
+                  </FeaturedPricingWrapper>
                 ) : (
                   <div key={plan.name} className="pricing-card">
                     <div>

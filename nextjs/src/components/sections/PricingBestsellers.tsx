@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Card from "@mui/material/Card";
+import Chip from "@mui/material/Chip";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 import { useCurrency } from "@/lib/currency-context";
@@ -132,8 +134,9 @@ function PriceDisplay({ usd }: { usd: number }) {
 }
 
 function CardInner({ card }: { card: BestsellerCard }) {
-  const inner = (
-    <article className={`pb-card${card.popular ? " pb-card--popular" : ""}`}>
+  /* Shared card body used for non-popular cards */
+  const cardBody = (
+    <>
       <div className="pb-card__header">
         <div className="pb-card__icon" aria-hidden="true">
           {card.icon}
@@ -171,22 +174,61 @@ function CardInner({ card }: { card: BestsellerCard }) {
           {card.cta}
         </Link>
       )}
-    </article>
+    </>
   );
 
   if (card.popular) {
     return (
-      <div style={{ position: 'relative' }}>
-        <div className="pb-card__badge" aria-label="Most popular plan">
-          Most Popular
-        </div>
+      /* MUI Card is the shadow/border/hover owner — outside Shine's overflow:hidden.
+         This fixes both the clipped badge and the rectangular hover shadow. */
+      <Card
+        elevation={0}
+        sx={{
+          position: 'relative',
+          borderRadius: '16px',
+          border: '1px solid var(--blue)',
+          boxShadow: '0 0 0 1px var(--blue), var(--sh-sm)',
+          transition: 'box-shadow 0.22s ease, transform 0.22s ease',
+          '&:hover': {
+            boxShadow: '0 0 0 1px var(--blue), var(--sh-lg)',
+            transform: 'translateY(-2px)',
+          },
+          height: '100%',
+          bgcolor: 'transparent',
+          overflow: 'visible',
+        }}
+      >
+        {/* Chip badge: outside Shine — never clipped by overflow:hidden */}
+        <Chip
+          label="Most Popular"
+          aria-label="Most popular plan"
+          size="small"
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 2,
+            bgcolor: 'var(--blue)',
+            color: '#fff',
+            fontSize: '11px',
+            fontWeight: 500,
+            letterSpacing: '0.04em',
+            borderRadius: '99px',
+            height: '24px',
+            '& .MuiChip-label': { px: '12px' },
+          }}
+        />
         <Shine enableOnHover color="#4343f0" opacity={0.06} duration={1.6} style={{ borderRadius: '16px', height: '100%' }}>
-          {inner}
+          {/* pb-card--mui-inner resets duplicate border/shadow so MUI Card is the sole visual container */}
+          <article className="pb-card pb-card--popular pb-card--mui-inner">
+            {cardBody}
+          </article>
         </Shine>
-      </div>
+      </Card>
     );
   }
-  return inner;
+  return <article className="pb-card">{cardBody}</article>;
 }
 
 export function PricingBestsellers() {

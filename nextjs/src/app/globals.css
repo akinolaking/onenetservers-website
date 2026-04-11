@@ -1368,6 +1368,7 @@ select {
   display: grid;
   gap: 18px;
   margin-top: 30px;
+  padding-top: 20px; /* space for absolutely-positioned badge above first-row cards */
 }
 
 .pricing-card {
@@ -3704,6 +3705,7 @@ h1 {
   gap: 18px;
   grid-template-columns: 1fr;
   margin-top: 28px;
+  padding-top: 20px; /* space for absolutely-positioned badge above first-row cards */
 }
 
 @media (min-width: 640px) {
@@ -5019,6 +5021,7 @@ p.lead {
   gap: 16px;
   grid-template-columns: 1fr;
   margin-top: 40px;
+  padding-top: 20px; /* space for absolutely-positioned badge above first-row cards */
 }
 
 @media (min-width: 480px) {
@@ -7827,4 +7830,151 @@ p.lead {
   margin: 0;
   color: rgba(255 255 255 / 0.7);
   font-size: 15px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SSL / PLAN CARD  (plan-card, plans-grid)
+   ═══════════════════════════════════════════════════════════ */
+
+.plans-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr;
+  padding-top: 20px; /* space for badge on featured card */
+}
+
+@media (min-width: 640px) {
+  .plans-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .plans-grid--4 { grid-template-columns: repeat(4, 1fr); }
+  .plans-grid--3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Inner content wrapper when plan-card is inside MUI Card */
+.plan-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  height: 100%;
+  border-radius: 16px;
+  background: transparent;
+}
+
+.plan-card--featured {
+  background: linear-gradient(160deg, var(--blue-xl) 0%, #fff 60%);
+}
+
+.plan-card__badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border-radius: 99px;
+  background: var(--blue);
+  color: #fff;
+  padding: 4px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.plan-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.plan-card__audience {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.plan-card__header h3 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+.plan-card__desc {
+  font-size: 13px;
+  color: var(--body);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.plan-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.plan-card__amount {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.plan-card__period {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.plan-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.plan-card__features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--body);
+}
+
+.plan-card__features li svg {
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.plan-card__renewal {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* MUI Card baseline reset — remove duplicate border/shadow/bg
+   when pricing-card / pb-card is rendered inside a MUI Card */
+.pricing-card--featured.pricing-card--mui-inner,
+.pricing-card.pricing-card--mui-inner {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  border-radius: 0;
+  height: 100%;
+}
+
+.pb-card.pb-card--mui-inner {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  height: 100%;
 }

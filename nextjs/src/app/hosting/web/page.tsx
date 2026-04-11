@@ -13,10 +13,10 @@ import {
   Cpu,
 } from "lucide-react";
 import { SectionHeader } from "@/components/shared/SectionHeader";
+import { FeaturedPricingWrapper } from "@/components/shared/FeaturedPricingWrapper";
 import { useCurrency } from "@/lib/currency-context";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
-import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
 /* ── Pricing data ─────────────────────────────────────────── */
@@ -344,11 +344,10 @@ export default function WebHostingPage() {
             <Slides inView inViewOnce direction="up" holdDelay={80}>
               {plans.map((plan) => (
                 plan.featured ? (
-                  <Shine key={plan.name} enableOnHover color="#4343F0" opacity={0.12}>
-                    <div
-                      className={`pricing-card pricing-card--featured`}
-                    >
-                      <div className="pricing-card__badge">Most popular</div>
+                  /* FeaturedPricingWrapper: MUI Card owns shadow + hover; Chip badge sits
+                     outside Shine's overflow:hidden — fixes clipped badge and square shadow. */
+                  <FeaturedPricingWrapper key={plan.name}>
+                    <div className="pricing-card pricing-card--featured pricing-card--mui-inner">
                       <div>
                         <h3>{plan.name}</h3>
                         <p>{plan.audience}</p>
@@ -383,7 +382,7 @@ export default function WebHostingPage() {
                         Get started
                       </a>
                     </div>
-                  </Shine>
+                  </FeaturedPricingWrapper>
                 ) : (
                   <div
                     key={plan.name}

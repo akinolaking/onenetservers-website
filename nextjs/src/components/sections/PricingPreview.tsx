@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Card from "@mui/material/Card";
+import Chip from "@mui/material/Chip";
 import { pricingCategories } from "@/lib/home-data";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { useCurrency } from "@/lib/currency-context";
@@ -77,25 +79,91 @@ export function PricingPreview() {
           const usdVal = parseUSD(priceObj.USD);
           const suffix = activeCategory === "domains" ? "/yr" : "/mo";
 
-          return (
-            <article
-              key={plan.name}
-              className={`pricing-card ${plan.featured ? "pricing-card--featured" : ""}`}
-            >
-              {plan.featured ? <div className="pricing-card__badge">Most popular</div> : null}
-              <h3>{plan.name}</h3>
-              <p>{plan.description}</p>
-              <div className="pricing-card__price">
-                <strong>{format(usdVal, 2)}{suffix}</strong>
-              </div>
-              <p className="pricing-card__renewal">{plan.renewal}</p>
-              <Link
-                href="/cart.php?a=add&pid=261&billingcycle=monthly"
-                className="pricing-card__cta"
+          if (plan.featured) {
+            return (
+              /* MUI Card owns shadow + border + hover — sits outside Shine's overflow:hidden.
+                 Fixes clipped badge and rectangular hover shadow. */
+              <Card
+                key={plan.name}
+                elevation={0}
+                sx={{
+                  position: 'relative',
+                  borderRadius: '16px',
+                  border: '1px solid rgba(67, 67, 240, 0.25)',
+                  background: 'linear-gradient(160deg, var(--blue-xl) 0%, #fff 60%)',
+                  boxShadow: '0 4px 6px rgb(0 0 0 / 7%), 0 2px 4px rgb(0 0 0 / 6%)',
+                  transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                  '&:hover': {
+                    boxShadow: '0 4px 16px rgb(67 67 240 / 8%), 0 2px 6px rgb(0 0 0 / 4%)',
+                    transform: 'translateY(-2px)',
+                  },
+                  overflow: 'visible',
+                }}
               >
-                Get started →
-              </Link>
-            </article>
+                {/* Chip badge: outside any overflow:hidden — always visible */}
+                <Chip
+                  label="Most popular"
+                  size="small"
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    left: '24px',
+                    transform: 'translateY(-50%)',
+                    zIndex: 2,
+                    bgcolor: 'var(--blue)',
+                    color: '#fff',
+                    fontSize: '11px',
+                    fontWeight: 500,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    borderRadius: '99px',
+                    height: '24px',
+                    '& .MuiChip-label': { px: '12px' },
+                  }}
+                />
+                <article className="pricing-card pricing-card--featured pricing-card--mui-inner">
+                  <h3>{plan.name}</h3>
+                  <p>{plan.description}</p>
+                  <div className="pricing-card__price">
+                    <strong>{format(usdVal, 2)}{suffix}</strong>
+                  </div>
+                  <p className="pricing-card__renewal">{plan.renewal}</p>
+                  <Link href="/cart.php?a=add&pid=261&billingcycle=monthly" className="pricing-card__cta">
+                    Get started →
+                  </Link>
+                </article>
+              </Card>
+            );
+          }
+
+          return (
+            <Card
+              key={plan.name}
+              elevation={0}
+              sx={{
+                borderRadius: '16px',
+                border: '1px solid var(--line)',
+                boxShadow: '0 1px 3px rgb(0 0 0 / 8%), 0 1px 2px rgb(0 0 0 / 6%)',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                '&:hover': {
+                  boxShadow: '0 4px 16px rgb(67 67 240 / 8%), 0 2px 6px rgb(0 0 0 / 4%)',
+                  transform: 'translateY(-2px)',
+                },
+                overflow: 'visible',
+              }}
+            >
+              <article className="pricing-card pricing-card--mui-inner">
+                <h3>{plan.name}</h3>
+                <p>{plan.description}</p>
+                <div className="pricing-card__price">
+                  <strong>{format(usdVal, 2)}{suffix}</strong>
+                </div>
+                <p className="pricing-card__renewal">{plan.renewal}</p>
+                <Link href="/cart.php?a=add&pid=261&billingcycle=monthly" className="pricing-card__cta">
+                  Get started →
+                </Link>
+              </article>
+            </Card>
           );
         })}
       </div>
