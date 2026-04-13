@@ -111,7 +111,6 @@
 }
 
 .nav-chevron {
-  transition: transform var(--t-std);
   flex-shrink: 0;
 }
 
@@ -138,7 +137,7 @@
   opacity: 0;
   pointer-events: none;
   transform: translateY(6px);
-  transition: opacity var(--t-std), transform var(--t-std);
+  transition: none;
   z-index: 510;
 }
 
@@ -306,7 +305,7 @@
   opacity: 0;
   pointer-events: none;
   transform: translateY(6px);
-  transition: opacity var(--t-std), transform var(--t-std);
+  transition: none;
   z-index: 510;
 }
 

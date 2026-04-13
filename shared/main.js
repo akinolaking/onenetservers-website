@@ -205,10 +205,9 @@ function initNavDropdowns() {
       btn.setAttribute('aria-expanded', 'true');
     }
     function close() {
-      closeTimer = setTimeout(() => {
-        dropdown.classList.remove('nav-dropdown--open');
-        btn.setAttribute('aria-expanded', 'false');
-      }, 120);
+      clearTimeout(closeTimer);
+      dropdown.classList.remove('nav-dropdown--open');
+      btn.setAttribute('aria-expanded', 'false');
     }
 
     /* Focusable items in this dropdown */
