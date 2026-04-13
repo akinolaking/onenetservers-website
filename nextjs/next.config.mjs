@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
+
   typescript: {
     // Vendored animate-ui components have upstream type errors — ignore during build
     ignoreBuildErrors: true,
