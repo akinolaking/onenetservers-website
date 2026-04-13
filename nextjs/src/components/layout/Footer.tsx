@@ -29,73 +29,14 @@ const socialIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-/* ── Brand-accurate white payment icons ── */
-
-const PaystackIcon = () => (
-  /* Paystack — P logomark, white */
-  <svg width="28" height="28" viewBox="0 0 200 200" role="img" aria-label="Paystack" fill="none">
-    <rect x="28" y="24" width="30" height="152" rx="6" fill="#fff"/>
-    {/* top arc — upper bump of P */}
-    <path d="M58 24 H118 C148 24 172 46 172 76 C172 106 148 128 118 128 H58 Z" fill="#fff"/>
-    {/* cutout to hollow the bump */}
-    <path d="M80 48 H114 C132 48 148 62 148 76 C148 90 132 104 114 104 H80 Z" fill="#0a0a12"/>
-    {/* lower arc — second bump (Paystack P has double bump) */}
-    <path d="M58 104 H112 C140 104 162 124 162 150 C162 176 140 196 112 196 H58 Z" fill="#fff"/>
-    <path d="M80 124 H110 C127 124 140 136 140 150 C140 164 127 176 110 176 H80 Z" fill="#0a0a12"/>
-  </svg>
-);
-
-const VisaIcon = () => (
-  /* Visa — wordmark, white italic */
-  <svg width="52" height="28" viewBox="0 0 216 80" role="img" aria-label="Visa">
-    <text
-      x="8" y="66"
-      fontFamily="'Times New Roman',Georgia,serif"
-      fontSize="72"
-      fontWeight="700"
-      fontStyle="italic"
-      fill="#fff"
-      letterSpacing="-2"
-    >VISA</text>
-  </svg>
-);
-
-const MastercardIcon = () => (
-  /* Mastercard — overlapping circles, white monochrome */
-  <svg width="46" height="28" viewBox="0 0 46 28" role="img" aria-label="Mastercard" fill="none">
-    <circle cx="17" cy="14" r="12" fill="#fff"/>
-    <circle cx="29" cy="14" r="12" fill="rgba(255,255,255,0.5)"/>
-    {/* intersection lens */}
-    <path d="M23 3.8a12 12 0 010 20.4A12 12 0 0123 3.8z" fill="rgba(255,255,255,0.75)"/>
-  </svg>
-);
-
-const VerveIcon = () => (
-  /* Verve — wordmark, white */
-  <svg width="52" height="28" viewBox="0 0 180 64" role="img" aria-label="Verve">
-    <text
-      x="4" y="50"
-      fontFamily="'Helvetica Neue',Arial,sans-serif"
-      fontSize="52"
-      fontWeight="700"
-      fill="#fff"
-      letterSpacing="1"
-    >VERVE</text>
-  </svg>
-);
-
+/* ── Bank Transfer inline icon (no external asset needed) ── */
 const BankTransferIcon = () => (
-  /* Bank building — matches provided image, white */
   <svg width="28" height="28" viewBox="0 0 512 512" role="img" aria-label="Bank Transfer" fill="#fff">
-    {/* Pointed roof / pediment */}
     <polygon points="256,18 10,170 502,170"/>
-    {/* Entablature — thick horizontal bar */}
     <rect x="6" y="182" width="500" height="52" rx="8"/>
-    {/* Three columns */}
     <rect x="44"  y="252" width="112" height="188" rx="4"/>
     <rect x="200" y="252" width="112" height="188" rx="4"/>
     <rect x="356" y="252" width="112" height="188" rx="4"/>
-    {/* Stylobate / base */}
     <rect x="0" y="452" width="512" height="44" rx="10"/>
   </svg>
 );
@@ -160,10 +101,10 @@ export function Footer() {
         <div className="footer-payments">
           <span>We accept</span>
           <div className="footer-payments-grid">
-            <PaystackIcon />
-            <VisaIcon />
-            <MastercardIcon />
-            <VerveIcon />
+            <Image src="/assets/pay-paystack.svg"    alt="Paystack"     width={90} height={28} />
+            <Image src="/assets/pay-visa.svg"         alt="Visa"         width={52} height={28} />
+            <Image src="/assets/pay-mastercard.svg"   alt="Mastercard"   width={48} height={28} />
+            <Image src="/assets/pay-verve.svg"        alt="Verve"        width={80} height={28} />
             <BankTransferIcon />
           </div>
         </div>
