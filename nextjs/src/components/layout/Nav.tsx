@@ -47,10 +47,6 @@ import {
   DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu";
 import {
-  Highlight,
-  HighlightItem,
-} from "@/components/animate-ui/primitives/effects/highlight";
-import {
   Sheet,
   SheetContent,
   SheetOverlay,
@@ -295,19 +291,11 @@ export function Nav() {
           {/* ── Desktop nav ── */}
           <nav className="nav-desktop" aria-label="Primary">
             {hasMounted && (
-              <Highlight
-                mode="parent"
-                hover
-                className="rounded-[var(--r1)] bg-[var(--blue-xs)]"
-                transition={{ type: "spring", stiffness: 350, damping: 35 }}
-                containerClassName="nav-menu-list"
-              >
+              <div className="nav-menu-list">
                 {navGroups.map((group) => (
-                  <HighlightItem key={group.title} asChild>
-                    <DesktopDropdown group={group} />
-                  </HighlightItem>
+                  <DesktopDropdown key={group.title} group={group} />
                 ))}
-              </Highlight>
+              </div>
             )}
           </nav>
 
