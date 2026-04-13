@@ -152,16 +152,29 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
       </button>
 
       {open && (
-        <div
-          style={{
-            position: "absolute",
-            top: "calc(100% + 8px)",
-            left: isWide ? "50%" : 0,
-            transform: isWide ? "translateX(-50%)" : undefined,
-            zIndex: 200,
-          }}
-          className="nav-dropdown-panel"
-        >
+        <>
+          {/* Invisible bridge — fills the 8px gap so onMouseLeave doesn't fire mid-transit */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              right: 0,
+              height: "8px",
+              zIndex: 199,
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: "calc(100% + 8px)",
+              left: isWide ? "50%" : 0,
+              transform: isWide ? "translateX(-50%)" : undefined,
+              zIndex: 200,
+            }}
+            className="nav-dropdown-panel"
+          >
           <div className={cn("nav-dropdown-grid", isWide && "nav-dropdown-grid--wide")}>
             {group.items.map((item) =>
               item.disabled ? (
@@ -188,6 +201,7 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
             )}
           </div>
         </div>
+        </>
       )}
     </div>
   );
