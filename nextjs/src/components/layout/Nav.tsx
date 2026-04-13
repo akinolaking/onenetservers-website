@@ -43,8 +43,6 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu";
 import {
   Sheet,
@@ -241,22 +239,18 @@ function CurrencyPicker({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" sideOffset={10} className="currency-menu w-52">
-        <DropdownMenuRadioGroup
-          value={active}
-          onValueChange={(v) => { onChange(v as Currency); setOpen(false); }}
-        >
-          {currencies.map((c) => (
-            <DropdownMenuRadioItem
-              key={c}
-              value={c}
-              className={cn("currency-option", active === c && "currency-option--active")}
-            >
-              <CurrencyFlag code={c} />
-              <span>{c === "NGN" ? "Nigerian Naira" : c === "GBP" ? "British Pound" : "US Dollar"}</span>
-              <span className="currency-code">{c}</span>
-            </DropdownMenuRadioItem>
-          ))}
-        </DropdownMenuRadioGroup>
+        {currencies.map((c) => (
+          <button
+            key={c}
+            type="button"
+            className={cn("currency-option", active === c && "currency-option--active")}
+            onClick={() => { onChange(c); setOpen(false); }}
+          >
+            <CurrencyFlag code={c} />
+            <span>{c === "NGN" ? "Nigerian Naira" : c === "GBP" ? "British Pound" : "US Dollar"}</span>
+            <span className="currency-code">{c}</span>
+          </button>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );
