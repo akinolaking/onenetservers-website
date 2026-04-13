@@ -130,6 +130,7 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
   return (
     <div
       className="relative"
+      onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
       <button
