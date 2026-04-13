@@ -118,26 +118,20 @@ const CurrencyFlag = ({ code }: { code: Currency }) => {
   );
 };
 
-/* ─── Desktop dropdown panel — click to open, click-outside to close ── */
+/* ─── Desktop dropdown panel ────────────────────────────────────────
+ *  - Click button to open / close
+ *  - Hover away from the whole container (button + panel) to close
+ *  - Chevron flips when open
+ * ─────────────────────────────────────────────────────────────────── */
 function DesktopDropdown({ group }: { group: NavGroup }) {
   const [open, setOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
   const isWide = group.title === "Hosting";
 
-  // Close on click outside
-  useEffect(() => {
-    if (!open) return;
-    const handler = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [open]);
-
   return (
-    <div ref={containerRef} className="relative">
+    <div
+      className="relative"
+      onMouseLeave={() => setOpen(false)}
+    >
       <button
         type="button"
         className="nav-trigger"
@@ -146,7 +140,13 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
         onClick={() => setOpen((v) => !v)}
       >
         {group.title}
-        <span className="inline-flex">
+        <span
+          className="inline-flex"
+          style={{
+            transform: open ? "rotate(180deg)" : "rotate(0deg)",
+            transition: "transform 0.2s ease",
+          }}
+        >
           <ChevronDown className="h-3 w-3" />
         </span>
       </button>
