@@ -39,7 +39,6 @@ import {
   Users,
 } from "lucide-react";
 
-import { Fade, Fades } from "@/components/animate-ui/primitives/effects/fade";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -134,7 +133,8 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
     setOpen(true);
   };
   const close_ = () => {
-    closeTimer.current = setTimeout(() => setOpen(false), 120);
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(false);
   };
 
   return (
@@ -152,63 +152,51 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
         aria-haspopup="true"
       >
         {group.title}
-        <motion.span
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 28 }}
-          className="inline-flex"
-        >
+        <span className="inline-flex">
           <ChevronDown className="h-3 w-3" />
-        </motion.span>
+        </span>
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="dropdown"
-            style={{
-              position: "absolute",
-              top: "calc(100% + 8px)",
-              left: isWide ? "50%" : 0,
-              zIndex: 200,
-            }}
-            initial={{ opacity: 0, y: 8, scale: 0.97, x: isWide ? "-50%" : "0%" }}
-            animate={{ opacity: 1, y: 0, scale: 1,   x: isWide ? "-50%" : "0%" }}
-            exit={{   opacity: 0, y: 6, scale: 0.97, x: isWide ? "-50%" : "0%" }}
-            transition={{ type: "spring", stiffness: 340, damping: 30 }}
-            className="nav-dropdown-panel"
-            onMouseEnter={open_}
-            onMouseLeave={close_}
-          >
-            <div className={cn("nav-dropdown-grid", isWide && "nav-dropdown-grid--wide")}>
-              <Fades delay={0} holdDelay={40} inView={false}>
-                {group.items.map((item) =>
-                  item.disabled ? (
-                    <span key={item.label} className="nav-dropdown-item nav-dropdown-item--disabled">
-                      <span className="nav-dropdown-icon" aria-hidden="true">
-                        {groupIcons[item.label] ?? <Globe className="h-4 w-4" />}
-                      </span>
-                      <span className="nav-dropdown-copy">
-                        <strong>{item.label}</strong>
-                        {item.description && <em>{item.description}</em>}
-                      </span>
-                    </span>
-                  ) : (
-                    <Link key={item.label} href={item.href} className="nav-dropdown-item">
-                      <span className="nav-dropdown-icon" aria-hidden="true">
-                        {groupIcons[item.label] ?? <Globe className="h-4 w-4" />}
-                      </span>
-                      <span className="nav-dropdown-copy">
-                        <strong>{item.label}</strong>
-                        {item.description && <em>{item.description}</em>}
-                      </span>
-                    </Link>
-                  )
-                )}
-              </Fades>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {open && (
+        <div
+          style={{
+            position: "absolute",
+            top: "calc(100% + 8px)",
+            left: isWide ? "50%" : 0,
+            transform: isWide ? "translateX(-50%)" : undefined,
+            zIndex: 200,
+          }}
+          className="nav-dropdown-panel"
+          onMouseEnter={open_}
+          onMouseLeave={close_}
+        >
+          <div className={cn("nav-dropdown-grid", isWide && "nav-dropdown-grid--wide")}>
+            {group.items.map((item) =>
+              item.disabled ? (
+                <span key={item.label} className="nav-dropdown-item nav-dropdown-item--disabled">
+                  <span className="nav-dropdown-icon" aria-hidden="true">
+                    {groupIcons[item.label] ?? <Globe className="h-4 w-4" />}
+                  </span>
+                  <span className="nav-dropdown-copy">
+                    <strong>{item.label}</strong>
+                    {item.description && <em>{item.description}</em>}
+                  </span>
+                </span>
+              ) : (
+                <Link key={item.label} href={item.href} className="nav-dropdown-item">
+                  <span className="nav-dropdown-icon" aria-hidden="true">
+                    {groupIcons[item.label] ?? <Globe className="h-4 w-4" />}
+                  </span>
+                  <span className="nav-dropdown-copy">
+                    <strong>{item.label}</strong>
+                    {item.description && <em>{item.description}</em>}
+                  </span>
+                </Link>
+              )
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
