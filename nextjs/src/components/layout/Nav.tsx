@@ -139,6 +139,7 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => setOpen((v) => !v)}
+        {...(open ? { "data-open": "" } : {})}
       >
         {group.title}
         <span
