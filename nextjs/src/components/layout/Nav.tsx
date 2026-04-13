@@ -118,34 +118,32 @@ const CurrencyFlag = ({ code }: { code: Currency }) => {
   );
 };
 
-/* ─── Animated desktop dropdown panel ───────────────────────────── */
+/* ─── Desktop dropdown panel — click to open, click-outside to close ── */
 function DesktopDropdown({ group }: { group: NavGroup }) {
   const [open, setOpen] = useState(false);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const isWide = group.title === "Hosting";
 
-  const open_ = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpen(true);
-  };
-  const close_ = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpen(false);
-  };
+  // Close on click outside
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={open_}
-      onMouseLeave={close_}
-      onFocus={open_}
-      onBlur={close_}
-    >
+    <div ref={containerRef} className="relative">
       <button
         type="button"
         className="nav-trigger"
         aria-expanded={open}
         aria-haspopup="true"
+        onClick={() => setOpen((v) => !v)}
       >
         {group.title}
         <span className="inline-flex">
@@ -163,8 +161,6 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
             zIndex: 200,
           }}
           className="nav-dropdown-panel"
-          onMouseEnter={open_}
-          onMouseLeave={close_}
         >
           <div className={cn("nav-dropdown-grid", isWide && "nav-dropdown-grid--wide")}>
             {group.items.map((item) =>
@@ -179,7 +175,7 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
                   </span>
                 </span>
               ) : (
-                <Link key={item.label} href={item.href} className="nav-dropdown-item">
+                <Link key={item.label} href={item.href} className="nav-dropdown-item" onClick={() => setOpen(false)}>
                   <span className="nav-dropdown-icon" aria-hidden="true">
                     {groupIcons[item.label] ?? <Globe className="h-4 w-4" />}
                   </span>
