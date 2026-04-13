@@ -1,5 +1,4 @@
 import { Hero } from "@/components/sections/Hero";
-import { TrustBar } from "@/components/sections/TrustBar";
 import { ValueCards } from "@/components/sections/ValueCards";
 import { PricingBestsellers } from "@/components/sections/PricingBestsellers";
 import { HowItWorks } from "@/components/sections/HowItWorks";
@@ -14,9 +13,7 @@ export default function Home() {
     <main id="main-content" className="page-shell">
       {/* 01 — Hero */}
       <Hero />
-      {/* 02 — Trust bar */}
-      <TrustBar />
-      {/* 03 — Core value blocks */}
+      {/* 02 — Core value blocks */}
       <ValueCards />
       {/* 04 — Pricing bestsellers */}
       <PricingBestsellers />
