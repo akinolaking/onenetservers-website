@@ -29,57 +29,74 @@ const socialIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-/* ── Brand-accurate payment method SVG icons ── */
+/* ── Brand-accurate white payment icons ── */
+
 const PaystackIcon = () => (
-  <svg width="72" height="32" viewBox="0 0 72 32" role="img" aria-label="Paystack">
-    <rect width="72" height="32" rx="5" fill="#00C3F7" />
-    {/* P letterform */}
-    <rect x="10" y="9" width="3.5" height="14" rx="1" fill="#fff" />
-    <path d="M13.5 9h6a4.5 4.5 0 010 9h-6" stroke="#fff" strokeWidth="2.2" fill="none" strokeLinecap="round" />
-    {/* wordmark */}
-    <text x="46" y="20.5" fontFamily="'Helvetica Neue',Arial,sans-serif" fontSize="8.5" fontWeight="700" fill="#fff" textAnchor="middle" letterSpacing="0.3">PAYSTACK</text>
+  /* Paystack — P logomark, white */
+  <svg width="28" height="28" viewBox="0 0 200 200" role="img" aria-label="Paystack" fill="none">
+    <rect x="28" y="24" width="30" height="152" rx="6" fill="#fff"/>
+    {/* top arc — upper bump of P */}
+    <path d="M58 24 H118 C148 24 172 46 172 76 C172 106 148 128 118 128 H58 Z" fill="#fff"/>
+    {/* cutout to hollow the bump */}
+    <path d="M80 48 H114 C132 48 148 62 148 76 C148 90 132 104 114 104 H80 Z" fill="#0a0a12"/>
+    {/* lower arc — second bump (Paystack P has double bump) */}
+    <path d="M58 104 H112 C140 104 162 124 162 150 C162 176 140 196 112 196 H58 Z" fill="#fff"/>
+    <path d="M80 124 H110 C127 124 140 136 140 150 C140 164 127 176 110 176 H80 Z" fill="#0a0a12"/>
   </svg>
 );
 
 const VisaIcon = () => (
-  <svg width="52" height="32" viewBox="0 0 52 32" role="img" aria-label="Visa">
-    <rect width="52" height="32" rx="5" fill="#1A1F71" />
-    <text x="26" y="22" fontFamily="'Times New Roman',Times,serif" fontSize="18" fontWeight="700" fontStyle="italic" fill="#F7B600" textAnchor="middle" letterSpacing="1">VISA</text>
+  /* Visa — wordmark, white italic */
+  <svg width="52" height="28" viewBox="0 0 216 80" role="img" aria-label="Visa">
+    <text
+      x="8" y="66"
+      fontFamily="'Times New Roman',Georgia,serif"
+      fontSize="72"
+      fontWeight="700"
+      fontStyle="italic"
+      fill="#fff"
+      letterSpacing="-2"
+    >VISA</text>
   </svg>
 );
 
 const MastercardIcon = () => (
-  <svg width="52" height="32" viewBox="0 0 52 32" role="img" aria-label="Mastercard">
-    <rect width="52" height="32" rx="5" fill="#252525" />
-    <circle cx="20" cy="16" r="9.5" fill="#EB001B" />
-    <circle cx="32" cy="16" r="9.5" fill="#F79E1B" />
-    {/* overlap blend */}
-    <path d="M26 8.3a9.5 9.5 0 010 15.4A9.5 9.5 0 0126 8.3z" fill="#FF5F00" />
+  /* Mastercard — overlapping circles, white monochrome */
+  <svg width="46" height="28" viewBox="0 0 46 28" role="img" aria-label="Mastercard" fill="none">
+    <circle cx="17" cy="14" r="12" fill="#fff"/>
+    <circle cx="29" cy="14" r="12" fill="rgba(255,255,255,0.5)"/>
+    {/* intersection lens */}
+    <path d="M23 3.8a12 12 0 010 20.4A12 12 0 0123 3.8z" fill="rgba(255,255,255,0.75)"/>
   </svg>
 );
 
 const VerveIcon = () => (
-  <svg width="58" height="32" viewBox="0 0 58 32" role="img" aria-label="Verve">
-    <rect width="58" height="32" rx="5" fill="#004B87" />
-    <rect x="4" y="13" width="50" height="6" rx="1" fill="#E4002B" />
-    <text x="29" y="21" fontFamily="'Helvetica Neue',Arial,sans-serif" fontSize="9" fontWeight="700" fill="#fff" textAnchor="middle" letterSpacing="1.5">VERVE</text>
+  /* Verve — wordmark, white */
+  <svg width="52" height="28" viewBox="0 0 180 64" role="img" aria-label="Verve">
+    <text
+      x="4" y="50"
+      fontFamily="'Helvetica Neue',Arial,sans-serif"
+      fontSize="52"
+      fontWeight="700"
+      fill="#fff"
+      letterSpacing="1"
+    >VERVE</text>
   </svg>
 );
 
 const BankTransferIcon = () => (
-  <svg width="72" height="32" viewBox="0 0 72 32" role="img" aria-label="Bank Transfer">
-    <rect width="72" height="32" rx="5" fill="#F0F0FA" />
-    {/* pediment / roof */}
-    <path d="M36 5L16 14h40L36 5z" fill="#4343F0" />
-    {/* columns */}
-    <rect x="18" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
-    <rect x="24" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
-    <rect x="30" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
-    <rect x="36" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
-    <rect x="42" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
-    <rect x="48" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
-    {/* base */}
-    <rect x="14" y="25" width="44" height="2.5" rx="0.5" fill="#3D3D5C" />
+  /* Bank building — matches provided image, white */
+  <svg width="28" height="28" viewBox="0 0 512 512" role="img" aria-label="Bank Transfer" fill="#fff">
+    {/* Pointed roof / pediment */}
+    <polygon points="256,18 10,170 502,170"/>
+    {/* Entablature — thick horizontal bar */}
+    <rect x="6" y="182" width="500" height="52" rx="8"/>
+    {/* Three columns */}
+    <rect x="44"  y="252" width="112" height="188" rx="4"/>
+    <rect x="200" y="252" width="112" height="188" rx="4"/>
+    <rect x="356" y="252" width="112" height="188" rx="4"/>
+    {/* Stylobate / base */}
+    <rect x="0" y="452" width="512" height="44" rx="10"/>
   </svg>
 );
 
