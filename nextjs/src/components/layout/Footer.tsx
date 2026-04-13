@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { footerColumns, paymentMethods, phoneNumbers, socialLinks, trustBadges } from "@/lib/site-data";
+import { footerColumns, socialLinks, trustBadges } from "@/lib/site-data";
 
 const socialIcons: Record<string, React.ReactNode> = {
   X: (
@@ -28,6 +28,60 @@ const socialIcons: Record<string, React.ReactNode> = {
     </svg>
   ),
 };
+
+/* ── Brand-accurate payment method SVG icons ── */
+const PaystackIcon = () => (
+  <svg width="72" height="32" viewBox="0 0 72 32" role="img" aria-label="Paystack">
+    <rect width="72" height="32" rx="5" fill="#00C3F7" />
+    {/* P letterform */}
+    <rect x="10" y="9" width="3.5" height="14" rx="1" fill="#fff" />
+    <path d="M13.5 9h6a4.5 4.5 0 010 9h-6" stroke="#fff" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+    {/* wordmark */}
+    <text x="46" y="20.5" fontFamily="'Helvetica Neue',Arial,sans-serif" fontSize="8.5" fontWeight="700" fill="#fff" textAnchor="middle" letterSpacing="0.3">PAYSTACK</text>
+  </svg>
+);
+
+const VisaIcon = () => (
+  <svg width="52" height="32" viewBox="0 0 52 32" role="img" aria-label="Visa">
+    <rect width="52" height="32" rx="5" fill="#1A1F71" />
+    <text x="26" y="22" fontFamily="'Times New Roman',Times,serif" fontSize="18" fontWeight="700" fontStyle="italic" fill="#F7B600" textAnchor="middle" letterSpacing="1">VISA</text>
+  </svg>
+);
+
+const MastercardIcon = () => (
+  <svg width="52" height="32" viewBox="0 0 52 32" role="img" aria-label="Mastercard">
+    <rect width="52" height="32" rx="5" fill="#252525" />
+    <circle cx="20" cy="16" r="9.5" fill="#EB001B" />
+    <circle cx="32" cy="16" r="9.5" fill="#F79E1B" />
+    {/* overlap blend */}
+    <path d="M26 8.3a9.5 9.5 0 010 15.4A9.5 9.5 0 0126 8.3z" fill="#FF5F00" />
+  </svg>
+);
+
+const VerveIcon = () => (
+  <svg width="58" height="32" viewBox="0 0 58 32" role="img" aria-label="Verve">
+    <rect width="58" height="32" rx="5" fill="#004B87" />
+    <rect x="4" y="13" width="50" height="6" rx="1" fill="#E4002B" />
+    <text x="29" y="21" fontFamily="'Helvetica Neue',Arial,sans-serif" fontSize="9" fontWeight="700" fill="#fff" textAnchor="middle" letterSpacing="1.5">VERVE</text>
+  </svg>
+);
+
+const BankTransferIcon = () => (
+  <svg width="72" height="32" viewBox="0 0 72 32" role="img" aria-label="Bank Transfer">
+    <rect width="72" height="32" rx="5" fill="#F0F0FA" />
+    {/* pediment / roof */}
+    <path d="M36 5L16 14h40L36 5z" fill="#4343F0" />
+    {/* columns */}
+    <rect x="18" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
+    <rect x="24" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
+    <rect x="30" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
+    <rect x="36" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
+    <rect x="42" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
+    <rect x="48" y="15" width="3" height="9" rx="0.5" fill="#3D3D5C" />
+    {/* base */}
+    <rect x="14" y="25" width="44" height="2.5" rx="0.5" fill="#3D3D5C" />
+  </svg>
+);
 
 export function Footer() {
   return (
@@ -76,22 +130,6 @@ export function Footer() {
               </ul>
             </div>
           ))}
-
-          <div className="footer-column footer-column--contact">
-            <h3>Contact</h3>
-            <div className="footer-contact-list">
-              {phoneNumbers.map((phone) => (
-                <a key={phone.text} href={phone.href} className="footer-contact-item">
-                  <span>{phone.label}</span>
-                  <strong>{phone.text}</strong>
-                </a>
-              ))}
-              <a href="mailto:support@onenetservers.net" className="footer-contact-item">
-                <span>Email</span>
-                <strong>support@onenetservers.net</strong>
-              </a>
-            </div>
-          </div>
         </div>
 
         <div className="footer-band">
@@ -105,11 +143,11 @@ export function Footer() {
         <div className="footer-payments">
           <span>We accept</span>
           <div className="footer-payments-grid">
-            {paymentMethods.map((method) => (
-              <span key={method} className="payment-chip">
-                {method}
-              </span>
-            ))}
+            <PaystackIcon />
+            <VisaIcon />
+            <MastercardIcon />
+            <VerveIcon />
+            <BankTransferIcon />
           </div>
         </div>
 
