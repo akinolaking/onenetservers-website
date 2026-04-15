@@ -10,19 +10,20 @@ import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 import { tlds } from "@/lib/home-data";
 import { DomainSearch } from "@/components/primitives/DomainSearch";
 
+/* TLD prices — live from WHMCS GetTLDPricing API */
 const extensions = [
-  { ext: ".ng", usd: 23.40, ngn: "₦43,000", gbp: "£21.79", badge: "NiRA", popular: true },
-  { ext: ".com.ng", usd: 11.25, ngn: "₦20,750", gbp: "£10.47", badge: "NiRA", popular: true },
-  { ext: ".com", usd: 15.00, ngn: "₦27,570", gbp: "£13.97", badge: "" },
-  { ext: ".co.uk", usd: 8.12, ngn: "₦14,925", gbp: "£7.56", badge: "" },
-  { ext: ".uk", usd: 8.12, ngn: "₦14,925", gbp: "£7.56", badge: "" },
-  { ext: ".shop", usd: 4.99, ngn: "₦9,172", gbp: "£4.65", badge: "Popular" },
-  { ext: ".online", usd: 3.80, ngn: "₦6,984", gbp: "£3.54", badge: "" },
-  { ext: ".xyz", usd: 3.42, ngn: "₦6,286", gbp: "£3.18", badge: "Lowest" },
-  { ext: ".dev", usd: 19.04, ngn: "₦34,995", gbp: "£17.73", badge: "" },
-  { ext: ".ai", usd: 95.24, ngn: "₦175,071", gbp: "£88.67", badge: "" },
-  { ext: ".tech", usd: 10.79, ngn: "₦19,832", gbp: "£10.04", badge: "" },
-  { ext: ".io", usd: 44.44, ngn: "₦81,681", gbp: "£41.37", badge: "" },
+  { ext: ".ng",     usd: 23.40,  ngn: "₦17,999",  gbp: "£16.74", badge: "NiRA",    popular: true },
+  { ext: ".com.ng", usd: 11.24,  ngn: "₦8,650",   gbp: "£8.04",  badge: "NiRA",    popular: true },
+  { ext: ".com",    usd: 28.60,  ngn: "₦21,999",  gbp: "£11.99", badge: "",         popular: false },
+  { ext: ".co.uk",  usd: 19.37,  ngn: "₦14,900",  gbp: "£7.38",  badge: "",         popular: false },
+  { ext: ".uk",     usd: 19.37,  ngn: "₦14,900",  gbp: "£7.38",  badge: "",         popular: false },
+  { ext: ".shop",   usd: 10.01,  ngn: "₦7,699",   gbp: "£3.79",  badge: "Popular",  popular: false },
+  { ext: ".online", usd: 9.10,   ngn: "₦7,000",   gbp: "£3.45",  badge: "",         popular: false },
+  { ext: ".xyz",    usd: 8.19,   ngn: "₦6,300",   gbp: "£3.11",  badge: "Lowest",   popular: false },
+  { ext: ".dev",    usd: 45.50,  ngn: "₦35,000",  gbp: "£17.30", badge: "",         popular: false },
+  { ext: ".ai",     usd: 227.76, ngn: "₦175,200", gbp: "£86.53", badge: "",         popular: false },
+  { ext: ".tech",   usd: 21.41,  ngn: "₦16,469",  gbp: "£8.57",  badge: "",         popular: false },
+  { ext: ".io",     usd: 106.34, ngn: "₦81,800",  gbp: "£40.37", badge: "",         popular: false },
 ];
 
 const features = [

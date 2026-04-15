@@ -22,70 +22,70 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
-/* ── Pricing data ─────────────────────────────────────────── */
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
   {
-    name: "Starter",
+    name: "WP Starter",
     audience: "First WordPress site",
-    monthlyUsd: 4.99,
-    annualUsd: 3.49,
-    renewal: "Renews at $4.99/mo after the first term.",
+    monthlyUsd: 6.78,
+    annualUsd: 6.44,
+    renewal: "Renews at $6.78/mo after the first term.",
     features: [
-      "1 WordPress site",
+      "1 WordPress instance",
       "10 GB SSD storage",
-      "One-click WordPress install",
+      "AI website builder",
       "Automatic WordPress updates",
       "Free SSL certificate",
     ],
-    pid: "271",
+    pid: "260",
     featured: false,
   },
   {
-    name: "Lite",
+    name: "WP Lite",
     audience: "Growing blogs and portfolios",
-    monthlyUsd: 9.99,
-    annualUsd: 6.99,
-    renewal: "Renews at $9.99/mo after the first term.",
+    monthlyUsd: 13.65,
+    annualUsd: 9.56,
+    renewal: "Renews at $13.65/mo after the first term.",
     features: [
-      "3 WordPress sites",
+      "3 WordPress instances",
       "25 GB SSD storage",
       "LiteSpeed WordPress cache",
       "Daily backups + one-click restore",
       "Staging environment",
     ],
-    pid: "272",
+    pid: "248",
     featured: false,
   },
   {
-    name: "Premium",
+    name: "WP Premium",
     audience: "Agencies and WooCommerce stores",
-    monthlyUsd: 19.99,
-    annualUsd: 13.99,
-    renewal: "Renews at $19.99/mo after the first term.",
+    monthlyUsd: 52.49,
+    annualUsd: 36.75,
+    renewal: "Renews at $52.49/mo after the first term.",
     features: [
-      "Unlimited WordPress sites",
+      "5 WordPress instances",
       "50 GB SSD storage",
       "Staging environment",
       "WooCommerce optimised",
       "Free domain (1st year)",
     ],
-    pid: "273",
+    pid: "249",
     featured: true,
   },
   {
-    name: "Ultimate",
+    name: "WP Ultimate",
     audience: "High-traffic and enterprise sites",
-    monthlyUsd: 34.99,
-    annualUsd: 24.99,
-    renewal: "Renews at $34.99/mo after the first term.",
+    monthlyUsd: 105.00,
+    annualUsd: 73.50,
+    renewal: "Renews at $105.00/mo after the first term.",
     features: [
-      "Unlimited WordPress sites",
+      "Unlimited WordPress instances",
       "100 GB SSD storage",
       "Staging environment",
       "Priority support",
       "Free domain (1st year)",
     ],
-    pid: "274",
+    pid: "250",
     featured: false,
   },
 ];
@@ -213,7 +213,7 @@ export default function WordPressHostingPage() {
             </p>
             <div className="hero-actions">
               <a
-                href="/cart.php?a=add&pid=271&billingcycle=annually"
+                href="/cart.php?a=add&pid=260&billingcycle=annually"
                 className="wh-btn-primary"
               >
                 Get WordPress hosting <ArrowRight size={16} />
@@ -471,7 +471,7 @@ export default function WordPressHostingPage() {
                 One-click install. Automatic updates. 30-day money-back guarantee. No technical knowledge required.
               </p>
               <a
-                href="/cart.php?a=add&pid=271&billingcycle=annually"
+                href="/cart.php?a=add&pid=260&billingcycle=annually"
                 className="wh-btn-primary"
               >
                 Get WordPress hosting <ArrowRight size={16} />

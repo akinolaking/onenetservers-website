@@ -19,13 +19,13 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
-/* ── Pricing data ─────────────────────────────────────────── */
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
   {
     name: "Starter",
     audience: "Your first website",
     monthlyUsd: 3.99,
-    annualUsd: 2.99,
+    annualUsd: 4.05,
     renewalMonthly: "Renews at $3.99/mo after the first term.",
     renewalAnnual: "Renews at $3.99/mo after the first term.",
     features: [
@@ -41,10 +41,10 @@ const plans = [
   {
     name: "Lite",
     audience: "Growing sites",
-    monthlyUsd: 7.99,
-    annualUsd: 5.49,
-    renewalMonthly: "Renews at $7.99/mo after the first term.",
-    renewalAnnual: "Renews at $7.99/mo after the first term.",
+    monthlyUsd: 9.75,
+    annualUsd: 6.82,
+    renewalMonthly: "Renews at $9.75/mo after the first term.",
+    renewalAnnual: "Renews at $9.75/mo after the first term.",
     features: [
       "3 websites",
       "20 GB SSD storage",
@@ -52,14 +52,14 @@ const plans = [
       "Free daily backups",
       "LiteSpeed web server",
     ],
-    pid: "262",
+    pid: "251",
     featured: false,
   },
   {
     name: "Premium",
     audience: "Serious builders",
-    monthlyUsd: 18.2,
-    annualUsd: 11.83,
+    monthlyUsd: 18.20,
+    annualUsd: 12.74,
     renewalMonthly: "Renews at $18.20/mo after the first term.",
     renewalAnnual: "Renews at $18.20/mo after the first term.",
     features: [
@@ -69,16 +69,16 @@ const plans = [
       "Free daily backups",
       "ImmunifyAV+ malware scanning",
     ],
-    pid: "263",
+    pid: "252",
     featured: true,
   },
   {
     name: "Ultimate",
     audience: "Agencies and stores",
-    monthlyUsd: 32.0,
-    annualUsd: 21.99,
-    renewalMonthly: "Renews at $32.00/mo after the first term.",
-    renewalAnnual: "Renews at $32.00/mo after the first term.",
+    monthlyUsd: 32.50,
+    annualUsd: 22.75,
+    renewalMonthly: "Renews at $32.50/mo after the first term.",
+    renewalAnnual: "Renews at $32.50/mo after the first term.",
     features: [
       "Unlimited websites",
       "100 GB SSD storage",
@@ -86,7 +86,7 @@ const plans = [
       "Priority daily backups",
       "Dedicated resources",
     ],
-    pid: "264",
+    pid: "254",
     featured: false,
   },
 ];

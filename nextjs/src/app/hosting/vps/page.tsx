@@ -9,27 +9,8 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
-  {
-    name: "VPS Lite",
-    audience: "Dev environments",
-    ram: "4GB",
-    cpu: "2 vCPU",
-    storage: "50 GB NVMe",
-    bandwidth: "Unlimited",
-    monthlyUsd: 7.99,
-    annualUsd: 5.99,
-    renewal: "Renews at $7.99/mo after the first term.",
-    features: [
-      "4 GB RAM · 2 vCPU",
-      "50 GB NVMe SSD",
-      "Unlimited bandwidth",
-      "Full root access",
-      "KVM virtualisation",
-    ],
-    pid: "291",
-    featured: false,
-  },
   {
     name: "VPS Starter",
     audience: "Apps and automation",
@@ -38,7 +19,7 @@ const plans = [
     storage: "100 GB NVMe",
     bandwidth: "Unlimited",
     monthlyUsd: 12.42,
-    annualUsd: 9.99,
+    annualUsd: 11.18,
     renewal: "Renews at $12.42/mo after the first term.",
     features: [
       "8 GB RAM · 4 vCPU",
@@ -47,7 +28,27 @@ const plans = [
       "One-click app deploy",
       "Docker + Wireguard ready",
     ],
-    pid: "292",
+    pid: "205",
+    featured: false,
+  },
+  {
+    name: "VPS Lite",
+    audience: "Growing workloads",
+    ram: "16GB",
+    cpu: "6 vCPU",
+    storage: "200 GB NVMe",
+    bandwidth: "Unlimited",
+    monthlyUsd: 29.11,
+    annualUsd: 26.20,
+    renewal: "Renews at $29.11/mo after the first term.",
+    features: [
+      "16 GB RAM · 6 vCPU",
+      "200 GB NVMe SSD",
+      "Unlimited bandwidth",
+      "Full root access",
+      "KVM virtualisation",
+    ],
+    pid: "264",
     featured: false,
   },
   {
@@ -58,7 +59,7 @@ const plans = [
     storage: "400 GB NVMe",
     bandwidth: "Unlimited",
     monthlyUsd: 43.61,
-    annualUsd: 33.99,
+    annualUsd: 39.25,
     renewal: "Renews at $43.61/mo after the first term.",
     features: [
       "48 GB RAM · 12 vCPU",
@@ -67,7 +68,7 @@ const plans = [
       "Priority support",
       "AI-ready from day one",
     ],
-    pid: "293",
+    pid: "265",
     featured: true,
   },
   {
@@ -77,9 +78,9 @@ const plans = [
     cpu: "24 vCPU",
     storage: "800 GB NVMe",
     bandwidth: "Unlimited",
-    monthlyUsd: 89.00,
-    annualUsd: 69.99,
-    renewal: "Renews at $89.00/mo after the first term.",
+    monthlyUsd: 92.15,
+    annualUsd: 82.94,
+    renewal: "Renews at $92.15/mo after the first term.",
     features: [
       "96 GB RAM · 24 vCPU",
       "800 GB NVMe SSD",
@@ -87,7 +88,7 @@ const plans = [
       "Dedicated resources",
       "SLA-backed uptime",
     ],
-    pid: "294",
+    pid: "266",
     featured: false,
   },
 ];
@@ -189,7 +190,7 @@ export default function VpsPage() {
               and Wireguard — from {format(7.99)}/mo.
             </p>
             <div className="hero-actions">
-              <a href="/cart.php?a=add&pid=292&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=205&billingcycle=annually" className="wh-btn-primary">
                 Deploy your VPS <ArrowRight size={16} />
               </a>
             </div>
@@ -345,7 +346,7 @@ export default function VpsPage() {
             <div className="wh-cta-box">
               <h2>Deploy in 60 seconds. Own your infrastructure.</h2>
               <p>30-day money-back guarantee. Unlimited bandwidth. Full root access.</p>
-              <a href="/cart.php?a=add&pid=292&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=205&billingcycle=annually" className="wh-btn-primary">
                 Deploy your VPS <ArrowRight size={16} />
               </a>
               <div className="hero-reassurance">

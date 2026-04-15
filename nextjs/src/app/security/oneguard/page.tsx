@@ -8,12 +8,13 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
   {
     key: "single",
     name: "OneGuard Essential",
     audience: "Single website",
-    usd: 4.99,
+    usd: 4.58,
     period: "mo",
     description: "Daily malware scanning, automatic removal, and web application firewall for one site.",
     features: [
@@ -24,14 +25,14 @@ const plans = [
       "Blacklist monitoring",
       "SSL certificate included",
     ],
-    pid: "450",
+    pid: "238",
     featured: false,
   },
   {
     key: "pro",
-    name: "OneGuard Pro",
+    name: "OneGuard Basic",
     audience: "Growing businesses",
-    usd: 12.99,
+    usd: 9.52,
     period: "mo",
     description: "Everything in Essential plus continuous scanning, priority removal, and site seal.",
     features: [
@@ -43,14 +44,14 @@ const plans = [
       "Uptime monitoring",
       "Email alerts",
     ],
-    pid: "451",
+    pid: "237",
     featured: true,
   },
   {
     key: "enterprise",
-    name: "OneGuard Enterprise",
+    name: "OneGuard Premium",
     audience: "High-traffic and e-commerce",
-    usd: 29.99,
+    usd: 38.89,
     period: "mo",
     description: "Comprehensive security suite: SIEM-grade logging, emergency response, and dedicated analyst support.",
     features: [
@@ -62,7 +63,7 @@ const plans = [
       "PCI-DSS compliance assist",
       "Custom WAF rules",
     ],
-    pid: "452",
+    pid: "236",
     featured: false,
   },
 ];
@@ -298,7 +299,7 @@ export default function SecurityOneguardPage() {
                 <a href="/security/ssl" className="btn btn-white">
                   View SSL Certificates <ArrowRight size={14} style={{ marginLeft: 4 }} />
                 </a>
-                <a href="/cart.php?a=add&pid=451&billingcycle=monthly" className="btn btn-primary">
+                <a href="/cart.php?a=add&pid=237&billingcycle=monthly" className="btn btn-primary">
                   Get OneGuard Pro
                 </a>
               </div>

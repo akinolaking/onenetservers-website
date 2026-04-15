@@ -128,7 +128,12 @@ export function PricingPreview() {
                     <strong>{format(usdVal, 2)}{suffix}</strong>
                   </div>
                   <p className="pricing-card__renewal">{plan.renewal}</p>
-                  <Link href="/cart.php?a=add&pid=261&billingcycle=monthly" className="pricing-card__cta">
+                  <Link
+                    href={plan.pid
+                      ? `/cart.php?a=add&pid=${plan.pid}&billingcycle=${billing === "annual" ? "annually" : "monthly"}`
+                      : activeCategory === "domains" ? `/domains` : `/cart.php?a=add&billingcycle=${billing === "annual" ? "annually" : "monthly"}`}
+                    className="pricing-card__cta"
+                  >
                     Get started →
                   </Link>
                 </article>
@@ -159,7 +164,12 @@ export function PricingPreview() {
                   <strong>{format(usdVal, 2)}{suffix}</strong>
                 </div>
                 <p className="pricing-card__renewal">{plan.renewal}</p>
-                <Link href="/cart.php?a=add&pid=261&billingcycle=monthly" className="pricing-card__cta">
+                <Link
+                  href={plan.pid
+                    ? `/cart.php?a=add&pid=${plan.pid}&billingcycle=${billing === "annual" ? "annually" : "monthly"}`
+                    : activeCategory === "domains" ? `/domains` : `/cart.php?a=add&billingcycle=${billing === "annual" ? "annually" : "monthly"}`}
+                  className="pricing-card__cta"
+                >
                   Get started →
                 </Link>
               </article>

@@ -10,12 +10,13 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
   {
     key: "dv",
-    name: "Domain Validated (DV)",
+    name: "PositiveSSL",
     audience: "Personal sites and blogs",
-    usd: 8.99,
+    usd: 13.02,
     description: "Fastest issuance. Validates domain ownership only. The padlock your visitors expect.",
     features: [
       "256-bit encryption",
@@ -25,58 +26,41 @@ const plans = [
       "Single domain",
       "Free reissues",
     ],
-    pid: "400",
+    pid: "19",
     featured: false,
   },
   {
-    key: "dv_wildcard",
-    name: "Wildcard DV SSL",
-    audience: "Sites with subdomains",
-    usd: 49.99,
-    description: "One certificate covers your main domain and all subdomains (*). No limit on subdomains.",
+    key: "dv_multidomain",
+    name: "PositiveSSL Multi-Domain",
+    audience: "Sites with multiple domains",
+    usd: 47.69,
+    description: "One certificate covers multiple domains. Ideal for businesses running several web properties.",
     features: [
       "256-bit encryption",
-      "Unlimited subdomains",
+      "Up to 3 domains included",
       "Free automated installation",
       "Auto-renewal available",
       "Issued within minutes",
       "Free reissues",
     ],
-    pid: "401",
+    pid: "21",
     featured: true,
   },
   {
-    key: "ov",
-    name: "Organisation Validated (OV)",
-    audience: "Established businesses",
-    usd: 79.99,
-    description: "Validates your business identity. Builds deeper trust — visitors can verify your organisation details.",
-    features: [
-      "256-bit encryption",
-      "Business identity verified",
-      "Site seal included",
-      "Issued within 1–3 days",
-      "Single domain",
-      "Priority support",
-    ],
-    pid: "402",
-    featured: false,
-  },
-  {
     key: "ev",
-    name: "Extended Validation (EV)",
+    name: "BusinessTrust EV SAN",
     audience: "E-commerce and enterprise",
-    usd: 149.99,
-    description: "The highest level of trust. Full company vetting, green bar in supported browsers, strongest brand assurance.",
+    usd: 333.12,
+    description: "The highest level of trust. Full company vetting with Subject Alternative Names for enterprise deployments.",
     features: [
       "256-bit encryption",
-      "Full company vetting",
-      "Green address bar (legacy browsers)",
+      "Full company vetting (EV)",
+      "Subject Alternative Names (SAN)",
       "Issued within 5–10 business days",
-      "Single domain",
+      "Multiple domains supported",
       "Enterprise SLA support",
     ],
-    pid: "403",
+    pid: "58",
     featured: false,
   },
 ];
@@ -346,7 +330,7 @@ export default function SecuritySslPage() {
                 <a href="/security/oneguard" className="btn btn-white">
                   See OneGuard Security <ArrowRight size={14} style={{ marginLeft: 4 }} />
                 </a>
-                <a href={`/cart.php?a=add&pid=401&billingcycle=annually`} className="btn btn-primary">
+                <a href={`/cart.php?a=add&pid=19&billingcycle=annually`} className="btn btn-primary">
                   Get Wildcard SSL
                 </a>
               </div>

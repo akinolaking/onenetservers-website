@@ -9,12 +9,13 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
   {
-    name: "Reseller Starter",
+    name: "RSL Starter",
     audience: "Freelancers and consultants",
     monthlyUsd: 5.39,
-    annualUsd: 3.99,
+    annualUsd: 4.15,
     renewal: "Renews at $5.39/mo after the first term.",
     features: [
       "20 cPanel accounts",
@@ -23,31 +24,47 @@ const plans = [
       "Free SSL per account",
       "WHMCS client portal",
     ],
-    pid: "301",
+    pid: "263",
     featured: false,
   },
   {
-    name: "Reseller Grow",
+    name: "RSL Lite",
     audience: "Growing agencies",
-    monthlyUsd: 11.99,
-    annualUsd: 8.99,
-    renewal: "Renews at $11.99/mo after the first term.",
+    monthlyUsd: 14.30,
+    annualUsd: 10.01,
+    renewal: "Renews at $14.30/mo after the first term.",
     features: [
       "50 cPanel accounts",
       "150 GB SSD storage",
       "White-label nameservers",
+      "Free SSL per account",
+      "WHMCS client portal",
+    ],
+    pid: "9",
+    featured: false,
+  },
+  {
+    name: "RSL Grow",
+    audience: "Established agencies",
+    monthlyUsd: 20.28,
+    annualUsd: 14.20,
+    renewal: "Renews at $20.28/mo after the first term.",
+    features: [
+      "100 cPanel accounts",
+      "250 GB SSD storage",
+      "White-label nameservers",
       "Mobile billing app",
       "Priority support",
     ],
-    pid: "302",
+    pid: "10",
     featured: true,
   },
   {
-    name: "Reseller Pro",
-    audience: "Established agencies",
-    monthlyUsd: 24.99,
-    annualUsd: 18.99,
-    renewal: "Renews at $24.99/mo after the first term.",
+    name: "RSL Enterprise",
+    audience: "Large agencies and reseller businesses",
+    monthlyUsd: 28.60,
+    annualUsd: 20.02,
+    renewal: "Renews at $28.60/mo after the first term.",
     features: [
       "Unlimited cPanel accounts",
       "400 GB SSD storage",
@@ -55,7 +72,7 @@ const plans = [
       "Mobile billing app",
       "Dedicated account manager",
     ],
-    pid: "303",
+    pid: "35",
     featured: false,
   },
 ];
@@ -152,7 +169,7 @@ export default function ResellerPage() {
               under your brand. Starting from {format(3.99)}/mo.
             </p>
             <div className="hero-actions">
-              <a href="/cart.php?a=add&pid=301&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=263&billingcycle=annually" className="wh-btn-primary">
                 Start reselling <ArrowRight size={16} />
               </a>
             </div>
@@ -275,7 +292,7 @@ export default function ResellerPage() {
             <div className="wh-cta-box">
               <h2>Your brand. Our infrastructure. Start today.</h2>
               <p>30-day money-back guarantee. White-label from day one. Free migration.</p>
-              <a href="/cart.php?a=add&pid=301&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=263&billingcycle=annually" className="wh-btn-primary">
                 Start reselling <ArrowRight size={16} />
               </a>
               <div className="hero-reassurance">

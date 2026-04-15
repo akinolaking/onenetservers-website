@@ -9,12 +9,13 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
   {
-    name: "Starter",
+    name: "Business Starter",
     audience: "Solo professionals",
     monthlyUsd: 2.33,
-    annualUsd: 1.75,
+    annualUsd: 1.80,
     renewal: "Renews at $2.33/mo after the first term.",
     features: [
       "5 email addresses",
@@ -24,15 +25,15 @@ const plans = [
       "Free SSL / TLS encryption",
       "Spam and malware filter",
     ],
-    pid: "281",
+    pid: "262",
     featured: false,
   },
   {
-    name: "Business",
+    name: "Business Lite",
     audience: "Teams and growing brands",
-    monthlyUsd: 5.49,
-    annualUsd: 3.99,
-    renewal: "Renews at $5.49/mo after the first term.",
+    monthlyUsd: 7.80,
+    annualUsd: 5.46,
+    renewal: "Renews at $7.80/mo after the first term.",
     features: [
       "25 email addresses",
       "25 GB mailbox storage",
@@ -41,15 +42,15 @@ const plans = [
       "Shared calendars",
       "Custom domain alias support",
     ],
-    pid: "282",
+    pid: "130",
     featured: true,
   },
   {
-    name: "Enterprise",
+    name: "Business Pro Plus",
     audience: "Large teams and organisations",
-    monthlyUsd: 11.99,
-    annualUsd: 8.49,
-    renewal: "Renews at $11.99/mo after the first term.",
+    monthlyUsd: 15.60,
+    annualUsd: 10.92,
+    renewal: "Renews at $15.60/mo after the first term.",
     features: [
       "100 email addresses",
       "50 GB mailbox storage per address",
@@ -58,7 +59,7 @@ const plans = [
       "Admin portal and audit logs",
       "GDPR-compliant data residency",
     ],
-    pid: "283",
+    pid: "132",
     featured: false,
   },
 ];
@@ -155,7 +156,7 @@ export default function EmailPage() {
               shared storage — all included. Starting from {format(2.33)}/mo.
             </p>
             <div className="hero-actions">
-              <a href="/cart.php?a=add&pid=281&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=262&billingcycle=annually" className="wh-btn-primary">
                 Get started <ArrowRight size={16} />
               </a>
             </div>
@@ -296,7 +297,7 @@ export default function EmailPage() {
             <div className="wh-cta-box">
               <h2>Professional email. First impression every time.</h2>
               <p>30-day money-back guarantee. Free migration. No per-user fees.</p>
-              <a href="/cart.php?a=add&pid=281&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=262&billingcycle=annually" className="wh-btn-primary">
                 Get started free <ArrowRight size={16} />
               </a>
               <div className="hero-reassurance">
