@@ -27,8 +27,8 @@ const plans = [
   {
     name: "WP Starter",
     audience: "First WordPress site",
-    monthlyUsd: 6.78,
-    annualUsd: 6.44,
+    monthly: { usd: 6.78,  ngn: 4599,  gbp: 5.99  },
+    annual:  { usd: 6.44,  ngn: 4369,  gbp: 5.69  },
     renewal: "Renews at $6.78/mo after the first term.",
     features: [
       "1 WordPress instance",
@@ -43,8 +43,8 @@ const plans = [
   {
     name: "WP Lite",
     audience: "Growing blogs and portfolios",
-    monthlyUsd: 13.65,
-    annualUsd: 9.56,
+    monthly: { usd: 13.65, ngn: 10500, gbp: 9.77  },
+    annual:  { usd: 9.56,  ngn: 7353,  gbp: 6.84  },
     renewal: "Renews at $13.65/mo after the first term.",
     features: [
       "3 WordPress instances",
@@ -59,8 +59,8 @@ const plans = [
   {
     name: "WP Premium",
     audience: "Agencies and WooCommerce stores",
-    monthlyUsd: 52.49,
-    annualUsd: 36.75,
+    monthly: { usd: 52.49, ngn: 40380, gbp: 37.55 },
+    annual:  { usd: 36.75, ngn: 28271, gbp: 26.29 },
     renewal: "Renews at $52.49/mo after the first term.",
     features: [
       "5 WordPress instances",
@@ -75,8 +75,8 @@ const plans = [
   {
     name: "WP Ultimate",
     audience: "High-traffic and enterprise sites",
-    monthlyUsd: 105.00,
-    annualUsd: 73.50,
+    monthly: { usd: 105.00, ngn: 80770, gbp: 75.12 },
+    annual:  { usd: 73.50,  ngn: 56539, gbp: 52.58 },
     renewal: "Renews at $105.00/mo after the first term.",
     features: [
       "Unlimited WordPress instances",
@@ -182,7 +182,13 @@ const faqs = [
 export default function WordPressHostingPage() {
   const [billing, setBilling] = useState<"monthly" | "annual">("annual");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const { format } = useCurrency();
+  const { currency } = useCurrency();
+
+  function showPrice(p: { usd: number; ngn: number; gbp: number }) {
+    if (currency === "NGN") return `₦${Math.round(p.ngn).toLocaleString("en-US")}`;
+    if (currency === "GBP") return `£${p.gbp.toFixed(2)}`;
+    return `$${p.usd.toFixed(2)}`;
+  }
 
   return (
     <main className="page-shell">
@@ -209,7 +215,7 @@ export default function WordPressHostingPage() {
             </h1>
             <p className="hero-sub">
               Optimised servers, one-click install, automatic updates, and daily backups.
-              From {format(3.49)}/mo.
+              From {showPrice(plans[0].monthly)}/mo.
             </p>
             <div className="hero-actions">
               <a
@@ -279,7 +285,7 @@ export default function WordPressHostingPage() {
                       </div>
                       <div className="pricing-card__price">
                         <strong>
-                          {format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}
+                          {showPrice(billing === "annual" ? plan.annual : plan.monthly)}
                         </strong>
                         <span>/mo</span>
                       </div>
@@ -312,7 +318,7 @@ export default function WordPressHostingPage() {
                     </div>
                     <div className="pricing-card__price">
                       <strong>
-                        {format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}
+                        {showPrice(billing === "annual" ? plan.annual : plan.monthly)}
                       </strong>
                       <span>/mo</span>
                     </div>

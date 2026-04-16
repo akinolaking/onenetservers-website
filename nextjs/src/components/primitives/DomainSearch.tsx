@@ -8,6 +8,8 @@ import { useCurrency } from "@/lib/currency-context";
 type TldResult = {
   ext: string;
   usd: number;
+  ngn: number;
+  gbp: number;
   note: string;
   available: boolean;
 };
@@ -33,7 +35,7 @@ const featuredTlds = tlds.filter((t) => FEATURED_EXTS.includes(t.ext));
 export function DomainSearch() {
   const [query, setQuery] = useState("");
   const [state, setState] = useState<SearchState>({ kind: "idle" });
-  const { format, currency } = useCurrency();
+  const { currency } = useCurrency();
   const inputRef = useRef<HTMLInputElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -42,9 +44,11 @@ export function DomainSearch() {
     [query]
   );
 
-  function priceLabel(usd: number) {
-    if (usd === 0) return "Free";
-    return `${format(usd, currency === "NGN" ? 0 : 2)}/yr`;
+  function priceLabel(t: { usd: number; ngn: number; gbp: number }) {
+    if (t.usd === 0) return "Free";
+    if (currency === "NGN") return `₦${t.ngn.toLocaleString("en-US")}/yr`;
+    if (currency === "GBP") return `£${t.gbp.toFixed(2)}/yr`;
+    return `$${t.usd.toFixed(2)}/yr`;
   }
 
   async function doSearch(base: string) {
@@ -61,6 +65,8 @@ export function DomainSearch() {
           return {
             ext: tld.ext,
             usd: tld.usd,
+            ngn: tld.ngn,
+            gbp: tld.gbp,
             note: tld.note as string,
             available: Boolean(json.available),
           };
@@ -71,6 +77,8 @@ export function DomainSearch() {
           return {
             ext: tld.ext,
             usd: tld.usd,
+            ngn: tld.ngn,
+            gbp: tld.gbp,
             note: tld.note as string,
             available: isAvailable,
           };
@@ -180,7 +188,7 @@ export function DomainSearch() {
                     {t.ext}
                   </span>
                   <span className="domain-result-card__price">
-                    {priceLabel(t.usd)}
+                    {priceLabel(t)}
                   </span>
                   {t.note && (
                     <span className="domain-result-card__badge">{t.note}</span>
@@ -219,7 +227,7 @@ export function DomainSearch() {
               title={`Search ${t.ext} domains`}
             >
               <span className="domain-tld-card__ext">{t.ext}</span>
-              <span className="domain-tld-card__price">{priceLabel(t.usd)}</span>
+              <span className="domain-tld-card__price">{priceLabel(t)}</span>
               {t.note && (
                 <span className="domain-tld-card__badge">{t.note}</span>
               )}

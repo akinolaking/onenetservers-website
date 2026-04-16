@@ -24,8 +24,8 @@ const plans = [
   {
     name: "Starter",
     audience: "Your first website",
-    monthlyUsd: 3.99,
-    annualUsd: 4.05,
+    monthly: { usd: 3.99,  ngn: 5499,  gbp: 2.79  },
+    annual:  { usd: 4.05,  ngn: 5582,  gbp: 2.83  },
     renewalMonthly: "Renews at $3.99/mo after the first term.",
     renewalAnnual: "Renews at $3.99/mo after the first term.",
     features: [
@@ -41,8 +41,8 @@ const plans = [
   {
     name: "Lite",
     audience: "Growing sites",
-    monthlyUsd: 9.75,
-    annualUsd: 6.82,
+    monthly: { usd: 9.75,  ngn: 7499,  gbp: 6.97  },
+    annual:  { usd: 6.82,  ngn: 5246,  gbp: 4.88  },
     renewalMonthly: "Renews at $9.75/mo after the first term.",
     renewalAnnual: "Renews at $9.75/mo after the first term.",
     features: [
@@ -58,8 +58,8 @@ const plans = [
   {
     name: "Premium",
     audience: "Serious builders",
-    monthlyUsd: 18.20,
-    annualUsd: 12.74,
+    monthly: { usd: 18.20, ngn: 13999, gbp: 13.02 },
+    annual:  { usd: 12.74, ngn: 9799,  gbp: 9.11  },
     renewalMonthly: "Renews at $18.20/mo after the first term.",
     renewalAnnual: "Renews at $18.20/mo after the first term.",
     features: [
@@ -75,8 +75,8 @@ const plans = [
   {
     name: "Ultimate",
     audience: "Agencies and stores",
-    monthlyUsd: 32.50,
-    annualUsd: 22.75,
+    monthly: { usd: 32.50, ngn: 24999, gbp: 23.25 },
+    annual:  { usd: 22.75, ngn: 17499, gbp: 16.28 },
     renewalMonthly: "Renews at $32.50/mo after the first term.",
     renewalAnnual: "Renews at $32.50/mo after the first term.",
     features: [
@@ -166,7 +166,7 @@ const howItWorks = [
 const comparison = [
   {
     feature: "Starting price",
-    onenet: "$2.99/mo",
+    onenet: "$3.99/mo",
     ukHost: "$3.49/mo",
     ngHost: "$4.99/mo",
     globalHost: "$2.99/mo*",
@@ -262,7 +262,13 @@ function CheckCell({ value }: { value: boolean | string }) {
 export default function WebHostingPage() {
   const [billing, setBilling] = useState<"monthly" | "annual">("annual");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const { format } = useCurrency();
+  const { currency } = useCurrency();
+
+  function showPrice(p: { usd: number; ngn: number; gbp: number }) {
+    if (currency === "NGN") return `₦${Math.round(p.ngn).toLocaleString("en-US")}`;
+    if (currency === "GBP") return `£${p.gbp.toFixed(2)}`;
+    return `$${p.usd.toFixed(2)}`;
+  }
 
   return (
     <main className="page-shell">
@@ -284,7 +290,7 @@ export default function WebHostingPage() {
             <h1>Web hosting that works as hard as you do.</h1>
             <p className="hero-sub">
               LiteSpeed servers, CloudLinux isolation, free SSL, and daily backups —
-              starting from {format(3.99)}/mo.
+              starting from {showPrice({ usd: 3.99, ngn: 5499, gbp: 2.79 })}/mo.
             </p>
             <div className="hero-actions">
               <a
@@ -354,7 +360,7 @@ export default function WebHostingPage() {
                       </div>
                       <div className="pricing-card__price">
                         <strong>
-                          {format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}
+                          {showPrice(billing === "annual" ? plan.annual : plan.monthly)}
                         </strong>
                         <span>
                           {billing === "annual" ? "/mo billed annually" : "/mo"}
@@ -394,7 +400,7 @@ export default function WebHostingPage() {
                     </div>
                     <div className="pricing-card__price">
                       <strong>
-                        {format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}
+                        {showPrice(billing === "annual" ? plan.annual : plan.monthly)}
                       </strong>
                       <span>
                         {billing === "annual" ? "/mo billed annually" : "/mo"}

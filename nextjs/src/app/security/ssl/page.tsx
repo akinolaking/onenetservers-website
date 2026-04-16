@@ -10,13 +10,13 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 
-/* ── Pricing data — live from WHMCS ────────────────────────── */
+/* ── Pricing data — live from WHMCS (annual prices) ────────── */
 const plans = [
   {
     key: "dv",
     name: "PositiveSSL",
     audience: "Personal sites and blogs",
-    usd: 13.02,
+    price: { usd: 13.02, ngn: 10013, gbp: 9.31 },
     description: "Fastest issuance. Validates domain ownership only. The padlock your visitors expect.",
     features: [
       "256-bit encryption",
@@ -33,7 +33,7 @@ const plans = [
     key: "dv_multidomain",
     name: "PositiveSSL Multi-Domain",
     audience: "Sites with multiple domains",
-    usd: 47.69,
+    price: { usd: 47.69, ngn: 36688, gbp: 34.12 },
     description: "One certificate covers multiple domains. Ideal for businesses running several web properties.",
     features: [
       "256-bit encryption",
@@ -50,7 +50,7 @@ const plans = [
     key: "ev",
     name: "BusinessTrust EV SAN",
     audience: "E-commerce and enterprise",
-    usd: 333.12,
+    price: { usd: 333.12, ngn: 256246, gbp: 238.31 },
     description: "The highest level of trust. Full company vetting with Subject Alternative Names for enterprise deployments.",
     features: [
       "256-bit encryption",
@@ -138,8 +138,14 @@ const faqs = [
 ];
 
 export default function SecuritySslPage() {
-  const { format } = useCurrency();
+  const { currency } = useCurrency();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  function showPrice(p: { usd: number; ngn: number; gbp: number }) {
+    if (currency === "NGN") return `₦${Math.round(p.ngn).toLocaleString("en-US")}`;
+    if (currency === "GBP") return `£${p.gbp.toFixed(2)}`;
+    return `$${p.usd.toFixed(2)}`;
+  }
 
   return (
     <>
@@ -207,7 +213,7 @@ export default function SecuritySslPage() {
                         <p className="plan-card__desc">{plan.description}</p>
                       </div>
                       <div className="plan-card__price">
-                        <span className="plan-card__amount">{format(plan.usd, 2)}</span>
+                        <span className="plan-card__amount">{showPrice(plan.price)}</span>
                         <span className="plan-card__period">/yr</span>
                       </div>
                       <ul className="plan-card__features">
@@ -253,7 +259,7 @@ export default function SecuritySslPage() {
                         <p className="plan-card__desc">{plan.description}</p>
                       </div>
                       <div className="plan-card__price">
-                        <span className="plan-card__amount">{format(plan.usd, 2)}</span>
+                        <span className="plan-card__amount">{showPrice(plan.price)}</span>
                         <span className="plan-card__period">/yr</span>
                       </div>
                       <ul className="plan-card__features">
@@ -324,7 +330,7 @@ export default function SecuritySslPage() {
               <h2 style={{ color: "#fff", margin: "12px 0 16px" }}>Your visitors are watching the padlock.</h2>
               <p style={{ color: "rgba(255,255,255,0.72)", maxWidth: 480, margin: "0 auto 32px" }}>
                 A single SSL certificate protects your reputation, your Google ranking, and your
-                customers&apos; trust. From {format(8.99, 2)} per year.
+                customers&apos; trust. From {showPrice(plans[0].price)} per year.
               </p>
               <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                 <a href="/security/oneguard" className="btn btn-white">

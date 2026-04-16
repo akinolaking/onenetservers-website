@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Slide, Slides } from "@/components/animate-ui/primitives/effects/slide";
+import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 import { nigeriaPoints } from "@/lib/home-data";
 
@@ -28,7 +29,6 @@ function FlagUK({ size = 28 }: { size?: number }) {
   );
 }
 
-/* Check icon */
 function CheckIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -37,7 +37,6 @@ function CheckIcon() {
   );
 }
 
-/* Shield icon */
 function ShieldIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -50,82 +49,86 @@ function ShieldIcon() {
 export function NigeriaSection() {
   return (
     <section className="homepage-section homepage-section--dark" id="nigeria">
-      <div className="shell nigeria-grid">
-        {/* Left column — copy */}
-        <Slide inView inViewOnce direction="up">
-          <div>
+      <div className="shell">
+        {/* Centered header: flags + heading + lead */}
+        <Fade inView inViewOnce>
+          <div className="nigeria-header">
             <div className="nigeria-flags" aria-label="Nigeria and United Kingdom">
               <FlagNG size={32} />
               <span className="nigeria-flags__sep" aria-hidden="true">+</span>
               <FlagUK size={32} />
             </div>
-
             <h2 className="nigeria-heading">
               Built for Nigeria.<br />Powered from London.
             </h2>
-
             <p className="nigeria-lead">
               The only UK-registered hosting provider with NiRA accreditation, Naira billing via Paystack, and .ng domain expertise. No conversion fees. No workarounds.
             </p>
-
-            <div className="nigeria-points">
-              <Slides inView inViewOnce direction="up" holdDelay={80}>
-                {nigeriaPoints.map((point, i) => (
-                  <div key={i} className="nigeria-point">
-                    <CheckIcon />
-                    {point}
-                  </div>
-                ))}
-              </Slides>
-            </div>
           </div>
-        </Slide>
+        </Fade>
 
-        {/* Right column — panel */}
-        <Slide inView inViewOnce direction="up" delay={200}>
-          <Shine enableOnHover color="#4343f0" opacity={0.12}>
-            <div className="nigeria-panel">
-              <div className="nigeria-panel__accred">
-                <ShieldIcon />
-                NiRA Accredited Registrar
-              </div>
+        {/* Two-column grid: left = bullet cards, right = panel */}
+        <div className="nigeria-grid">
+          {/* Left: feature cards */}
+          <div className="nigeria-points">
+            <Slides inView inViewOnce direction="up" holdDelay={80}>
+              {nigeriaPoints.map((point, i) => (
+                <div key={i} className="nigeria-point">
+                  <CheckIcon />
+                  {point}
+                </div>
+              ))}
+            </Slides>
+          </div>
 
-              <h3>Your Nigeria-first advantage</h3>
+          {/* Right: advantage panel */}
+          <div>
+            <Slide inView inViewOnce direction="up" delay={150}>
+              <Shine enableOnHover color="#4343f0" opacity={0.12}>
+                <div className="nigeria-panel">
+                  <div className="nigeria-panel__accred">
+                    <ShieldIcon />
+                    NiRA Accredited Registrar
+                  </div>
 
-              <ul className="nigeria-panel__list">
-                <li>
-                  <CheckIcon />
-                  Direct .ng and .com.ng registration — no middleman
-                </li>
-                <li>
-                  <CheckIcon />
-                  Naira billing via Paystack — cards, USSD, bank transfer, Verve
-                </li>
-                <li>
-                  <CheckIcon />
-                  Support team that understands WAT hours and local needs
-                </li>
-                <li>
-                  <CheckIcon />
-                  SCUML registered — compliant under Nigerian law
-                </li>
-                <li>
-                  <CheckIcon />
-                  Digital Identity Initiative — free first year for qualifying founders
-                </li>
-              </ul>
+                  <h3>Your Nigeria-first advantage</h3>
 
-              <div className="nigeria-panel__actions">
-                <Link href="/domains" className="nigeria-cta-primary">
-                  Get your .ng domain →
-                </Link>
-                <Link href="/digital-identity" className="nigeria-cta-secondary">
-                  Apply for free year
-                </Link>
-              </div>
-            </div>
-          </Shine>
-        </Slide>
+                  <ul className="nigeria-panel__list">
+                    <li>
+                      <CheckIcon />
+                      Direct .ng and .com.ng registration — no middleman
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      Naira billing via Paystack — cards, USSD, bank transfer, Verve
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      Support team that understands WAT hours and local needs
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      SCUML registered — compliant under Nigerian law
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      Digital Identity Initiative — free first year for qualifying founders
+                    </li>
+                  </ul>
+
+                  <div className="nigeria-panel__actions">
+                    <Link href="/domains" className="nigeria-cta-primary">
+                      Get your .ng domain →
+                    </Link>
+                    <Link href="/digital-identity" className="nigeria-cta-secondary">
+                      Apply for free year
+                    </Link>
+                  </div>
+                </div>
+              </Shine>
+            </Slide>
+          </div>
+        </div>
       </div>
     </section>
   );

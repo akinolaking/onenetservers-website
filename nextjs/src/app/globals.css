@@ -1183,8 +1183,7 @@ select {
 
 .service-card h3,
 .step-card h3,
-.pricing-card h3,
-.nigeria-panel h3 {
+.pricing-card h3 {
   margin: 0;
   color: var(--ink);
   font-size: 1.35rem;
@@ -1423,20 +1422,21 @@ select {
 
 .nigeria-grid {
   display: grid;
-  gap: 48px;
+  gap: 40px;
   grid-template-columns: 1fr;
+  align-items: start;
 }
 
 @media (min-width: 900px) {
   .nigeria-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 48px;
   }
 }
 
 .nigeria-points {
   display: grid;
   gap: 12px;
-  margin-top: 30px;
 }
 
 .nigeria-point {
@@ -3391,38 +3391,53 @@ h1 {
    NIGERIA SECTION — substantive redesign
    ═══════════════════════════════════════════════════════════ */
 
+.nigeria-header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
 .nigeria-flags {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1.6rem;
+  justify-content: center;
+  gap: 10px;
   margin-bottom: 20px;
   line-height: 1;
 }
 
 .nigeria-flags__sep {
   font-size: 1rem;
-  color: rgb(255 255 255 / 40%);
+  color: rgb(255 255 255 / 45%);
   font-style: normal;
 }
 
 .nigeria-heading {
   margin: 0 0 16px;
   color: #fff;
-  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.04em;
 }
 
 .nigeria-lead {
-  margin: 0 0 28px;
-  color: rgb(255 255 255 / 68%);
+  margin: 0 auto;
+  color: rgb(255 255 255 / 70%);
   font-family: var(--font-copy), serif;
   font-size: 16px;
   line-height: 1.75;
   font-weight: 300;
-  max-width: 52ch;
+  max-width: 64ch;
+}
+
+/* panel h3 is always on dark background — must be white */
+.nigeria-panel h3 {
+  margin: 0 0 4px;
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  font-weight: 500;
 }
 
 .nigeria-panel__accred {
