@@ -82,50 +82,52 @@ export function NigeriaSection() {
           </div>
 
           {/* Right: advantage panel */}
-          <Slide inView inViewOnce direction="up" delay={150}>
-            <Shine enableOnHover color="#4343f0" opacity={0.12}>
-              <div className="nigeria-panel">
-                <div className="nigeria-panel__accred">
-                  <ShieldIcon />
-                  NiRA Accredited Registrar
+          <div>
+            <Slide inView inViewOnce direction="up" delay={150}>
+              <Shine enableOnHover color="#4343f0" opacity={0.12}>
+                <div className="nigeria-panel">
+                  <div className="nigeria-panel__accred">
+                    <ShieldIcon />
+                    NiRA Accredited Registrar
+                  </div>
+
+                  <h3>Your Nigeria-first advantage</h3>
+
+                  <ul className="nigeria-panel__list">
+                    <li>
+                      <CheckIcon />
+                      Direct .ng and .com.ng registration — no middleman
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      Naira billing via Paystack — cards, USSD, bank transfer, Verve
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      Support team that understands WAT hours and local needs
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      SCUML registered — compliant under Nigerian law
+                    </li>
+                    <li>
+                      <CheckIcon />
+                      Digital Identity Initiative — free first year for qualifying founders
+                    </li>
+                  </ul>
+
+                  <div className="nigeria-panel__actions">
+                    <Link href="/domains" className="nigeria-cta-primary">
+                      Get your .ng domain →
+                    </Link>
+                    <Link href="/digital-identity" className="nigeria-cta-secondary">
+                      Apply for free year
+                    </Link>
+                  </div>
                 </div>
-
-                <h3>Your Nigeria-first advantage</h3>
-
-                <ul className="nigeria-panel__list">
-                  <li>
-                    <CheckIcon />
-                    Direct .ng and .com.ng registration — no middleman
-                  </li>
-                  <li>
-                    <CheckIcon />
-                    Naira billing via Paystack — cards, USSD, bank transfer, Verve
-                  </li>
-                  <li>
-                    <CheckIcon />
-                    Support team that understands WAT hours and local needs
-                  </li>
-                  <li>
-                    <CheckIcon />
-                    SCUML registered — compliant under Nigerian law
-                  </li>
-                  <li>
-                    <CheckIcon />
-                    Digital Identity Initiative — free first year for qualifying founders
-                  </li>
-                </ul>
-
-                <div className="nigeria-panel__actions">
-                  <Link href="/domains" className="nigeria-cta-primary">
-                    Get your .ng domain →
-                  </Link>
-                  <Link href="/digital-identity" className="nigeria-cta-secondary">
-                    Apply for free year
-                  </Link>
-                </div>
-              </div>
-            </Shine>
-          </Slide>
+              </Shine>
+            </Slide>
+          </div>
         </div>
       </div>
     </section>
