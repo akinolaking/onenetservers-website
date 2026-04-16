@@ -9,18 +9,20 @@ import { SectionHeader } from "@/components/shared/SectionHeader";
 import { useCurrency } from "@/lib/currency-context";
 
 type BillingMode = "monthly" | "annual";
+type CategoryKey = typeof pricingCategories[number]["key"];
 
 export function PricingPreview() {
-  const [activeCategory, setActiveCategory] = useState(pricingCategories[0].key);
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>(pricingCategories[0].key);
   const [billing, setBilling] = useState<BillingMode>("monthly");
-  const { format } = useCurrency();
+  const { currency } = useCurrency();
 
   const category =
     pricingCategories.find((item) => item.key === activeCategory) ?? pricingCategories[0];
 
-  /* Parse "$X.XX/mo" → number */
-  function parseUSD(str: string): number {
-    return parseFloat(str.replace(/[^0-9.]/g, "")) || 0;
+  /* Pick the right currency string and strip the trailing "/mo" or "/yr" unit */
+  function pickPrice(obj: { USD: string; NGN: string; GBP: string }): string {
+    const raw = currency === "NGN" ? obj.NGN : currency === "GBP" ? obj.GBP : obj.USD;
+    return raw.split("/")[0];
   }
 
   return (
@@ -76,10 +78,10 @@ export function PricingPreview() {
       <div className="pricing-grid">
         {category.plans.map((plan) => {
           const priceObj = billing === "monthly" ? plan.monthly : plan.annual;
-          const usdVal = parseUSD(priceObj.USD);
-          const suffix = activeCategory === "domains" ? "/yr" : "/mo";
+          const suffix = (activeCategory as string) === "domains" ? "/yr" : "/mo";
+          const isFeatured = "featured" in plan && (plan as { featured?: boolean }).featured;
 
-          if (plan.featured) {
+          if (isFeatured) {
             return (
               /* MUI Card owns shadow + border + hover — sits outside Shine's overflow:hidden.
                  Fixes clipped badge and rectangular hover shadow. */
@@ -125,7 +127,7 @@ export function PricingPreview() {
                   <h3>{plan.name}</h3>
                   <p>{plan.description}</p>
                   <div className="pricing-card__price">
-                    <strong>{format(usdVal, 2)}{suffix}</strong>
+                    <strong>{pickPrice(priceObj)}{suffix}</strong>
                   </div>
                   <p className="pricing-card__renewal">{plan.renewal}</p>
                   <Link href="/cart.php?a=add&pid=261&billingcycle=monthly" className="pricing-card__cta">
@@ -156,7 +158,7 @@ export function PricingPreview() {
                 <h3>{plan.name}</h3>
                 <p>{plan.description}</p>
                 <div className="pricing-card__price">
-                  <strong>{format(usdVal, 2)}{suffix}</strong>
+                  <strong>{pickPrice(priceObj)}{suffix}</strong>
                 </div>
                 <p className="pricing-card__renewal">{plan.renewal}</p>
                 <Link href="/cart.php?a=add&pid=261&billingcycle=monthly" className="pricing-card__cta">

@@ -9,12 +9,13 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
   {
-    name: "Reseller Starter",
+    name: "RSL Starter",
     audience: "Freelancers and consultants",
-    monthlyUsd: 5.39,
-    annualUsd: 3.99,
+    monthly: { usd: 5.39,  ngn: 7499,  gbp: 3.97  },
+    annual:  { usd: 4.15,  ngn: 5774,  gbp: 3.06  },
     renewal: "Renews at $5.39/mo after the first term.",
     features: [
       "20 cPanel accounts",
@@ -23,31 +24,47 @@ const plans = [
       "Free SSL per account",
       "WHMCS client portal",
     ],
-    pid: "301",
+    pid: "263",
     featured: false,
   },
   {
-    name: "Reseller Grow",
+    name: "RSL Lite",
     audience: "Growing agencies",
-    monthlyUsd: 11.99,
-    annualUsd: 8.99,
-    renewal: "Renews at $11.99/mo after the first term.",
+    monthly: { usd: 14.30, ngn: 10999, gbp: 10.23 },
+    annual:  { usd: 10.01, ngn: 7699,  gbp: 7.16  },
+    renewal: "Renews at $14.30/mo after the first term.",
     features: [
       "50 cPanel accounts",
       "150 GB SSD storage",
       "White-label nameservers",
+      "Free SSL per account",
+      "WHMCS client portal",
+    ],
+    pid: "9",
+    featured: false,
+  },
+  {
+    name: "RSL Grow",
+    audience: "Established agencies",
+    monthly: { usd: 20.28, ngn: 15599, gbp: 14.51 },
+    annual:  { usd: 14.20, ngn: 10921, gbp: 10.16 },
+    renewal: "Renews at $20.28/mo after the first term.",
+    features: [
+      "100 cPanel accounts",
+      "250 GB SSD storage",
+      "White-label nameservers",
       "Mobile billing app",
       "Priority support",
     ],
-    pid: "302",
+    pid: "10",
     featured: true,
   },
   {
-    name: "Reseller Pro",
-    audience: "Established agencies",
-    monthlyUsd: 24.99,
-    annualUsd: 18.99,
-    renewal: "Renews at $24.99/mo after the first term.",
+    name: "RSL Enterprise",
+    audience: "Large agencies and reseller businesses",
+    monthly: { usd: 28.60, ngn: 21999, gbp: 20.46 },
+    annual:  { usd: 20.02, ngn: 15400, gbp: 14.32 },
+    renewal: "Renews at $28.60/mo after the first term.",
     features: [
       "Unlimited cPanel accounts",
       "400 GB SSD storage",
@@ -55,7 +72,7 @@ const plans = [
       "Mobile billing app",
       "Dedicated account manager",
     ],
-    pid: "303",
+    pid: "35",
     featured: false,
   },
 ];
@@ -131,7 +148,13 @@ const faqs = [
 export default function ResellerPage() {
   const [billing, setBilling] = useState<"monthly" | "annual">("annual");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const { format } = useCurrency();
+  const { currency } = useCurrency();
+
+  function showPrice(p: { usd: number; ngn: number; gbp: number }) {
+    if (currency === "NGN") return `₦${Math.round(p.ngn).toLocaleString("en-US")}`;
+    if (currency === "GBP") return `£${p.gbp.toFixed(2)}`;
+    return `$${p.usd.toFixed(2)}`;
+  }
 
   return (
     <main className="page-shell">
@@ -149,10 +172,10 @@ export default function ResellerPage() {
             <h1>Launch your hosting brand.<br />We handle the infrastructure.</h1>
             <p className="hero-sub">
               White-label hosting with WHM, WHMCS, private nameservers, and a mobile billing app
-              under your brand. Starting from {format(3.99)}/mo.
+              under your brand. Starting from {showPrice(plans[0].monthly)}/mo.
             </p>
             <div className="hero-actions">
-              <a href="/cart.php?a=add&pid=301&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=263&billingcycle=annually" className="wh-btn-primary">
                 Start reselling <ArrowRight size={16} />
               </a>
             </div>
@@ -189,7 +212,7 @@ export default function ResellerPage() {
 
                       <div><h3>{plan.name}</h3><p>{plan.audience}</p></div>
                       <div className="pricing-card__price">
-                        <strong>{format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}</strong>
+                        <strong>{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</strong>
                         <span>{billing === "annual" ? "/mo billed annually" : "/mo"}</span>
                       </div>
                       <p className="pricing-card__renewal">{plan.renewal}</p>
@@ -204,7 +227,7 @@ export default function ResellerPage() {
                   <div key={plan.name} className="pricing-card">
                     <div><h3>{plan.name}</h3><p>{plan.audience}</p></div>
                     <div className="pricing-card__price">
-                      <strong>{format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}</strong>
+                      <strong>{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</strong>
                       <span>{billing === "annual" ? "/mo billed annually" : "/mo"}</span>
                     </div>
                     <p className="pricing-card__renewal">{plan.renewal}</p>
@@ -275,7 +298,7 @@ export default function ResellerPage() {
             <div className="wh-cta-box">
               <h2>Your brand. Our infrastructure. Start today.</h2>
               <p>30-day money-back guarantee. White-label from day one. Free migration.</p>
-              <a href="/cart.php?a=add&pid=301&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=263&billingcycle=annually" className="wh-btn-primary">
                 Start reselling <ArrowRight size={16} />
               </a>
               <div className="hero-reassurance">

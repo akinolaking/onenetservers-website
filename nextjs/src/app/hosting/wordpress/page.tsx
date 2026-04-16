@@ -22,70 +22,70 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
-/* ── Pricing data ─────────────────────────────────────────── */
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
   {
-    name: "Starter",
+    name: "WP Starter",
     audience: "First WordPress site",
-    monthlyUsd: 4.99,
-    annualUsd: 3.49,
-    renewal: "Renews at $4.99/mo after the first term.",
+    monthly: { usd: 6.78,  ngn: 4599,  gbp: 5.99  },
+    annual:  { usd: 6.44,  ngn: 4369,  gbp: 5.69  },
+    renewal: "Renews at $6.78/mo after the first term.",
     features: [
-      "1 WordPress site",
+      "1 WordPress instance",
       "10 GB SSD storage",
-      "One-click WordPress install",
+      "AI website builder",
       "Automatic WordPress updates",
       "Free SSL certificate",
     ],
-    pid: "271",
+    pid: "260",
     featured: false,
   },
   {
-    name: "Lite",
+    name: "WP Lite",
     audience: "Growing blogs and portfolios",
-    monthlyUsd: 9.99,
-    annualUsd: 6.99,
-    renewal: "Renews at $9.99/mo after the first term.",
+    monthly: { usd: 13.65, ngn: 10500, gbp: 9.77  },
+    annual:  { usd: 9.56,  ngn: 7353,  gbp: 6.84  },
+    renewal: "Renews at $13.65/mo after the first term.",
     features: [
-      "3 WordPress sites",
+      "3 WordPress instances",
       "25 GB SSD storage",
       "LiteSpeed WordPress cache",
       "Daily backups + one-click restore",
       "Staging environment",
     ],
-    pid: "272",
+    pid: "248",
     featured: false,
   },
   {
-    name: "Premium",
+    name: "WP Premium",
     audience: "Agencies and WooCommerce stores",
-    monthlyUsd: 19.99,
-    annualUsd: 13.99,
-    renewal: "Renews at $19.99/mo after the first term.",
+    monthly: { usd: 52.49, ngn: 40380, gbp: 37.55 },
+    annual:  { usd: 36.75, ngn: 28271, gbp: 26.29 },
+    renewal: "Renews at $52.49/mo after the first term.",
     features: [
-      "Unlimited WordPress sites",
+      "5 WordPress instances",
       "50 GB SSD storage",
       "Staging environment",
       "WooCommerce optimised",
       "Free domain (1st year)",
     ],
-    pid: "273",
+    pid: "249",
     featured: true,
   },
   {
-    name: "Ultimate",
+    name: "WP Ultimate",
     audience: "High-traffic and enterprise sites",
-    monthlyUsd: 34.99,
-    annualUsd: 24.99,
-    renewal: "Renews at $34.99/mo after the first term.",
+    monthly: { usd: 105.00, ngn: 80770, gbp: 75.12 },
+    annual:  { usd: 73.50,  ngn: 56539, gbp: 52.58 },
+    renewal: "Renews at $105.00/mo after the first term.",
     features: [
-      "Unlimited WordPress sites",
+      "Unlimited WordPress instances",
       "100 GB SSD storage",
       "Staging environment",
       "Priority support",
       "Free domain (1st year)",
     ],
-    pid: "274",
+    pid: "250",
     featured: false,
   },
 ];
@@ -182,7 +182,13 @@ const faqs = [
 export default function WordPressHostingPage() {
   const [billing, setBilling] = useState<"monthly" | "annual">("annual");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const { format } = useCurrency();
+  const { currency } = useCurrency();
+
+  function showPrice(p: { usd: number; ngn: number; gbp: number }) {
+    if (currency === "NGN") return `₦${Math.round(p.ngn).toLocaleString("en-US")}`;
+    if (currency === "GBP") return `£${p.gbp.toFixed(2)}`;
+    return `$${p.usd.toFixed(2)}`;
+  }
 
   return (
     <main className="page-shell">
@@ -209,11 +215,11 @@ export default function WordPressHostingPage() {
             </h1>
             <p className="hero-sub">
               Optimised servers, one-click install, automatic updates, and daily backups.
-              From {format(3.49)}/mo.
+              From {showPrice(plans[0].monthly)}/mo.
             </p>
             <div className="hero-actions">
               <a
-                href="/cart.php?a=add&pid=271&billingcycle=annually"
+                href="/cart.php?a=add&pid=260&billingcycle=annually"
                 className="wh-btn-primary"
               >
                 Get WordPress hosting <ArrowRight size={16} />
@@ -279,7 +285,7 @@ export default function WordPressHostingPage() {
                       </div>
                       <div className="pricing-card__price">
                         <strong>
-                          {format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}
+                          {showPrice(billing === "annual" ? plan.annual : plan.monthly)}
                         </strong>
                         <span>/mo</span>
                       </div>
@@ -312,7 +318,7 @@ export default function WordPressHostingPage() {
                     </div>
                     <div className="pricing-card__price">
                       <strong>
-                        {format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}
+                        {showPrice(billing === "annual" ? plan.annual : plan.monthly)}
                       </strong>
                       <span>/mo</span>
                     </div>
@@ -471,7 +477,7 @@ export default function WordPressHostingPage() {
                 One-click install. Automatic updates. 30-day money-back guarantee. No technical knowledge required.
               </p>
               <a
-                href="/cart.php?a=add&pid=271&billingcycle=annually"
+                href="/cart.php?a=add&pid=260&billingcycle=annually"
                 className="wh-btn-primary"
               >
                 Get WordPress hosting <ArrowRight size={16} />

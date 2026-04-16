@@ -9,12 +9,13 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
   {
-    name: "Starter",
+    name: "Business Starter",
     audience: "Solo professionals",
-    monthlyUsd: 2.33,
-    annualUsd: 1.75,
+    monthly: { usd: 2.33,  ngn: 2899,  gbp: 1.79  },
+    annual:  { usd: 1.80,  ngn: 2240,  gbp: 1.38  },
     renewal: "Renews at $2.33/mo after the first term.",
     features: [
       "5 email addresses",
@@ -24,15 +25,15 @@ const plans = [
       "Free SSL / TLS encryption",
       "Spam and malware filter",
     ],
-    pid: "281",
+    pid: "262",
     featured: false,
   },
   {
-    name: "Business",
+    name: "Business Lite",
     audience: "Teams and growing brands",
-    monthlyUsd: 5.49,
-    annualUsd: 3.99,
-    renewal: "Renews at $5.49/mo after the first term.",
+    monthly: { usd: 7.80,  ngn: 5999,  gbp: 5.58  },
+    annual:  { usd: 5.46,  ngn: 4199,  gbp: 3.91  },
+    renewal: "Renews at $7.80/mo after the first term.",
     features: [
       "25 email addresses",
       "25 GB mailbox storage",
@@ -41,15 +42,32 @@ const plans = [
       "Shared calendars",
       "Custom domain alias support",
     ],
-    pid: "282",
+    pid: "130",
     featured: true,
   },
   {
-    name: "Enterprise",
+    name: "Business Pro",
+    audience: "Mid-size teams",
+    monthly: { usd: 10.40, ngn: 7999,  gbp: 7.44  },
+    annual:  { usd: 7.28,  ngn: 5599,  gbp: 5.21  },
+    renewal: "Renews at $10.40/mo after the first term.",
+    features: [
+      "50 email addresses",
+      "30 GB mailbox storage per address",
+      "CrossBox + video calls built in",
+      "Team chat and file sharing",
+      "Priority support (<2hr SLA)",
+      "Custom domain alias support",
+    ],
+    pid: "131",
+    featured: false,
+  },
+  {
+    name: "Business Pro Plus",
     audience: "Large teams and organisations",
-    monthlyUsd: 11.99,
-    annualUsd: 8.49,
-    renewal: "Renews at $11.99/mo after the first term.",
+    monthly: { usd: 15.60, ngn: 11999, gbp: 11.16 },
+    annual:  { usd: 10.92, ngn: 8399,  gbp: 7.81  },
+    renewal: "Renews at $15.60/mo after the first term.",
     features: [
       "100 email addresses",
       "50 GB mailbox storage per address",
@@ -58,7 +76,7 @@ const plans = [
       "Admin portal and audit logs",
       "GDPR-compliant data residency",
     ],
-    pid: "283",
+    pid: "132",
     featured: false,
   },
 ];
@@ -134,7 +152,13 @@ const faqs = [
 export default function EmailPage() {
   const [billing, setBilling] = useState<"monthly" | "annual">("annual");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const { format } = useCurrency();
+  const { currency } = useCurrency();
+
+  function showPrice(p: { usd: number; ngn: number; gbp: number }) {
+    if (currency === "NGN") return `₦${Math.round(p.ngn).toLocaleString("en-US")}`;
+    if (currency === "GBP") return `£${p.gbp.toFixed(2)}`;
+    return `$${p.usd.toFixed(2)}`;
+  }
 
   return (
     <main className="page-shell">
@@ -152,10 +176,10 @@ export default function EmailPage() {
             <h1>Business email that earns trust.</h1>
             <p className="hero-sub">
               Your name on your domain. 5–100 addresses on one plan. Video calls, team chat, and
-              shared storage — all included. Starting from {format(2.33)}/mo.
+              shared storage — all included. Starting from {showPrice(plans[0].monthly)}/mo.
             </p>
             <div className="hero-actions">
-              <a href="/cart.php?a=add&pid=281&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=262&billingcycle=annually" className="wh-btn-primary">
                 Get started <ArrowRight size={16} />
               </a>
             </div>
@@ -195,7 +219,7 @@ export default function EmailPage() {
                         <p>{plan.audience}</p>
                       </div>
                       <div className="pricing-card__price">
-                        <strong>{format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}</strong>
+                        <strong>{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</strong>
                         <span>{billing === "annual" ? "/mo billed annually" : "/mo"}</span>
                       </div>
                       <p className="pricing-card__renewal">{plan.renewal}</p>
@@ -217,7 +241,7 @@ export default function EmailPage() {
                       <p>{plan.audience}</p>
                     </div>
                     <div className="pricing-card__price">
-                      <strong>{format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}</strong>
+                      <strong>{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</strong>
                       <span>{billing === "annual" ? "/mo billed annually" : "/mo"}</span>
                     </div>
                     <p className="pricing-card__renewal">{plan.renewal}</p>
@@ -296,7 +320,7 @@ export default function EmailPage() {
             <div className="wh-cta-box">
               <h2>Professional email. First impression every time.</h2>
               <p>30-day money-back guarantee. Free migration. No per-user fees.</p>
-              <a href="/cart.php?a=add&pid=281&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=262&billingcycle=annually" className="wh-btn-primary">
                 Get started free <ArrowRight size={16} />
               </a>
               <div className="hero-reassurance">

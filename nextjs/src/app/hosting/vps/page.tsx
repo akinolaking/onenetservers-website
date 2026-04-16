@@ -9,27 +9,8 @@ import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
+/* ── Pricing data — live from WHMCS ────────────────────────── */
 const plans = [
-  {
-    name: "VPS Lite",
-    audience: "Dev environments",
-    ram: "4GB",
-    cpu: "2 vCPU",
-    storage: "50 GB NVMe",
-    bandwidth: "Unlimited",
-    monthlyUsd: 7.99,
-    annualUsd: 5.99,
-    renewal: "Renews at $7.99/mo after the first term.",
-    features: [
-      "4 GB RAM · 2 vCPU",
-      "50 GB NVMe SSD",
-      "Unlimited bandwidth",
-      "Full root access",
-      "KVM virtualisation",
-    ],
-    pid: "291",
-    featured: false,
-  },
   {
     name: "VPS Starter",
     audience: "Apps and automation",
@@ -37,8 +18,8 @@ const plans = [
     cpu: "4 vCPU",
     storage: "100 GB NVMe",
     bandwidth: "Unlimited",
-    monthlyUsd: 12.42,
-    annualUsd: 9.99,
+    monthly: { usd: 12.42, ngn: 1000,   gbp: 9.12  },
+    annual:  { usd: 11.18, ngn: 900,    gbp: 8.21  },
     renewal: "Renews at $12.42/mo after the first term.",
     features: [
       "8 GB RAM · 4 vCPU",
@@ -47,7 +28,27 @@ const plans = [
       "One-click app deploy",
       "Docker + Wireguard ready",
     ],
-    pid: "292",
+    pid: "205",
+    featured: false,
+  },
+  {
+    name: "VPS Lite",
+    audience: "Growing workloads",
+    ram: "16GB",
+    cpu: "6 vCPU",
+    storage: "200 GB NVMe",
+    bandwidth: "Unlimited",
+    monthly: { usd: 29.11, ngn: 39699,  gbp: 21.37 },
+    annual:  { usd: 26.20, ngn: 35731,  gbp: 19.24 },
+    renewal: "Renews at $29.11/mo after the first term.",
+    features: [
+      "16 GB RAM · 6 vCPU",
+      "200 GB NVMe SSD",
+      "Unlimited bandwidth",
+      "Full root access",
+      "KVM virtualisation",
+    ],
+    pid: "264",
     featured: false,
   },
   {
@@ -57,8 +58,8 @@ const plans = [
     cpu: "12 vCPU",
     storage: "400 GB NVMe",
     bandwidth: "Unlimited",
-    monthlyUsd: 43.61,
-    annualUsd: 33.99,
+    monthly: { usd: 43.61, ngn: 59474,  gbp: 32.03 },
+    annual:  { usd: 39.25, ngn: 53528,  gbp: 28.83 },
     renewal: "Renews at $43.61/mo after the first term.",
     features: [
       "48 GB RAM · 12 vCPU",
@@ -67,7 +68,7 @@ const plans = [
       "Priority support",
       "AI-ready from day one",
     ],
-    pid: "293",
+    pid: "265",
     featured: true,
   },
   {
@@ -77,9 +78,9 @@ const plans = [
     cpu: "24 vCPU",
     storage: "800 GB NVMe",
     bandwidth: "Unlimited",
-    monthlyUsd: 89.00,
-    annualUsd: 69.99,
-    renewal: "Renews at $89.00/mo after the first term.",
+    monthly: { usd: 92.15,  ngn: 125671, gbp: 67.68 },
+    annual:  { usd: 82.94,  ngn: 113120, gbp: 60.91 },
+    renewal: "Renews at $92.15/mo after the first term.",
     features: [
       "96 GB RAM · 24 vCPU",
       "800 GB NVMe SSD",
@@ -87,7 +88,7 @@ const plans = [
       "Dedicated resources",
       "SLA-backed uptime",
     ],
-    pid: "294",
+    pid: "266",
     featured: false,
   },
 ];
@@ -168,7 +169,13 @@ const faqs = [
 export default function VpsPage() {
   const [billing, setBilling] = useState<"monthly" | "annual">("annual");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const { format } = useCurrency();
+  const { currency } = useCurrency();
+
+  function showPrice(p: { usd: number; ngn: number; gbp: number }) {
+    if (currency === "NGN") return `₦${Math.round(p.ngn).toLocaleString("en-US")}`;
+    if (currency === "GBP") return `£${p.gbp.toFixed(2)}`;
+    return `$${p.usd.toFixed(2)}`;
+  }
 
   return (
     <main className="page-shell">
@@ -186,10 +193,10 @@ export default function VpsPage() {
             <h1>Full power. Zero bandwidth limits.</h1>
             <p className="hero-sub">
               Root access, unlimited bandwidth, and one-click deploys for Docker, n8n, Nextcloud,
-              and Wireguard — from {format(7.99)}/mo.
+              and Wireguard — from {showPrice(plans[0].monthly)}/mo.
             </p>
             <div className="hero-actions">
-              <a href="/cart.php?a=add&pid=292&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=205&billingcycle=annually" className="wh-btn-primary">
                 Deploy your VPS <ArrowRight size={16} />
               </a>
             </div>
@@ -244,7 +251,7 @@ export default function VpsPage() {
                         <p>{plan.audience}</p>
                       </div>
                       <div className="pricing-card__price">
-                        <strong>{format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}</strong>
+                        <strong>{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</strong>
                         <span>{billing === "annual" ? "/mo billed annually" : "/mo"}</span>
                       </div>
                       <p className="pricing-card__renewal">{plan.renewal}</p>
@@ -266,7 +273,7 @@ export default function VpsPage() {
                       <p>{plan.audience}</p>
                     </div>
                     <div className="pricing-card__price">
-                      <strong>{format(billing === "annual" ? plan.annualUsd : plan.monthlyUsd)}</strong>
+                      <strong>{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</strong>
                       <span>{billing === "annual" ? "/mo billed annually" : "/mo"}</span>
                     </div>
                     <p className="pricing-card__renewal">{plan.renewal}</p>
@@ -345,7 +352,7 @@ export default function VpsPage() {
             <div className="wh-cta-box">
               <h2>Deploy in 60 seconds. Own your infrastructure.</h2>
               <p>30-day money-back guarantee. Unlimited bandwidth. Full root access.</p>
-              <a href="/cart.php?a=add&pid=292&billingcycle=annually" className="wh-btn-primary">
+              <a href="/cart.php?a=add&pid=205&billingcycle=annually" className="wh-btn-primary">
                 Deploy your VPS <ArrowRight size={16} />
               </a>
               <div className="hero-reassurance">
