@@ -217,25 +217,59 @@ select {
 }
 
 .site-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   height: var(--nav-h);
-  border-bottom: 1px solid rgb(228 228 240 / 72%);
-  background: rgb(255 255 255 / 92%);
-  backdrop-filter: blur(18px) saturate(1.08);
-  box-shadow: 0 1px 0 rgb(228 228 240 / 48%);
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
   transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    backdrop-filter 220ms ease;
 }
 
 .site-nav--scrolled {
-  background: rgb(255 255 255 / 97%);
-  border-color: rgb(228 228 240 / 88%);
+  background: rgb(255 255 255 / 96%);
+  border-color: rgb(228 228 240 / 72%);
   backdrop-filter: blur(22px) saturate(1.12);
   box-shadow: var(--sh-sm);
+}
+
+/* Nav items — transparent (on hero) state */
+.site-nav:not(.site-nav--scrolled) .nav-trigger {
+  color: rgb(255 255 255 / 88%);
+}
+.site-nav:not(.site-nav--scrolled) .nav-trigger:hover,
+.site-nav:not(.site-nav--scrolled) .nav-trigger[data-open],
+.site-nav:not(.site-nav--scrolled) .nav-trigger[data-popup-open] {
+  background: rgb(255 255 255 / 14%);
+  color: #fff;
+}
+.site-nav:not(.site-nav--scrolled) .nav-secondary-link {
+  border-color: rgb(255 255 255 / 30%);
+  background: rgb(255 255 255 / 12%);
+  color: #fff;
+}
+.site-nav:not(.site-nav--scrolled) .currency-trigger {
+  border-color: rgb(255 255 255 / 30%);
+  background: rgb(255 255 255 / 12%);
+  color: rgb(255 255 255 / 88%);
+  box-shadow: none;
+}
+.site-nav:not(.site-nav--scrolled) .nav-toggle svg {
+  color: #fff;
+}
+.site-nav:not(.site-nav--scrolled) .nav-brand-name {
+  color: #fff;
+}
+.site-nav:not(.site-nav--scrolled) .nav-brand img {
+  filter: brightness(0) invert(1);
 }
 
 .nav-shell {
@@ -2263,13 +2297,8 @@ h1 {
    ═══════════════════════════════════════════════════════════ */
 
 .hero-home {
-  padding: 104px 0 88px;
-  background:
-    radial-gradient(ellipse 72% 48% at 50% -8%, rgb(18 14 42 / 90%), transparent),
-    radial-gradient(circle at 82% 20%, rgb(245 158 11 / 10%), transparent 38%),
-    radial-gradient(circle at 12% 88%, rgb(16 185 129 / 7%), transparent 42%),
-    linear-gradient(160deg, #0a0912 0%, #100e22 55%, #0f0f1a 100%);
-  border-radius: 0 0 32px 32px;
+  padding: calc(var(--nav-h) + 56px) 0 80px;
+  background: linear-gradient(180deg, #4343F0 0%, #6868f3 30%, #b8b8fa 65%, #f0f0ff 85%, #ffffff 100%);
   overflow: hidden;
   position: relative;
 }
@@ -2294,13 +2323,13 @@ h1 {
 }
 
 .hero-h1__accent {
-  color: #f0b429;
+  color: #ffd66e;
 }
 
 .hero-sub {
   max-width: 56ch;
   margin: 0 auto;
-  color: rgb(255 255 255 / 70%);
+  color: rgb(255 255 255 / 82%);
   font-family: var(--font-copy), serif;
   font-size: clamp(1rem, 2.2vw, 1.15rem);
   line-height: 1.75;
@@ -2320,12 +2349,12 @@ h1 {
   gap: 6px 16px;
   flex-wrap: wrap;
   justify-content: center;
-  color: rgb(255 255 255 / 52%);
+  color: rgb(67 67 240 / 65%);
   font-size: 12.5px;
 }
 
 .hero-ext-hint strong {
-  color: rgb(255 255 255 / 85%);
+  color: var(--ink);
   font-weight: 500;
 }
 
@@ -2334,7 +2363,7 @@ h1 {
   gap: 8px 20px;
   flex-wrap: wrap;
   justify-content: center;
-  color: rgb(255 255 255 / 62%);
+  color: var(--body);
   font-size: 13.5px;
   font-weight: 500;
 }
@@ -2366,7 +2395,7 @@ h1 {
 
 .hero-proof p {
   margin: 0;
-  color: rgb(255 255 255 / 60%);
+  color: var(--body);
   font-size: 13.5px;
   font-weight: 500;
 }
@@ -2379,7 +2408,7 @@ h1 {
   height: 36px;
   width: 36px;
   margin-left: -10px;
-  border: 2px solid var(--ink-2);
+  border: 2px solid #fff;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--blue-xl) 0%, var(--blue-l) 100%);
 }
@@ -2388,75 +2417,76 @@ h1 {
   margin-left: 0;
 }
 
-/* ── Hero dark-bg domain search overrides ── */
+/* ── Hero (blue-to-white gradient) domain search overrides ── */
 .hero-home .domain-search-field {
-  background: rgb(255 255 255 / 10%);
-  border-color: rgb(255 255 255 / 18%);
+  background: rgb(255 255 255 / 85%);
+  border-color: rgb(255 255 255 / 60%);
+  backdrop-filter: blur(8px);
 }
 
 .hero-home .domain-search-input {
-  color: #fff;
+  color: var(--ink);
 }
 
 .hero-home .domain-search-input::placeholder {
-  color: rgb(255 255 255 / 38%);
+  color: var(--muted);
 }
 
 .hero-home .domain-tld-card {
-  background: rgb(255 255 255 / 7%);
-  border-color: rgb(255 255 255 / 12%);
+  background: rgb(255 255 255 / 70%);
+  border-color: rgb(255 255 255 / 50%);
   cursor: pointer;
 }
 
 .hero-home .domain-tld-card:hover {
-  background: rgb(255 255 255 / 13%);
-  border-color: rgb(240 180 41 / 60%);
+  background: rgb(255 255 255 / 90%);
+  border-color: var(--blue);
 }
 
 .hero-home .domain-tld-card__ext {
-  color: #fff;
+  color: var(--ink);
 }
 
 .hero-home .domain-tld-card__price {
-  color: #f0b429;
+  color: var(--blue-d);
 }
 
 .hero-home .domain-tld-card__badge {
-  background: rgb(255 255 255 / 10%);
-  color: rgb(255 255 255 / 75%);
+  background: var(--blue-xs);
+  color: var(--blue);
 }
 
 .hero-home .domain-result-card {
-  background: rgb(255 255 255 / 7%);
-  border-color: rgb(255 255 255 / 12%);
+  background: rgb(255 255 255 / 85%);
+  border-color: rgb(255 255 255 / 50%);
 }
 
 .hero-home .domain-result-card__name {
-  color: #fff;
+  color: var(--ink);
 }
 
 .hero-home .domain-result-card--available {
-  border-color: rgb(16 185 129 / 35%);
-  background: rgb(16 185 129 / 10%);
+  border-color: rgb(16 185 129 / 50%);
+  background: rgb(16 185 129 / 8%);
 }
 
 .hero-home .domain-result-card--taken {
-  border-color: rgb(239 68 68 / 28%);
-  background: rgb(239 68 68 / 7%);
+  border-color: rgb(239 68 68 / 35%);
+  background: rgb(239 68 68 / 5%);
 }
 
 .hero-home .domain-result-card__badge {
-  background: rgb(255 255 255 / 10%);
-  color: rgb(255 255 255 / 75%);
+  background: var(--blue-xs);
+  color: var(--blue);
 }
 
 .hero-home .domain-taken-msg {
-  color: rgb(255 255 255 / 70%);
+  color: var(--body);
 }
 
 .hero-home .domain-result--loading {
-  background: rgb(255 255 255 / 8%);
-  color: rgb(255 255 255 / 55%);
+  background: rgb(255 255 255 / 60%);
+  color: var(--muted);
 }
 
 .hero-stat-row {
