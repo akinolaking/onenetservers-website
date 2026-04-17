@@ -8041,6 +8041,12 @@ body:has(.legal-shell) .site-nav {
   box-shadow: var(--sh-sm);
 }
 body:has(.legal-shell) .site-nav .nav-trigger { color: var(--ink-2); }
+body:has(.legal-shell) .site-nav .nav-trigger:hover,
+body:has(.legal-shell) .site-nav .nav-trigger[data-open],
+body:has(.legal-shell) .site-nav .nav-trigger[data-popup-open] {
+  background: rgb(245 245 255 / 96%);
+  color: var(--ink);
+}
 body:has(.legal-shell) .site-nav .nav-secondary-link {
   border-color: var(--line);
   background: rgb(255 255 255 / 94%);
