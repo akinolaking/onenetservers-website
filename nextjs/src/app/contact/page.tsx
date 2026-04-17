@@ -103,7 +103,7 @@ export default function ContactPage() {
         <div className="shell">
           <Fade inView inViewOnce className="about-hero__inner">
             <div className="eyebrow eyebrow--centered">Contact us</div>
-            <h1>We&apos;re here.<br />Talk to a human.</h1>
+            <h1>We&apos;re here. Talk to a human.</h1>
             <p className="hero-sub">
               Real engineers from Lagos and London. Not bots. Not offshore scripts.
               Average response under 2 hours.
