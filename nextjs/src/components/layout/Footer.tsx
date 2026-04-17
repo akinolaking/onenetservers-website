@@ -29,17 +29,13 @@ const socialIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-/* ── Bank Transfer inline icon (no external asset needed) ── */
-const BankTransferIcon = () => (
-  <svg width="28" height="28" viewBox="0 0 512 512" role="img" aria-label="Bank Transfer" fill="#fff">
-    <polygon points="256,18 10,170 502,170"/>
-    <rect x="6" y="182" width="500" height="52" rx="8"/>
-    <rect x="44"  y="252" width="112" height="188" rx="4"/>
-    <rect x="200" y="252" width="112" height="188" rx="4"/>
-    <rect x="356" y="252" width="112" height="188" rx="4"/>
-    <rect x="0" y="452" width="512" height="44" rx="10"/>
-  </svg>
-);
+const paymentMethods = [
+  { src: "/assets/pay-paystack.svg",    alt: "Paystack",       width: 110, height: 28 },
+  { src: "/assets/visa-icon.svg",       alt: "Visa",           width: 62,  height: 28 },
+  { src: "/assets/mastercard-icon.svg", alt: "Mastercard",     width: 52,  height: 28 },
+  { src: "/assets/verve-icon.svg",      alt: "Verve",          width: 80,  height: 28 },
+  { src: "/assets/bank-icon.svg",       alt: "Bank Transfer",  width: 32,  height: 28 },
+];
 
 export function Footer() {
   return (
@@ -101,11 +97,17 @@ export function Footer() {
         <div className="footer-payments">
           <span>We accept</span>
           <div className="footer-payments-grid">
-            <Image src="/assets/pay-paystack.svg"    alt="Paystack"     width={90} height={28} />
-            <Image src="/assets/pay-visa.svg"         alt="Visa"         width={52} height={28} />
-            <Image src="/assets/pay-mastercard.svg"   alt="Mastercard"   width={48} height={28} />
-            <Image src="/assets/pay-verve.svg"        alt="Verve"        width={80} height={28} />
-            <BankTransferIcon />
+            {paymentMethods.map((method) => (
+              <div key={method.alt} className="payment-badge" title={method.alt}>
+                <Image
+                  src={method.src}
+                  alt={method.alt}
+                  width={method.width}
+                  height={method.height}
+                  style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
+                />
+              </div>
+            ))}
           </div>
         </div>
 
@@ -119,3 +121,4 @@ export function Footer() {
     </footer>
   );
 }
+
