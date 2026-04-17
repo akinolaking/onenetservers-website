@@ -4,19 +4,19 @@ import { useState } from "react";
 import { ArrowRight, Check, Shield, Lock, Globe, Award, Zap, Eye } from "lucide-react";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { FeaturedPricingWrapper } from "@/components/shared/FeaturedPricingWrapper";
-import Card from "@mui/material/Card";
 import { useCurrency } from "@/lib/currency-context";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 
-/* ── Pricing data — live from WHMCS (annual prices) ────────── */
+/* ── Pricing data ────────────────────────────────────────────── */
 const plans = [
   {
     key: "dv",
     name: "PositiveSSL",
     audience: "Personal sites and blogs",
-    price: { usd: 13.02, ngn: 10013, gbp: 9.31 },
+    monthly: { usd: 1.99,  ngn: 1499,  gbp: 1.49  },
+    annual:  { usd: 13.02, ngn: 10013, gbp: 9.31  },
     description: "Fastest issuance. Validates domain ownership only. The padlock your visitors expect.",
     features: [
       "256-bit encryption",
@@ -33,7 +33,8 @@ const plans = [
     key: "dv_multidomain",
     name: "PositiveSSL Multi-Domain",
     audience: "Sites with multiple domains",
-    price: { usd: 47.69, ngn: 36688, gbp: 34.12 },
+    monthly: { usd: 5.99,  ngn: 4499,  gbp: 4.29  },
+    annual:  { usd: 47.69, ngn: 36688, gbp: 34.12 },
     description: "One certificate covers multiple domains. Ideal for businesses running several web properties.",
     features: [
       "256-bit encryption",
@@ -50,7 +51,8 @@ const plans = [
     key: "ev",
     name: "BusinessTrust EV SAN",
     audience: "E-commerce and enterprise",
-    price: { usd: 333.12, ngn: 256246, gbp: 238.31 },
+    monthly: { usd: 38.99,  ngn: 29999, gbp: 27.99 },
+    annual:  { usd: 333.12, ngn: 256246, gbp: 238.31 },
     description: "The highest level of trust. Full company vetting with Subject Alternative Names for enterprise deployments.",
     features: [
       "256-bit encryption",
@@ -139,6 +141,7 @@ const faqs = [
 
 export default function SecuritySslPage() {
   const { currency } = useCurrency();
+  const [billing, setBilling] = useState<"monthly" | "annual">("annual");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   function showPrice(p: { usd: number; ngn: number; gbp: number }) {
@@ -146,6 +149,9 @@ export default function SecuritySslPage() {
     if (currency === "GBP") return `£${p.gbp.toFixed(2)}`;
     return `$${p.usd.toFixed(2)}`;
   }
+
+  const billingCycle = billing === "annual" ? "annually" : "monthly";
+  const period = billing === "annual" ? "/yr" : "/mo";
 
   return (
     <>
@@ -200,11 +206,16 @@ export default function SecuritySslPage() {
             />
           </Fade>
 
-          <div className="plans-grid plans-grid--4" style={{ marginTop: 48 }}>
+          <div className="billing-toggle">
+            <button className={billing === "monthly" ? "is-active" : ""} onClick={() => setBilling("monthly")}>Monthly</button>
+            <button className={billing === "annual" ? "is-active" : ""} onClick={() => setBilling("annual")}>Annual</button>
+            <span className="wh-savings-badge">Save up to 35% · +2 months free</span>
+          </div>
+
+          <div className="plans-grid plans-grid--3" style={{ marginTop: 48 }}>
             <Slides inView inViewOnce direction="up" holdDelay={70}>
               {plans.map((plan) =>
                 plan.featured ? (
-                  /* FeaturedPricingWrapper: MUI Card owns shadow + hover outside Shine's overflow:hidden */
                   <FeaturedPricingWrapper key={plan.key} badgeAlign="center">
                     <article className="plan-card plan-card--featured">
                       <div className="plan-card__header">
@@ -213,8 +224,8 @@ export default function SecuritySslPage() {
                         <p className="plan-card__desc">{plan.description}</p>
                       </div>
                       <div className="plan-card__price">
-                        <span className="plan-card__amount">{showPrice(plan.price)}</span>
-                        <span className="plan-card__period">/yr</span>
+                        <span className="plan-card__amount">{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</span>
+                        <span className="plan-card__period">{period}</span>
                       </div>
                       <ul className="plan-card__features">
                         {plan.features.map((f) => (
@@ -226,7 +237,7 @@ export default function SecuritySslPage() {
                       </ul>
                       <Shine>
                         <a
-                          href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=annually`}
+                          href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`}
                           className="btn btn-primary btn-full"
                         >
                           Get {plan.name}
@@ -236,51 +247,34 @@ export default function SecuritySslPage() {
                     </article>
                   </FeaturedPricingWrapper>
                 ) : (
-                  <Card
-                    key={plan.key}
-                    elevation={0}
-                    sx={{
-                      borderRadius: "16px",
-                      border: "1px solid var(--line)",
-                      boxShadow: "0 1px 3px rgb(0 0 0 / 8%), 0 1px 2px rgb(0 0 0 / 6%)",
-                      transition: "box-shadow 0.2s ease, transform 0.2s ease",
-                      "&:hover": {
-                        boxShadow: "0 4px 16px rgb(67 67 240 / 8%), 0 2px 6px rgb(0 0 0 / 4%)",
-                        transform: "translateY(-2px)",
-                      },
-                      height: "100%",
-                      overflow: "visible",
-                    }}
-                  >
-                    <article className="plan-card">
-                      <div className="plan-card__header">
-                        <p className="plan-card__audience">{plan.audience}</p>
-                        <h3>{plan.name}</h3>
-                        <p className="plan-card__desc">{plan.description}</p>
-                      </div>
-                      <div className="plan-card__price">
-                        <span className="plan-card__amount">{showPrice(plan.price)}</span>
-                        <span className="plan-card__period">/yr</span>
-                      </div>
-                      <ul className="plan-card__features">
-                        {plan.features.map((f) => (
-                          <li key={f}>
-                            <Check size={14} aria-hidden="true" />
-                            <span>{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <Shine>
-                        <a
-                          href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=annually`}
-                          className="btn btn-ghost btn-full"
-                        >
-                          Get {plan.name}
-                        </a>
-                      </Shine>
-                      <p className="plan-card__renewal">Renews at same rate. Cancel anytime.</p>
-                    </article>
-                  </Card>
+                  <article key={plan.key} className="plan-card plan-card--standalone">
+                    <div className="plan-card__header">
+                      <p className="plan-card__audience">{plan.audience}</p>
+                      <h3>{plan.name}</h3>
+                      <p className="plan-card__desc">{plan.description}</p>
+                    </div>
+                    <div className="plan-card__price">
+                      <span className="plan-card__amount">{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</span>
+                      <span className="plan-card__period">{period}</span>
+                    </div>
+                    <ul className="plan-card__features">
+                      {plan.features.map((f) => (
+                        <li key={f}>
+                          <Check size={14} aria-hidden="true" />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Shine>
+                      <a
+                        href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`}
+                        className="btn btn-ghost btn-full"
+                      >
+                        Get {plan.name}
+                      </a>
+                    </Shine>
+                    <p className="plan-card__renewal">Renews at same rate. Cancel anytime.</p>
+                  </article>
                 )
               )}
             </Slides>
@@ -330,14 +324,14 @@ export default function SecuritySslPage() {
               <h2 style={{ color: "#fff", margin: "12px 0 16px" }}>Your visitors are watching the padlock.</h2>
               <p style={{ color: "rgba(255,255,255,0.72)", maxWidth: 480, margin: "0 auto 32px" }}>
                 A single SSL certificate protects your reputation, your Google ranking, and your
-                customers&apos; trust. From {showPrice(plans[0].price)} per year.
+                customers&apos; trust. From {showPrice(plans[0].annual)} per year.
               </p>
               <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                 <a href="/security/oneguard" className="btn btn-white">
                   See OneGuard Security <ArrowRight size={14} style={{ marginLeft: 4 }} />
                 </a>
-                <a href={`/cart.php?a=add&pid=19&billingcycle=annually`} className="btn btn-primary">
-                  Get Wildcard SSL
+                <a href="/cart.php?a=add&pid=19&billingcycle=annually" className="btn btn-primary">
+                  Get PositiveSSL
                 </a>
               </div>
             </div>

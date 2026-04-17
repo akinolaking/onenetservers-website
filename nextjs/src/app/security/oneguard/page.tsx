@@ -3,19 +3,20 @@
 import { useState } from "react";
 import { ArrowRight, Check, Shield, Lock, Zap, Eye, RefreshCw, AlertTriangle, Activity } from "lucide-react";
 import { SectionHeader } from "@/components/shared/SectionHeader";
+import { FeaturedPricingWrapper } from "@/components/shared/FeaturedPricingWrapper";
 import { useCurrency } from "@/lib/currency-context";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 
-/* ── Pricing data — live from WHMCS ────────────────────────── */
+/* ── Pricing data ────────────────────────────────────────────── */
 const plans = [
   {
     key: "single",
     name: "OneGuard Essential",
     audience: "Single website",
-    usd: 4.58,
-    period: "mo",
+    monthly: { usd: 4.58,  ngn: 3499,  gbp: 3.49 },
+    annual:  { usd: 3.82,  ngn: 2899,  gbp: 2.99 },
     description: "Daily malware scanning, automatic removal, and web application firewall for one site.",
     features: [
       "Daily malware scanning",
@@ -32,8 +33,8 @@ const plans = [
     key: "pro",
     name: "OneGuard Basic",
     audience: "Growing businesses",
-    usd: 9.52,
-    period: "mo",
+    monthly: { usd: 9.52,  ngn: 7499,  gbp: 6.99 },
+    annual:  { usd: 7.93,  ngn: 6249,  gbp: 5.99 },
     description: "Everything in Essential plus continuous scanning, priority removal, and site seal.",
     features: [
       "Continuous malware scanning",
@@ -51,8 +52,8 @@ const plans = [
     key: "enterprise",
     name: "OneGuard Premium",
     audience: "High-traffic and e-commerce",
-    usd: 38.89,
-    period: "mo",
+    monthly: { usd: 38.89, ngn: 29999, gbp: 28.99 },
+    annual:  { usd: 32.41, ngn: 24999, gbp: 24.99 },
     description: "Comprehensive security suite: SIEM-grade logging, emergency response, and dedicated analyst support.",
     features: [
       "Real-time threat detection",
@@ -155,14 +156,25 @@ const faqs = [
 ];
 
 export default function SecurityOneguardPage() {
-  const { format } = useCurrency();
+  const { currency } = useCurrency();
+  const [billing, setBilling] = useState<"monthly" | "annual">("annual");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  function showPrice(p: { usd: number; ngn: number; gbp: number }) {
+    if (currency === "NGN") return `₦${Math.round(p.ngn).toLocaleString("en-US")}`;
+    if (currency === "GBP") return `£${p.gbp.toFixed(2)}`;
+    return `$${p.usd.toFixed(2)}`;
+  }
+
+  const billingCycle = billing === "annual" ? "annually" : "monthly";
+  const periodLabel = billing === "annual" ? "/mo, billed annually" : "/mo";
+  const renewalLabel = billing === "annual" ? "Billed annually. Cancel anytime." : "Renews monthly. Cancel anytime.";
 
   return (
     <>
       <head>
         <title>OneGuard Security | OneNet Servers</title>
-        <meta name="description" content="OneGuard Security: daily malware scanning, automatic removal, WAF, DDoS protection, and blacklist monitoring for your website. From £4.99/mo." />
+        <meta name="description" content="OneGuard Security: daily malware scanning, automatic removal, WAF, DDoS protection, and blacklist monitoring for your website. From £2.99/mo." />
         <link rel="canonical" href="https://onenetservers.net/security/oneguard" />
       </head>
 
@@ -211,41 +223,77 @@ export default function SecurityOneguardPage() {
             />
           </Fade>
 
+          <div className="billing-toggle">
+            <button className={billing === "monthly" ? "is-active" : ""} onClick={() => setBilling("monthly")}>Monthly</button>
+            <button className={billing === "annual" ? "is-active" : ""} onClick={() => setBilling("annual")}>Annual</button>
+            <span className="wh-savings-badge">Save up to 17% · +2 months free</span>
+          </div>
+
           <div className="plans-grid plans-grid--3" style={{ marginTop: 48 }}>
             <Slides inView inViewOnce direction="up" holdDelay={70}>
-              {plans.map((plan) => (
-                <article key={plan.key} className={`plan-card${plan.featured ? " plan-card--featured" : ""}`}>
-                  {plan.featured && (
-                    <div className="plan-card__badge">Most Popular</div>
-                  )}
-                  <div className="plan-card__header">
-                    <p className="plan-card__audience">{plan.audience}</p>
-                    <h3>{plan.name}</h3>
-                    <p className="plan-card__desc">{plan.description}</p>
-                  </div>
-                  <div className="plan-card__price">
-                    <span className="plan-card__amount">{format(plan.usd, 2)}</span>
-                    <span className="plan-card__period">/{plan.period}</span>
-                  </div>
-                  <ul className="plan-card__features">
-                    {plan.features.map((f) => (
-                      <li key={f}>
-                        <Check size={14} aria-hidden="true" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Shine>
-                    <a
-                      href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=monthly`}
-                      className={`btn ${plan.featured ? "btn-primary" : "btn-ghost"} btn-full`}
-                    >
-                      Get {plan.name.replace("OneGuard ", "")}
-                    </a>
-                  </Shine>
-                  <p className="plan-card__renewal">Renews monthly. Cancel anytime.</p>
-                </article>
-              ))}
+              {plans.map((plan) =>
+                plan.featured ? (
+                  <FeaturedPricingWrapper key={plan.key} badgeAlign="center">
+                    <article className="plan-card plan-card--featured">
+                      <div className="plan-card__header">
+                        <p className="plan-card__audience">{plan.audience}</p>
+                        <h3>{plan.name}</h3>
+                        <p className="plan-card__desc">{plan.description}</p>
+                      </div>
+                      <div className="plan-card__price">
+                        <span className="plan-card__amount">{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</span>
+                        <span className="plan-card__period">{periodLabel}</span>
+                      </div>
+                      <ul className="plan-card__features">
+                        {plan.features.map((f) => (
+                          <li key={f}>
+                            <Check size={14} aria-hidden="true" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Shine>
+                        <a
+                          href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`}
+                          className="btn btn-primary btn-full"
+                        >
+                          Get {plan.name.replace("OneGuard ", "")}
+                        </a>
+                      </Shine>
+                      <p className="plan-card__renewal">{renewalLabel}</p>
+                    </article>
+                  </FeaturedPricingWrapper>
+                ) : (
+                  <article key={plan.key} className="plan-card plan-card--standalone">
+                    <div className="plan-card__header">
+                      <p className="plan-card__audience">{plan.audience}</p>
+                      <h3>{plan.name}</h3>
+                      <p className="plan-card__desc">{plan.description}</p>
+                    </div>
+                    <div className="plan-card__price">
+                      <span className="plan-card__amount">{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</span>
+                      <span className="plan-card__period">{periodLabel}</span>
+                    </div>
+                    <ul className="plan-card__features">
+                      {plan.features.map((f) => (
+                        <li key={f}>
+                          <Check size={14} aria-hidden="true" />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Shine>
+                      <a
+                        href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`}
+                        className={`btn btn-ghost btn-full`}
+                      >
+                        Get {plan.name.replace("OneGuard ", "")}
+                      </a>
+                    </Shine>
+                    <p className="plan-card__renewal">{renewalLabel}</p>
+                  </article>
+                )
+              )}
             </Slides>
           </div>
         </div>
@@ -293,14 +341,14 @@ export default function SecurityOneguardPage() {
               <h2 style={{ color: "#fff", margin: "12px 0 16px" }}>Stop a breach before it happens.</h2>
               <p style={{ color: "rgba(255,255,255,0.72)", maxWidth: 480, margin: "0 auto 32px" }}>
                 The average time to detect a website compromise without a security tool is 6 months.
-                OneGuard finds and removes threats in minutes, from {format(4.99, 2)}/mo.
+                OneGuard finds and removes threats in minutes, from {showPrice(plans[0].annual)}/mo.
               </p>
               <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                 <a href="/security/ssl" className="btn btn-white">
                   View SSL Certificates <ArrowRight size={14} style={{ marginLeft: 4 }} />
                 </a>
-                <a href="/cart.php?a=add&pid=237&billingcycle=monthly" className="btn btn-primary">
-                  Get OneGuard Pro
+                <a href="/cart.php?a=add&pid=237&billingcycle=annually" className="btn btn-primary">
+                  Get OneGuard Basic
                 </a>
               </div>
             </div>
