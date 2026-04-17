@@ -30,11 +30,11 @@ const socialIcons: Record<string, React.ReactNode> = {
 };
 
 const paymentMethods = [
-  { src: "/assets/pay-paystack.svg",    alt: "Paystack",       width: 110, height: 28 },
-  { src: "/assets/visa-icon.svg",       alt: "Visa",           width: 62,  height: 28 },
-  { src: "/assets/mastercard-icon.svg", alt: "Mastercard",     width: 52,  height: 28 },
-  { src: "/assets/verve-icon.svg",      alt: "Verve",          width: 80,  height: 28 },
-  { src: "/assets/bank-icon.svg",       alt: "Bank Transfer",  width: 32,  height: 28 },
+  { src: "/assets/paystack-icon.svg",   alt: "Paystack",       width: 100, height: 24 },
+  { src: "/assets/visa-icon.svg",       alt: "Visa",           width: 56,  height: 24 },
+  { src: "/assets/mastercard-icon.svg", alt: "Mastercard",     width: 46,  height: 24 },
+  { src: "/assets/verve-icon.svg",      alt: "Verve",          width: 72,  height: 24 },
+  { src: "/assets/bank-icon.svg",       alt: "Bank Transfer",  width: 28,  height: 24 },
 ];
 
 export function Footer() {
