@@ -2204,11 +2204,16 @@ h1 {
   color: var(--muted);
   transition: transform 0.22s ease;
 }
-.mobile-accordion-item[data-state="open"] .mobile-chevron {
+.mobile-accordion-item--open .mobile-chevron {
   transform: rotate(180deg);
 }
 .mobile-accordion-content {
-  padding: 0 10px 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.28s ease;
+}
+.mobile-accordion-item--open .mobile-accordion-content {
+  max-height: 600px;
 }
 
 /* ── Mobile links inside accordion ── */

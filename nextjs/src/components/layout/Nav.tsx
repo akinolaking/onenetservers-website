@@ -53,13 +53,6 @@ import {
   SheetPortal,
   SheetTrigger,
 } from "@/components/animate-ui/primitives/radix/sheet";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionHeader,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/animate-ui/primitives/radix/accordion";
 import { AuthModal } from "@/components/shared/AuthModal";
 
 import {
@@ -259,6 +252,62 @@ function CurrencyPicker({
   );
 }
 
+/* ─── Mobile accordion group ────────────────────────────────────── */
+function MobileNavGroup({
+  group,
+  onLinkClick,
+}: {
+  group: NavGroup;
+  onLinkClick: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={cn("mobile-accordion-item", open && "mobile-accordion-item--open")}>
+      <button
+        type="button"
+        className="mobile-accordion-trigger"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+      >
+        <span>{group.title}</span>
+        <ChevronDown className="mobile-chevron h-4 w-4" />
+      </button>
+      <div className="mobile-accordion-content">
+        <div className="mobile-links">
+          {group.items.map((item) =>
+            item.disabled ? (
+              <span key={item.label} className="mobile-link mobile-link--disabled">
+                <span className="mobile-link-icon" aria-hidden="true">
+                  {groupIcons[item.label] ?? <Globe className="h-3.5 w-3.5" />}
+                </span>
+                <span>
+                  <strong>{item.label}</strong>
+                  {item.description && <em>{item.description}</em>}
+                </span>
+              </span>
+            ) : (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="mobile-link"
+                onClick={onLinkClick}
+              >
+                <span className="mobile-link-icon" aria-hidden="true">
+                  {groupIcons[item.label] ?? <Globe className="h-3.5 w-3.5" />}
+                </span>
+                <span>
+                  <strong>{item.label}</strong>
+                  {item.description && <em>{item.description}</em>}
+                </span>
+              </Link>
+            )
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Main Nav ───────────────────────────────────────────────────── */
 /* Pages without a hero — nav should always appear solid */
 const SOLID_NAV_PATHS = ["/legal", "/about", "/contact", "/community", "/digital-identity"];
@@ -439,52 +488,17 @@ export function Nav() {
                     })}
                   </div>
 
-                  {/* Nav groups via Animate UI Accordion */}
+                  {/* Nav groups */}
                   <div className="mobile-nav-body">
-                    <Accordion type="multiple" className="mobile-accordion">
+                    <div className="mobile-accordion">
                       {navGroups.map((group) => (
-                        <AccordionItem key={group.title} value={group.title} className="mobile-accordion-item">
-                          <AccordionHeader>
-                            <AccordionTrigger className="mobile-accordion-trigger">
-                              <span>{group.title}</span>
-                              <ChevronDown className="mobile-chevron h-4 w-4" />
-                            </AccordionTrigger>
-                          </AccordionHeader>
-                          <AccordionContent className="mobile-accordion-content">
-                            <div className="mobile-links">
-                              {group.items.map((item) =>
-                                item.disabled ? (
-                                  <span key={item.label} className="mobile-link mobile-link--disabled">
-                                    <span className="mobile-link-icon" aria-hidden="true">
-                                      {groupIcons[item.label] ?? <Globe className="h-3.5 w-3.5" />}
-                                    </span>
-                                    <span>
-                                      <strong>{item.label}</strong>
-                                      {item.description && <em>{item.description}</em>}
-                                    </span>
-                                  </span>
-                                ) : (
-                                  <Link
-                                    key={item.label}
-                                    href={item.href}
-                                    className="mobile-link"
-                                    onClick={() => setMobileOpen(false)}
-                                  >
-                                    <span className="mobile-link-icon" aria-hidden="true">
-                                      {groupIcons[item.label] ?? <Globe className="h-3.5 w-3.5" />}
-                                    </span>
-                                    <span>
-                                      <strong>{item.label}</strong>
-                                      {item.description && <em>{item.description}</em>}
-                                    </span>
-                                  </Link>
-                                )
-                              )}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
+                        <MobileNavGroup
+                          key={group.title}
+                          group={group}
+                          onLinkClick={() => setMobileOpen(false)}
+                        />
                       ))}
-                    </Accordion>
+                    </div>
                   </div>
 
                   {/* Mobile currency */}
