@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 
@@ -12,66 +13,18 @@ function FeatureDot() {
   );
 }
 
-/* ── Business Email — CSS email client mockup ────────────────────── */
+/* ── Business Email — real mockup image ──────────────────────────── */
 function EmailVisual() {
   return (
     <div className="feat-visual feat-visual--email">
-      {/* Floating shield badge */}
-      <div className="feat-email-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <polyline points="9 12 11 14 15 10"/>
-        </svg>
-        <span>name@yourcompany.com</span>
-      </div>
-      {/* Email client shell */}
-      <div className="feat-email-client">
-        <div className="feat-email-sidebar">
-          <div className="feat-email-sidebar__head">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-            Mail
-          </div>
-          <div className="feat-email-newbtn">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            New message
-          </div>
-          <div className="feat-email-nav">
-            <div className="feat-email-navitem feat-email-navitem--active">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
-              Inbox
-            </div>
-            <div className="feat-email-navitem">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              Starred
-            </div>
-            <div className="feat-email-navitem">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              Updates
-            </div>
-          </div>
-        </div>
-        <div className="feat-email-main">
-          <div className="feat-email-main__head">Inbox</div>
-          <div className="feat-email-tabs">
-            <span className="feat-email-tab feat-email-tab--active">All mail</span>
-            <span className="feat-email-tab">Unread</span>
-            <span className="feat-email-tab">Read</span>
-            <span className="feat-email-tab">Promotions</span>
-          </div>
-          <div className="feat-email-rows">
-            {[80, 60, 90].map((w, i) => (
-              <div key={i} className="feat-email-row">
-                <div className="feat-email-row__bar" style={{ width: `${w}%` }} />
-                <div className="feat-email-row__bar feat-email-row__bar--sm" style={{ width: `${w - 25}%` }} />
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* Floating mail pill */}
-        <div className="feat-email-fab">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-        </div>
-      </div>
+      <Image
+        src="/assets/email-mockup.png"
+        alt="Business email client interface"
+        width={480}
+        height={300}
+        className="feat-email-img"
+        priority={false}
+      />
     </div>
   );
 }
@@ -271,20 +224,6 @@ const FEAT_CARDS = [
       "Scalable RAM and vCPU",
     ],
     visual: <VPSVisual />,
-  },
-  {
-    key:      "domain",
-    href:     "/domains",
-    label:    "Domain Registration",
-    headline: "Own the name that matters.",
-    features: [
-      "500+ TLD extensions available",
-      "NiRA-accredited .ng registrar",
-      "Free WHOIS privacy included",
-      "Instant activation on most TLDs",
-      "Easy transfer, no unlock needed",
-    ],
-    visual: <DomainVisual />,
   },
 ] as const;
 
