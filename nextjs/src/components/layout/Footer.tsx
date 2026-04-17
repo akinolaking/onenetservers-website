@@ -30,11 +30,11 @@ const socialIcons: Record<string, React.ReactNode> = {
 };
 
 const paymentMethods = [
-  { src: "/assets/paystack-icon.svg",   alt: "Paystack",       width: 100, height: 24 },
-  { src: "/assets/visa-icon.svg",       alt: "Visa",           width: 56,  height: 24 },
-  { src: "/assets/mastercard-icon.svg", alt: "Mastercard",     width: 46,  height: 24 },
-  { src: "/assets/verve-icon.svg",      alt: "Verve",          width: 72,  height: 24 },
-  { src: "/assets/bank-icon.svg",       alt: "Bank Transfer",  width: 28,  height: 24 },
+  { src: "/assets/paystack-icon.svg",   alt: "Paystack",       width: 100, height: 24, white: false },
+  { src: "/assets/visa-icon.svg",       alt: "Visa",           width: 56,  height: 24, white: false },
+  { src: "/assets/mastercard-icon.svg", alt: "Mastercard",     width: 46,  height: 24, white: false },
+  { src: "/assets/verve-icon.svg",      alt: "Verve",          width: 72,  height: 24, white: true  },
+  { src: "/assets/bank-icon.svg",       alt: "Bank Transfer",  width: 28,  height: 24, white: true  },
 ];
 
 export function Footer() {
@@ -104,7 +104,13 @@ export function Footer() {
                   alt={method.alt}
                   width={method.width}
                   height={method.height}
-                  style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
+                  style={{
+                    width: "auto",
+                    height: "auto",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    filter: method.white ? "brightness(0) invert(1)" : undefined,
+                  }}
                 />
               </div>
             ))}
