@@ -1,18 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { DomainSearch } from "@/components/primitives/DomainSearch";
-import {
-  AvatarGroup,
-  AvatarGroupItem,
-} from "@/components/animate-ui/animate/avatar-group";
 
-/* Placeholder avatar colours — replace src props with real images when available */
 const AVATARS = [
-  { fallback: "A", gradient: "linear-gradient(135deg,#c7d2fe,#818cf8)" },
-  { fallback: "O", gradient: "linear-gradient(135deg,#fde68a,#f59e0b)" },
-  { fallback: "C", gradient: "linear-gradient(135deg,#bbf7d0,#10b981)" },
-  { fallback: "E", gradient: "linear-gradient(135deg,#fecaca,#ef4444)" },
-  { fallback: "M", gradient: "linear-gradient(135deg,#e0e7ff,#6366f1)" },
+  { src: "/assets/avatar-a.svg", alt: "Customer profile" },
+  { src: "/assets/avatar-b.svg", alt: "Customer profile" },
+  { src: "/assets/avatar-c.svg", alt: "Customer profile" },
 ];
 
 export function Hero() {
@@ -33,32 +27,20 @@ export function Hero() {
           <DomainSearch />
         </div>
 
-        <div className="hero-reassurance">
-          <span>No credit card required</span>
-          <span>Cancel anytime</span>
-          <span>Free migration included</span>
-        </div>
-
         <div className="hero-proof">
-          <AvatarGroup size={36} overlap={10} aria-label="Customer avatars">
-            {AVATARS.map((av) => (
-              <AvatarGroupItem
-                key={av.fallback}
-                fallback={av.fallback}
-                gradient={av.gradient}
+          <div className="hero-proof__avatars">
+            {AVATARS.map((av, i) => (
+              <Image
+                key={i}
+                src={av.src}
+                alt={av.alt}
+                width={36}
+                height={36}
+                className="hero-proof__avatar"
               />
             ))}
-          </AvatarGroup>
-          <p>
-            <span aria-label="5 out of 5 stars">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" strokeWidth="1" aria-hidden="true" style={{ display: "inline" }}>
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-              ))}
-            </span>
-            {" "}Join 500+ businesses already live with OneNet Servers
-          </p>
+          </div>
+          <p>Join 500+ businesses already live with OneNet Servers</p>
         </div>
       </div>
     </section>
