@@ -134,6 +134,59 @@ function HostingVisual() {
   );
 }
 
+/* ── Domain Registration — search result mockup ─────────────────── */
+function DomainVisual() {
+  const results = [
+    { ext: ".ng",     price: "$23/yr",  available: true },
+    { ext: ".com",    price: "$15/yr",  available: true },
+    { ext: ".com.ng", price: "$11/yr",  available: true },
+    { ext: ".co.uk",  price: "$8/yr",   available: false },
+    { ext: ".shop",   price: "$4.99/yr",available: true },
+    { ext: ".xyz",    price: "$3.42/yr",available: false },
+  ];
+  return (
+    <div className="feat-visual feat-visual--domain">
+      {/* NiRA badge */}
+      <div className="feat-domain-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        NiRA Accredited Registrar
+      </div>
+      {/* Search panel */}
+      <div className="feat-domain-panel">
+        {/* Search bar */}
+        <div className="feat-domain-searchbar">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span className="feat-domain-query">yourbusiness</span>
+          <span className="feat-domain-cursor" />
+          <span className="feat-domain-search-btn">Search</span>
+        </div>
+        {/* Results */}
+        <div className="feat-domain-results">
+          {results.map((r) => (
+            <div key={r.ext} className={`feat-domain-row${r.available ? " feat-domain-row--available" : " feat-domain-row--taken"}`}>
+              <span className="feat-domain-ext">{r.ext}</span>
+              <span className="feat-domain-price">{r.price}</span>
+              <span className="feat-domain-status">
+                {r.available ? (
+                  <>
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    Available
+                  </>
+                ) : "Taken"}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── Cloud VPS — terminal mockup ─────────────────────────────────── */
 function VPSVisual() {
   const lines = [
@@ -218,6 +271,20 @@ const FEAT_CARDS = [
       "Scalable RAM and vCPU",
     ],
     visual: <VPSVisual />,
+  },
+  {
+    key:      "domain",
+    href:     "/domains",
+    label:    "Domain Registration",
+    headline: "Own the name that matters.",
+    features: [
+      "500+ TLD extensions available",
+      "NiRA-accredited .ng registrar",
+      "Free WHOIS privacy included",
+      "Instant activation on most TLDs",
+      "Easy transfer, no unlock needed",
+    ],
+    visual: <DomainVisual />,
   },
 ] as const;
 
