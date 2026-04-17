@@ -2333,7 +2333,7 @@ h1 {
   font-family: var(--font-copy), serif;
   font-size: clamp(1rem, 2.2vw, 1.15rem);
   line-height: 1.75;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .hero-search-wrap {
