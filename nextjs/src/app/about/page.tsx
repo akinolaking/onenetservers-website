@@ -50,7 +50,7 @@ export default function AboutPage() {
         <div className="shell">
           <Fade inView inViewOnce className="about-hero__inner">
             <div className="eyebrow eyebrow--centered">About OneNet Servers</div>
-            <h1>Global presence.<br />Nigerian roots.<br />London registered.</h1>
+            <h1>Global presence. Nigerian roots. London registered.</h1>
             <p className="hero-sub">
               We are ConqolX Technologies Limited — a hosting and domain registrar incorporated in
               England & Wales and Nigeria, NiRA accredited, Tech Nation Endorsed, and resident in
