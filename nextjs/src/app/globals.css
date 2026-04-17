@@ -2328,7 +2328,11 @@ h1 {
    ═══════════════════════════════════════════════════════════ */
 
 .hero-home {
-  padding: calc(var(--nav-h) + 56px) 0 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  padding: calc(var(--nav-h) + 48px) 0 80px;
   background: linear-gradient(180deg, #4343F0 0%, #6868f3 30%, #b8b8fa 65%, #f0f0ff 85%, #ffffff 100%);
   overflow: hidden;
   position: relative;
@@ -6550,7 +6554,8 @@ p.lead {
 /* ── Hero ── */
 @media (max-width: 640px) {
   .hero-home {
-    padding: 64px 0 48px;
+    padding: calc(var(--nav-h) + 32px) 0 56px;
+    min-height: 100svh;
   }
 
   .hero-h1 {
