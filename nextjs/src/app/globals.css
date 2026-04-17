@@ -6108,9 +6108,11 @@ p.lead {
 }
 
 .about-hero__inner {
-  text-align: center;
+  display: grid;
+  gap: 24px;
   max-width: 720px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .about-hero .eyebrow {
