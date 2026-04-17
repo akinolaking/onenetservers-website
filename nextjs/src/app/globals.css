@@ -2370,16 +2370,39 @@ h1 {
 
 .hero-ext-hints {
   display: flex;
-  gap: 6px 16px;
+  gap: 6px 8px;
   flex-wrap: wrap;
   justify-content: center;
-  color: rgb(67 67 240 / 65%);
   font-size: 12.5px;
+}
+
+.hero-ext-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+}
+
+.hero-ext-hint:hover {
+  background: var(--blue-xl);
+  border-color: var(--blue);
+  color: var(--blue);
 }
 
 .hero-ext-hint strong {
   color: var(--ink);
   font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.hero-ext-hint:hover strong {
+  color: var(--blue);
 }
 
 .hero-reassurance {

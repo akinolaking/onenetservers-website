@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { DomainSearch } from "@/components/primitives/DomainSearch";
 import {
   AvatarGroup,
@@ -17,10 +18,8 @@ const AVATARS = [
 ];
 
 const EXT_HINTS = [
-  { ext: ".ng",     usd: 23 },
-  { ext: ".com",    usd: 15 },
-  { ext: ".co.uk",  usd: 8  },
-  { ext: ".com.ng", usd: 11 },
+  { ext: ".shop", usd: 4.99 },
+  { ext: ".xyz",  usd: 3.42 },
 ];
 
 export function Hero() {
@@ -43,9 +42,9 @@ export function Hero() {
           <DomainSearch />
           <div className="hero-ext-hints" aria-label="Popular domain extensions">
             {EXT_HINTS.map((h) => (
-              <span key={h.ext} className="hero-ext-hint">
+              <Link key={h.ext} href="/domains" className="hero-ext-hint">
                 <strong>{h.ext}</strong> from {format(h.usd, 0)}/yr
-              </span>
+              </Link>
             ))}
           </div>
         </div>

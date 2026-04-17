@@ -212,29 +212,6 @@ export function DomainSearch() {
         </div>
       )}
 
-      {/* Idle — TLD cards, click to populate search */}
-      {state.kind === "idle" && (
-        <div
-          className="domain-tld-grid"
-          aria-label="Popular domain extensions, click to search"
-        >
-          {featuredTlds.map((t) => (
-            <button
-              key={t.ext}
-              type="button"
-              className="domain-tld-card"
-              onClick={() => onTldClick(t.ext)}
-              title={`Search ${t.ext} domains`}
-            >
-              <span className="domain-tld-card__ext">{t.ext}</span>
-              <span className="domain-tld-card__price">{priceLabel(t)}</span>
-              {t.note && (
-                <span className="domain-tld-card__badge">{t.note}</span>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
