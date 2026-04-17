@@ -245,6 +245,13 @@ select {
 .site-nav:not(.site-nav--scrolled) .nav-trigger {
   color: rgb(255 255 255 / 88%);
 }
+.site-nav:not(.site-nav--scrolled) .nav-cart {
+  color: rgb(255 255 255 / 88%);
+}
+.site-nav:not(.site-nav--scrolled) .nav-cart:hover {
+  background: rgb(255 255 255 / 14%);
+  color: #fff;
+}
 .site-nav:not(.site-nav--scrolled) .nav-trigger:hover,
 .site-nav:not(.site-nav--scrolled) .nav-trigger[data-open],
 .site-nav:not(.site-nav--scrolled) .nav-trigger[data-popup-open] {
@@ -2383,7 +2390,9 @@ h1 {
   padding: 3px 10px;
   border-radius: 999px;
   border: 1px solid var(--line);
+  background: transparent;
   color: var(--muted);
+  font-size: inherit;
   text-decoration: none;
   transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
   cursor: pointer;

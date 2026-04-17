@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { DomainSearch } from "@/components/primitives/DomainSearch";
 import {
   AvatarGroup,
   AvatarGroupItem,
 } from "@/components/animate-ui/animate/avatar-group";
-import { useCurrency } from "@/lib/currency-context";
 
 /* Placeholder avatar colours — replace src props with real images when available */
 const AVATARS = [
@@ -17,14 +15,7 @@ const AVATARS = [
   { fallback: "M", gradient: "linear-gradient(135deg,#e0e7ff,#6366f1)" },
 ];
 
-const EXT_HINTS = [
-  { ext: ".shop", usd: 4.99 },
-  { ext: ".xyz",  usd: 3.42 },
-];
-
 export function Hero() {
-  const { format } = useCurrency();
-
   return (
     <section className="hero-home" aria-label="Get your business online">
       <div className="hero-inner shell">
@@ -40,13 +31,6 @@ export function Hero() {
 
         <div className="hero-search-wrap">
           <DomainSearch />
-          <div className="hero-ext-hints" aria-label="Popular domain extensions">
-            {EXT_HINTS.map((h) => (
-              <Link key={h.ext} href="/domains" className="hero-ext-hint">
-                <strong>{h.ext}</strong> from {format(h.usd, 0)}/yr
-              </Link>
-            ))}
-          </div>
         </div>
 
         <div className="hero-reassurance">

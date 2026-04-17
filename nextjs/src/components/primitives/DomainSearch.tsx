@@ -30,7 +30,9 @@ function stripExtension(value: string) {
 
 const FEATURED_EXTS = [".ng", ".com", ".com.ng", ".co.uk", ".shop", ".xyz"];
 
-const featuredTlds = tlds.filter((t) => FEATURED_EXTS.includes(t.ext));
+const featuredTlds = FEATURED_EXTS
+  .map((ext) => tlds.find((t) => t.ext === ext))
+  .filter((t): t is NonNullable<typeof t> => t != null);
 
 export function DomainSearch() {
   const [query, setQuery] = useState("");
@@ -212,6 +214,21 @@ export function DomainSearch() {
         </div>
       )}
 
+      {/* Ext hints — idle state, click to populate search */}
+      {state.kind === "idle" && (
+        <div className="hero-ext-hints" aria-label="Popular domain extensions">
+          {featuredTlds.map((t) => (
+            <button
+              key={t.ext}
+              type="button"
+              className="hero-ext-hint"
+              onClick={() => onTldClick(t.ext)}
+            >
+              <strong>{t.ext}</strong> from {priceLabel(t)}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
