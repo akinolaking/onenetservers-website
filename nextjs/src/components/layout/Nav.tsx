@@ -439,27 +439,6 @@ export function Nav() {
                     })}
                   </div>
 
-                  {/* Featured links — direct shortcuts to key pages */}
-                  <div className="mobile-featured-links">
-                    {[
-                      { label: "Web Hosting",    href: "/hosting/web",        icon: <Server className="h-3.5 w-3.5" /> },
-                      { label: "Domains",         href: "/domains",            icon: <Globe2 className="h-3.5 w-3.5" /> },
-                      { label: "Business Email",  href: "/email",              icon: <Mail className="h-3.5 w-3.5" /> },
-                      { label: "Cloud VPS",       href: "/hosting/vps",        icon: <Cpu className="h-3.5 w-3.5" /> },
-                      { label: "SSL & Security",  href: "/security/ssl",       icon: <Shield className="h-3.5 w-3.5" /> },
-                    ].map((link) => (
-                      <Link
-                        key={link.label}
-                        href={link.href}
-                        className="mobile-featured-link"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {link.icon}
-                        <span>{link.label}</span>
-                      </Link>
-                    ))}
-                  </div>
-
                   {/* Nav groups via Animate UI Accordion */}
                   <div className="mobile-nav-body">
                     <Accordion type="multiple" className="mobile-accordion">

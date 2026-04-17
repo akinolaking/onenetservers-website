@@ -2168,34 +2168,6 @@ h1 {
   background: var(--blue-xl);
 }
 
-/* ── Mobile featured shortcut links ── */
-.mobile-featured-links {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--line);
-}
-
-.mobile-featured-link {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 9px 12px;
-  border-radius: var(--r1);
-  border: 1px solid var(--line);
-  background: var(--bg);
-  color: var(--ink-2);
-  font-size: 13px;
-  font-weight: 500;
-  transition: background 0.12s ease, color 0.12s ease;
-}
-
-.mobile-featured-link:hover {
-  background: var(--blue-xs);
-  color: var(--blue-d);
-  border-color: rgb(67 67 240 / 20%);
-}
 
 /* ── Mobile Accordion nav (Animate UI) ── */
 .mobile-nav-body {
