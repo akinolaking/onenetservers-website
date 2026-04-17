@@ -216,7 +216,7 @@ export function DomainSearch() {
       {state.kind === "idle" && (
         <div
           className="domain-tld-grid"
-          aria-label="Popular domain extensions — click to search"
+          aria-label="Popular domain extensions, click to search"
         >
           {featuredTlds.map((t) => (
             <button

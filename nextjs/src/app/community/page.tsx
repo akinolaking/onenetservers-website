@@ -10,7 +10,7 @@ const events = [
   {
     date: "May 2026",
     title: "AI Tools for Small Business",
-    description: "Practical walkthrough of AI tools any business owner can use today — content creation, customer support, automation, and more. No technical background required.",
+    description: "Practical walkthrough of AI tools any business owner can use today: content creation, customer support, automation, and more. No technical background required.",
     location: "Lagos (hybrid)",
     tag: "Workshop",
     sdg: "SDG 8",
@@ -26,7 +26,7 @@ const events = [
   {
     date: "July 2026",
     title: "Internet Infrastructure for Builders",
-    description: "How the internet actually works — DNS, hosting, SSL, and email deliverability. For founders who want to stop guessing and start understanding.",
+    description: "How the internet actually works: DNS, hosting, SSL, and email deliverability. For founders who want to stop guessing and start understanding.",
     location: "London (hybrid)",
     tag: "Talk",
     sdg: "SDG 10",
@@ -81,7 +81,7 @@ export default function CommunityPage() {
             </div>
             <h1>Future of Productivity.<br />Community for builders.</h1>
             <p className="hero-sub">
-              Monthly events on AI, digital identity, and internet infrastructure — open to all
+              Monthly events on AI, digital identity, and internet infrastructure, open to all
               builders. Lagos. London. Online.
             </p>
             <div className="hero-actions">

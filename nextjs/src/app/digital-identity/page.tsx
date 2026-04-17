@@ -12,7 +12,7 @@ const included = [
   {
     icon: Globe,
     title: "Free domain (1st year)",
-    description: "Choose from .name.ng, .com.ng, or .ng — the extensions that establish a Nigerian digital identity. Yours at no cost in year one.",
+    description: "Choose from .name.ng, .com.ng, or .ng, the extensions that establish a Nigerian digital identity. Yours at no cost in year one.",
     bg: "var(--blue-xl)",
     color: "var(--blue)",
   },
@@ -86,7 +86,7 @@ const steps = [
 const faqs = [
   {
     q: "Is this completely free? What's the catch?",
-    a: "Yes — free for the first year. No credit card required during the free period. After 12 months, you can continue at our standard rates (from $3.99/mo for hosting, standard domain rates). We notify you 30 days before any charge. You can cancel before renewal with no obligation.",
+    a: "Yes, free for the first year. No credit card required during the free period. After 12 months, you can continue at our standard rates (from $3.99/mo for hosting, standard domain rates). We notify you 30 days before any charge. You can cancel before renewal with no obligation.",
   },
   {
     q: "What happens after the first year?",
@@ -169,7 +169,7 @@ export default function DigitalIdentityPage() {
             </p>
             <div className="hero-actions">
               <Link href="#apply" className="wh-btn-primary">
-                Apply now — it&apos;s free
+                Apply for free
               </Link>
             </div>
             <div className="hero-reassurance">
@@ -187,7 +187,7 @@ export default function DigitalIdentityPage() {
           <SectionHeader
             eyebrow="What you get"
             title="Everything to start. Nothing to pay."
-            lead="Year one, covered. Domain, hosting, and email — at no cost to qualifying applicants."
+            lead="Year one, covered. Domain, hosting, and email at no cost to qualifying applicants."
             centered
           />
           <div className="wh-features-grid">

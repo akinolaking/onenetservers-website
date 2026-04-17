@@ -1,7 +1,7 @@
 export const metadata = {
   title: "Terms of Service | OneNet Servers",
   description:
-    "Terms of Service for OneNet Servers — trading name of ConqolX Technologies Limited. Read your rights and obligations as a customer.",
+    "Terms of Service for OneNet Servers, trading name of ConqolX Technologies Limited. Read your rights and obligations as a customer.",
 };
 
 export default function TermsPage() {
@@ -25,9 +25,9 @@ export default function TermsPage() {
             <tr><th>Term</th><th>Detail</th></tr>
           </thead>
           <tbody>
-            <tr><td>Billing</td><td>Prepaid — monthly or annual cycles</td></tr>
+            <tr><td>Billing</td><td>Prepaid, monthly or annual cycles</td></tr>
             <tr><td>Money-back guarantee</td><td>30 days on new hosting orders (not domains or SSL)</td></tr>
-            <tr><td>Uptime SLA</td><td>99.9% monthly — credits for excess downtime</td></tr>
+            <tr><td>Uptime SLA</td><td>99.9% monthly, with credits for excess downtime</td></tr>
             <tr><td>Invoice grace period</td><td>7 days before suspension; 30 days before termination</td></tr>
             <tr><td>Data backups</td><td>Daily, 14-day retention on shared hosting</td></tr>
             <tr><td>Notice of material changes</td><td>30 days by email before new terms take effect</td></tr>
@@ -139,7 +139,7 @@ export default function TermsPage() {
             <p>You agree not to use our Services to:</p>
             <ul>
               <li>Host or distribute illegal content, including IP-infringing material or content that incites violence.</li>
-              <li>Send unsolicited bulk email (spam) — results in immediate termination without refund.</li>
+              <li>Send unsolicited bulk email (spam): results in immediate termination without refund.</li>
               <li>Conduct denial-of-service attacks, port scanning, or network intrusion.</li>
               <li>Mine cryptocurrency without prior written approval.</li>
               <li>Host phishing websites or distribute malware.</li>

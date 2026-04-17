@@ -112,7 +112,7 @@ const features = [
     icon: Zap,
     title: "LiteSpeed web server",
     description:
-      "Up to 10× faster than Apache. Built-in caching at the server level — no plugin required.",
+      "Up to 10× faster than Apache. Built-in caching at the server level, no plugin required.",
     colour: "rgb(245 158 11 / 10%)",
     iconColour: "var(--amber)",
   },
@@ -147,7 +147,7 @@ const howItWorks = [
     number: "01",
     title: "Choose your plan",
     description:
-      "Pick the plan that fits. All plans include a 30-day money-back guarantee — no questions asked.",
+      "Pick the plan that fits. All plans include a 30-day money-back guarantee, no questions asked.",
   },
   {
     number: "02",
@@ -204,7 +204,7 @@ const comparison = [
 const faqs = [
   {
     q: "Can I migrate my existing website?",
-    a: "Yes, free for all plans. Our team handles the full migration — files, databases, DNS, and email — at no extra charge. Most migrations complete within 24 hours.",
+    a: "Yes, free for all plans. Our team handles the full migration: files, databases, DNS, and email, at no extra charge. Most migrations complete within 24 hours.",
   },
   {
     q: "What happens after 30 days?",
@@ -212,11 +212,11 @@ const faqs = [
   },
   {
     q: "Do you support WordPress?",
-    a: "Yes — one-click WordPress install on all plans. We also offer dedicated WordPress hosting with LiteSpeed caching, automatic updates, and staging environments.",
+    a: "Yes, one-click WordPress install on all plans. We also offer dedicated WordPress hosting with LiteSpeed caching, automatic updates, and staging environments.",
   },
   {
     q: "Is there a control panel?",
-    a: "Yes — cPanel on shared plans, with full file manager, email, database management, and one-click app installs. You can also manage everything from the OneNet Servers client area.",
+    a: "Yes, cPanel on shared plans, with full file manager, email, database management, and one-click app installs. You can also manage everything from the OneNet Servers client area.",
   },
   {
     q: "Can I host multiple websites?",
@@ -289,7 +289,7 @@ export default function WebHostingPage() {
             </div>
             <h1>Web hosting that works as hard as you do.</h1>
             <p className="hero-sub">
-              LiteSpeed servers, CloudLinux isolation, free SSL, and daily backups —
+              LiteSpeed servers, CloudLinux isolation, free SSL, and daily backups,
               starting from {showPrice({ usd: 3.99, ngn: 5499, gbp: 2.79 })}/mo.
             </p>
             <div className="hero-actions">
@@ -343,7 +343,7 @@ export default function WebHostingPage() {
               <span>EO</span>
             </div>
             <div className="wh-stars" aria-label="5 out of 5 stars" role="img">★★★★★</div>
-            <p>&ldquo;Migrated from Bluehost, load time went from 4s to under 800ms.&rdquo; — Adebola O.</p>
+            <p>&ldquo;Migrated from Bluehost, load time went from 4s to under 800ms.&rdquo; Adebola O.</p>
           </div>
 
           <div className="pricing-grid wh-pricing-grid">

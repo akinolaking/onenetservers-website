@@ -36,7 +36,7 @@ export function Hero() {
 
         <p className="hero-sub">
           Don&apos;t let your tech setup slow you down. We get your business
-          on the internet in under 10&nbsp;minutes — no developer, no stress.
+          on the internet in under 10&nbsp;minutes. No developer, no stress.
         </p>
 
         <div className="hero-search-wrap">

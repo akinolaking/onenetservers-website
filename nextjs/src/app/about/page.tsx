@@ -8,11 +8,11 @@ import { SectionHeader } from "@/components/shared/SectionHeader";
 
 const milestones = [
   { year: "2021", event: "ConqolX Technologies incorporated in England & Wales (RC: 14565201)." },
-  { year: "2022", event: "NiRA accreditation granted — direct .ng and .com.ng registry access." },
+  { year: "2022", event: "NiRA accreditation granted, with direct .ng and .com.ng registry access." },
   { year: "2022", event: "Nigeria RC: 1775966 registered. SCUML compliant from launch." },
-  { year: "2023", event: "Tech Nation Endorsed Founder programme — same cohort as Revolut and Monzo alumni." },
-  { year: "2024", event: "Itana Digital Resident — Africa's first Digital Special Economic Zone, Abuja." },
-  { year: "2025", event: "Digital Identity Initiative launched — free first year for qualifying Nigerian founders." },
+  { year: "2023", event: "Tech Nation Endorsed Founder programme, same cohort as Revolut and Monzo alumni." },
+  { year: "2024", event: "Itana Digital Resident, Africa's first Digital Special Economic Zone, Abuja." },
+  { year: "2025", event: "Digital Identity Initiative launched, offering a free first year for qualifying Nigerian founders." },
   { year: "2026", event: "Global rebrand to OneNet Servers. Unified Nigeria–UK–Global platform launched." },
 ];
 
@@ -52,7 +52,7 @@ export default function AboutPage() {
             <div className="eyebrow eyebrow--centered">About OneNet Servers</div>
             <h1>Global presence. Nigerian roots. London registered.</h1>
             <p className="hero-sub">
-              We are ConqolX Technologies Limited — a hosting and domain registrar incorporated in
+              We are ConqolX Technologies Limited, a hosting and domain registrar incorporated in
               England & Wales and Nigeria, NiRA accredited, Tech Nation Endorsed, and resident in
               Africa&apos;s first Digital Special Economic Zone.
             </p>
@@ -86,12 +86,12 @@ export default function AboutPage() {
                 <h2>Built from frustration. Focused on builders.</h2>
                 <p>
                   OneNet Servers was founded because no existing hosting provider understood what it meant
-                  to build a business across Nigeria and the UK simultaneously — the currency complexity,
+                  to build a business across Nigeria and the UK simultaneously: the currency complexity,
                   the domain requirements, the banking friction, the support gaps.
                 </p>
                 <p>
-                  We are the only UK-registered, NiRA-accredited hosting provider. That is not a marketing line —
-                  it is a structural advantage that means lower domain prices, direct registry access, and billing
+                  We are the only UK-registered, NiRA-accredited hosting provider. That is not a marketing line.
+                  It is a structural advantage that means lower domain prices, direct registry access, and billing
                   that works in naira, pounds, and dollars without workarounds.
                 </p>
                 <p>
@@ -110,16 +110,16 @@ export default function AboutPage() {
                     <strong>NG RC:</strong> 1775966
                   </div>
                   <div className="about-cred-item">
-                    <strong>NiRA Accredited</strong> registrar — .ng &amp; .com.ng
+                    <strong>NiRA Accredited</strong> registrar: .ng &amp; .com.ng
                   </div>
                   <div className="about-cred-item">
-                    <strong>SCUML Registered</strong> — compliant under Nigerian law
+                    <strong>SCUML Registered</strong>, compliant under Nigerian law
                   </div>
                   <div className="about-cred-item">
-                    <strong>Tech Nation Endorsed Founder</strong> — UK Home Office
+                    <strong>Tech Nation Endorsed Founder</strong>, UK Home Office
                   </div>
                   <div className="about-cred-item">
-                    <strong>Itana Digital Resident</strong> — Africa&apos;s first Digital SEZ
+                    <strong>Itana Digital Resident</strong>, Africa&apos;s first Digital SEZ
                   </div>
                 </div>
               </div>

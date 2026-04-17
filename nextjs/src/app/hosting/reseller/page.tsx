@@ -81,7 +81,7 @@ const features = [
   {
     icon: Globe,
     title: "Private nameservers",
-    description: "Your brand. Your nameservers. Clients never see 'OneNet Servers' — they see your company name throughout.",
+    description: "Your brand. Your nameservers. Clients never see 'OneNet Servers': they see your company name throughout.",
     bg: "var(--blue-xl)",
     color: "var(--blue)",
   },
@@ -95,21 +95,21 @@ const features = [
   {
     icon: Shield,
     title: "WHMCS client portal",
-    description: "Full billing automation, client management, and support ticketing — set up under your domain, your brand.",
+    description: "Full billing automation, client management, and support ticketing, all set up under your domain and brand.",
     bg: "rgb(245 158 11 / 10%)",
     color: "var(--amber)",
   },
   {
     icon: Zap,
     title: "LiteSpeed for all accounts",
-    description: "Every cPanel account under your reseller gets LiteSpeed performance and CloudLinux isolation — same as our premium plans.",
+    description: "Every cPanel account under your reseller gets LiteSpeed performance and CloudLinux isolation, same as our premium plans.",
     bg: "var(--blue-xl)",
     color: "var(--blue)",
   },
   {
     icon: BarChart,
     title: "WHM reseller dashboard",
-    description: "Full Web Host Manager access. Create accounts, set resource limits, monitor usage, and manage packages — all from WHM.",
+    description: "Full Web Host Manager access. Create accounts, set resource limits, monitor usage, and manage packages, all from WHM.",
     bg: "rgb(16 185 129 / 12%)",
     color: "var(--green)",
   },
@@ -125,7 +125,7 @@ const features = [
 const faqs = [
   {
     q: "Will my clients know I'm using OneNet Servers?",
-    a: "No — unless you tell them. Private nameservers, white-label WHMCS, and a white-label client portal all carry your brand. From your client's perspective, they are dealing with your hosting company.",
+    a: "Not unless you tell them. Private nameservers, white-label WHMCS, and a white-label client portal all carry your brand. From your client's perspective, they are dealing with your hosting company.",
   },
   {
     q: "What does the mobile billing app look like?",
@@ -133,7 +133,7 @@ const faqs = [
   },
   {
     q: "Can I set my own prices?",
-    a: "Yes — completely. You set your own prices in WHMCS, invoice your clients independently, and keep the margin. We charge you the wholesale reseller rate; everything above that is yours.",
+    a: "Yes, completely. You set your own prices in WHMCS, invoice your clients independently, and keep the margin. We charge you the wholesale reseller rate; everything above that is yours.",
   },
   {
     q: "Do I need technical hosting knowledge?",

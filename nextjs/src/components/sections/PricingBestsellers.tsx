@@ -51,7 +51,7 @@ const CARDS = [
     href:        "/hosting/vps",
     label:       "Cloud VPS",
     headline:    "Root access. Zero limits.",
-    description: "8 GB RAM · 4 vCPU · unlimited bandwidth. Docker, n8n, and Nextcloud — one click away.",
+    description: "8 GB RAM · 4 vCPU · unlimited bandwidth. Docker, n8n, and Nextcloud, one click away.",
     image:       "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80",
     imageAlt:    "Terminal screen showing server commands and code",
     objectPos:   "center top",
@@ -69,7 +69,7 @@ export function PricingBestsellers() {
             <div className="eyebrow eyebrow--centered">What we offer</div>
             <h2>Everything your business needs online.</h2>
             <p className="lead">
-              Hosting, domains, email, and infrastructure — built for Nigeria, the UK, and everywhere in between.
+              Hosting, domains, email, and infrastructure. Built for Nigeria, the UK, and everywhere in between.
             </p>
           </div>
         </Fade>

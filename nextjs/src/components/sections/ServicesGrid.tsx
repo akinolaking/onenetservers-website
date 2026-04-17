@@ -19,7 +19,7 @@ export function ServicesGrid() {
           <SectionHeader
             eyebrow="What we offer"
             title="Everything to put your business online."
-            lead="From your first domain to a fully managed AI-powered stack — built for serious builders in Lagos, London, and everywhere in between."
+            lead="From your first domain to a fully managed AI-powered stack. Built for serious builders in Lagos, London, and everywhere in between."
           />
         </Fade>
 

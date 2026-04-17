@@ -1,7 +1,7 @@
 export const metadata = {
   title: "Privacy Policy | OneNet Servers",
   description:
-    "Privacy Policy for OneNet Servers — how we collect, use, and protect your personal data under UK GDPR and Nigerian data protection law.",
+    "Privacy Policy for OneNet Servers: how we collect, use, and protect your personal data under UK GDPR and Nigerian data protection law.",
 };
 
 export default function PrivacyPage() {
@@ -124,7 +124,7 @@ export default function PrivacyPage() {
             <p>
               We operate in the UK and Nigeria. Your data may be processed in both jurisdictions and in
               EU and US data centres operated by our infrastructure providers. Where data is transferred
-              outside the UK or EEA, we ensure appropriate safeguards are in place — including Standard
+              outside the UK or EEA, we ensure appropriate safeguards are in place, including Standard
               Contractual Clauses or adequacy decisions.
             </p>
           </div>
@@ -167,7 +167,7 @@ export default function PrivacyPage() {
             <table className="legal-table">
               <thead><tr><th>Type</th><th>Purpose</th><th>Can be declined?</th></tr></thead>
               <tbody>
-                <tr><td>Essential</td><td>Session management, security, cart</td><td>No — required for service</td></tr>
+                <tr><td>Essential</td><td>Session management, security, cart</td><td>No, required for service</td></tr>
                 <tr><td>Analytics</td><td>Page views, traffic sources</td><td>Yes</td></tr>
                 <tr><td>Preference</td><td>Currency, language</td><td>Yes</td></tr>
               </tbody>
@@ -186,7 +186,7 @@ export default function PrivacyPage() {
             <ul>
               <li>TLS encryption for all data in transit.</li>
               <li>AES-256 encryption at rest for sensitive data.</li>
-              <li>Passwords stored as bcrypt hashes — we never see your plain-text password.</li>
+              <li>Passwords are stored as bcrypt hashes. We never see your plain-text password.</li>
               <li>Two-factor authentication available on all accounts.</li>
               <li>Regular third-party security audits.</li>
             </ul>

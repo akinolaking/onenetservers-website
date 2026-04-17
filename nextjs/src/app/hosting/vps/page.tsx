@@ -116,7 +116,7 @@ const features = [
   {
     icon: Package,
     title: "One-click app deploy",
-    description: "Docker, n8n, Nextcloud, Wireguard, and more — deployed in under a minute from the client area.",
+    description: "Docker, n8n, Nextcloud, Wireguard, and more, deployed in under a minute from the client area.",
     bg: "rgb(245 158 11 / 10%)",
     color: "var(--amber)",
   },
@@ -154,11 +154,11 @@ const faqs = [
   },
   {
     q: "Can I upgrade later?",
-    a: "Yes — upgrade to a larger plan at any time from your client area. The new resources apply at the next billing cycle. Downgrade is also available, subject to data fitting within the smaller storage allocation.",
+    a: "Yes, upgrade to a larger plan at any time from your client area. The new resources apply at the next billing cycle. Downgrade is also available, subject to data fitting within the smaller storage allocation.",
   },
   {
     q: "Is a managed VPS available?",
-    a: "Our VPS plans are unmanaged by default — giving you full control. Managed add-ons (server monitoring, patching, backup management) are available from the client area. Our support team is available 24/7 for infrastructure questions.",
+    a: "Our VPS plans are unmanaged by default, giving you full control. Managed add-ons (server monitoring, patching, backup management) are available from the client area. Our support team is available 24/7 for infrastructure questions.",
   },
   {
     q: "Can I run AI or machine learning workloads?",
@@ -193,7 +193,7 @@ export default function VpsPage() {
             <h1>Full power. Zero bandwidth limits.</h1>
             <p className="hero-sub">
               Root access, unlimited bandwidth, and one-click deploys for Docker, n8n, Nextcloud,
-              and Wireguard — from {showPrice(plans[0].monthly)}/mo.
+              and Wireguard, from {showPrice(plans[0].monthly)}/mo.
             </p>
             <div className="hero-actions">
               <a href="/cart.php?a=add&pid=205&billingcycle=annually" className="wh-btn-primary">

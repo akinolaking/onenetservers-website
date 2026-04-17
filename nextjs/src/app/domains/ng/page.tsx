@@ -23,14 +23,14 @@ const whyNg = [
   {
     icon: Award,
     title: "NiRA direct registration",
-    description: "We are a NiRA-accredited registrar. Every .ng and .com.ng domain is registered directly — no middleman, faster activation, lower cost.",
+    description: "We are a NiRA-accredited registrar. Every .ng and .com.ng domain is registered directly, with no middleman, faster activation, and lower cost.",
     bg: "var(--blue-xl)",
     color: "var(--blue)",
   },
   {
     icon: Shield,
     title: "WHOIS privacy included",
-    description: "Your personal information stays private by default. No extra charge. NiRA regulations require registrant data to be accurate — we protect it from public view.",
+    description: "Your personal information stays private by default. No extra charge. NiRA regulations require registrant data to be accurate, and we protect it from public view.",
     bg: "rgb(16 185 129 / 12%)",
     color: "var(--green)",
   },
@@ -51,7 +51,7 @@ const whyNg = [
   {
     icon: Building2,
     title: "DNSSEC and auto-renew",
-    description: "Cryptographic DNS protection enabled on all .ng domains. Enable auto-renew and we handle the rest — your domain never lapses.",
+    description: "Cryptographic DNS protection enabled on all .ng domains. Enable auto-renew and we handle the rest. Your domain will never lapse.",
     bg: "rgb(16 185 129 / 12%)",
     color: "var(--green)",
   },
@@ -67,7 +67,7 @@ const whyNg = [
 const faqs = [
   {
     q: "What is NiRA and why does it matter?",
-    a: "NiRA (Nigeria Internet Registration Association) is the registry authority that manages all .ng domain extensions. Registrars must be accredited by NiRA to register .ng and .com.ng domains directly. OneNet Servers is NiRA-accredited — meaning we don't go through a third-party reseller, which results in faster registration and lower prices.",
+    a: "NiRA (Nigeria Internet Registration Association) is the registry authority that manages all .ng domain extensions. Registrars must be accredited by NiRA to register .ng and .com.ng domains directly. OneNet Servers is NiRA-accredited, meaning we don't go through a third-party reseller, which results in faster registration and lower prices.",
   },
   {
     q: "How long does a .ng domain take to activate?",
@@ -87,7 +87,7 @@ const faqs = [
   },
   {
     q: "Is WHOIS privacy available for .ng domains?",
-    a: "Yes. OneNet Servers includes WHOIS privacy at no extra charge on all .ng registrations we handle. NiRA requires registrant data to be accurate and on file with us — we simply keep it out of the public WHOIS database.",
+    a: "Yes. OneNet Servers includes WHOIS privacy at no extra charge on all .ng registrations we handle. NiRA requires registrant data to be accurate and on file with us, but we keep it out of the public WHOIS database.",
   },
 ];
 
@@ -99,7 +99,7 @@ export default function DomainsNgPage() {
     <>
       <head>
         <title>.NG Domains | NiRA Accredited Registrar | OneNet Servers</title>
-        <meta name="description" content="Register .ng, .com.ng, and all .ng domain extensions directly with OneNet Servers — Nigeria's NiRA-accredited registrar. Fast activation, Naira billing, free WHOIS privacy." />
+        <meta name="description" content="Register .ng, .com.ng, and all .ng domain extensions directly with OneNet Servers, Nigeria's NiRA-accredited registrar. Fast activation, Naira billing, free WHOIS privacy." />
         <link rel="canonical" href="https://onenetservers.net/domains/ng" />
       </head>
 
@@ -122,7 +122,7 @@ export default function DomainsNgPage() {
               <h1 style={{ margin: 0 }}>Your Nigerian identity online.</h1>
               <p className="section-lead">
                 OneNet Servers is a NiRA-accredited registrar. We register .ng and .com.ng
-                directly — no reseller, faster activation, and the most competitive prices in the market.
+                directly, no reseller, faster activation, and the most competitive prices in the market.
               </p>
             </div>
           </Fade>
@@ -135,7 +135,7 @@ export default function DomainsNgPage() {
 
           <Fade inView inViewOnce delay={0.15}>
             <div className="hero-reassurance" style={{ justifyContent: "center", marginTop: 20 }}>
-              <span>NiRA direct — no middleman</span>
+              <span>NiRA direct, no middleman</span>
               <span>Free WHOIS privacy</span>
               <span>Pay in Naira via Paystack</span>
             </div>
@@ -228,7 +228,7 @@ export default function DomainsNgPage() {
               {
                 n: "01",
                 title: "Search and select",
-                body: "Enter your preferred domain name in the search above. Select the .ng extension that fits — .ng for maximum prestige, .com.ng for most commercial businesses.",
+                body: "Enter your preferred domain name in the search above. Select the .ng extension that fits: .ng for maximum prestige, .com.ng for most commercial businesses.",
               },
               {
                 n: "02",
@@ -238,12 +238,12 @@ export default function DomainsNgPage() {
               {
                 n: "03",
                 title: "NiRA verification",
-                body: "We submit your registration to NiRA with your registrant details. For most extensions, verification is automatic. Ensure your contact email is accurate — NiRA may send a confirmation.",
+                body: "We submit your registration to NiRA with your registrant details. For most extensions, verification is automatic. Ensure your contact email is accurate, as NiRA may send a confirmation.",
               },
               {
                 n: "04",
                 title: "Your domain goes live",
-                body: "Once verified, your .ng domain is active and added to your OneNet Servers dashboard. Point it to your hosting, email, or any IP address — in minutes.",
+                body: "Once verified, your .ng domain is active and added to your OneNet Servers dashboard. Point it to your hosting, email, or any IP address, in minutes.",
               },
             ].map((step, i) => (
               <Fade key={step.n} inView inViewOnce delay={i * 0.08}>
@@ -268,7 +268,7 @@ export default function DomainsNgPage() {
               <p className="section-eyebrow" style={{ color: "rgba(255,255,255,0.6)" }}>NiRA direct registration</p>
               <h2 style={{ color: "#fff", margin: "12px 0 16px" }}>Claim your .ng domain today.</h2>
               <p style={{ color: "rgba(255,255,255,0.72)", maxWidth: 480, margin: "0 auto 32px" }}>
-                Your Nigerian identity online. Register directly through NiRA — no middleman,
+                Your Nigerian identity online. Register directly through NiRA, no middleman,
                 faster activation, and the best prices in the market.
               </p>
               <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>

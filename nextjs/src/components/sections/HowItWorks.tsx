@@ -27,7 +27,7 @@ export function HowItWorks() {
             <div className="eyebrow eyebrow--centered">Getting started</div>
             <h2>From idea to online in minutes and success.</h2>
             <p className="lead">
-              No technical knowledge required. We handle setup — you get the keys.
+              No technical knowledge required. We handle setup, then hand you the keys.
             </p>
           </div>
         </Fade>

@@ -69,7 +69,7 @@ const features = [
   {
     icon: Shield,
     title: "256-bit encryption",
-    description: "All certificates use 256-bit AES encryption — the same standard used by banks, governments, and global payment platforms.",
+    description: "All certificates use 256-bit AES encryption, the same standard used by banks, governments, and global payment platforms.",
     bg: "var(--blue-xl)",
     color: "var(--blue)",
   },
@@ -83,14 +83,14 @@ const features = [
   {
     icon: Globe,
     title: "Browser and device compatible",
-    description: "Compatible with 99.9% of browsers and devices worldwide — Chrome, Safari, Firefox, Edge, iOS, Android. No exclusions.",
+    description: "Compatible with 99.9% of browsers and devices worldwide: Chrome, Safari, Firefox, Edge, iOS, Android. No exclusions.",
     bg: "rgb(245 158 11 / 10%)",
     color: "var(--amber)",
   },
   {
     icon: Award,
     title: "Issued by trusted CAs",
-    description: "Certificates issued through globally trusted Certificate Authorities. Your visitors see a valid, trusted padlock — no browser warnings.",
+    description: "Certificates issued through globally trusted Certificate Authorities. Your visitors see a valid, trusted padlock, no browser warnings.",
     bg: "var(--blue-xl)",
     color: "var(--blue)",
   },
@@ -113,19 +113,19 @@ const features = [
 const faqs = [
   {
     q: "Do I need a paid SSL if my hosting already includes a free one?",
-    a: "Free Let's Encrypt certificates cover encryption — your site gets the padlock. Paid certificates add validation depth: OV confirms your business identity, EV adds the highest trust level. For e-commerce, enterprise, or any site handling payments, a paid certificate signals a higher level of vetting to your visitors.",
+    a: "Free Let's Encrypt certificates cover encryption, so your site gets the padlock. Paid certificates add validation depth: OV confirms your business identity, EV adds the highest trust level. For e-commerce, enterprise, or any site handling payments, a paid certificate signals a higher level of vetting to your visitors.",
   },
   {
     q: "What is the difference between DV, OV, and EV?",
-    a: "DV (Domain Validation) verifies domain ownership only — fastest to issue, lowest cost. OV (Organisation Validation) verifies your business identity against public records — takes 1–3 days. EV (Extended Validation) requires the most thorough company vetting — displays maximum trust indicators in browsers and is the standard for banking and finance.",
+    a: "DV (Domain Validation) verifies domain ownership only, fastest to issue and lowest cost. OV (Organisation Validation) verifies your business identity against public records and takes 1–3 days. EV (Extended Validation) requires the most thorough company vetting and displays maximum trust indicators in browsers, making it the standard for banking and finance.",
   },
   {
     q: "What is a Wildcard certificate?",
-    a: "A Wildcard SSL covers your main domain and all subdomains at one level — e.g., *.yourdomain.com covers shop.yourdomain.com, mail.yourdomain.com, app.yourdomain.com, and any other subdomain. Instead of buying separate certificates for each subdomain, one Wildcard covers them all.",
+    a: "A Wildcard SSL covers your main domain and all subdomains at one level, e.g., *.yourdomain.com covers shop.yourdomain.com, mail.yourdomain.com, app.yourdomain.com, and any other subdomain. Instead of buying separate certificates for each subdomain, one Wildcard covers them all.",
   },
   {
     q: "How long does installation take?",
-    a: "For hosting plans on our platform, SSL installation is automated — your certificate is active within minutes of issuance. If you are installing on an external server, we provide full installation guides for Apache, Nginx, cPanel, and Plesk.",
+    a: "For hosting plans on our platform, SSL installation is automated and your certificate is active within minutes of issuance. If you are installing on an external server, we provide full installation guides for Apache, Nginx, cPanel, and Plesk.",
   },
   {
     q: "Does SSL affect my Google ranking?",
@@ -151,7 +151,7 @@ export default function SecuritySslPage() {
     <>
       <head>
         <title>SSL Certificates | OneNet Servers</title>
-        <meta name="description" content="SSL certificates from £8.99/yr — DV, Wildcard, OV, and EV. Automated installation, 256-bit encryption, and trusted CAs. For every site, every level of validation." />
+        <meta name="description" content="SSL certificates from £8.99/yr: DV, Wildcard, OV, and EV. Automated installation, 256-bit encryption, and trusted CAs. For every site, every level of validation." />
         <link rel="canonical" href="https://onenetservers.net/security/ssl" />
       </head>
 
@@ -173,7 +173,7 @@ export default function SecuritySslPage() {
               <p className="section-eyebrow">SSL Certificates</p>
               <h1 style={{ margin: 0 }}>The padlock your visitors trust.</h1>
               <p className="section-lead">
-                From a basic DV certificate to full Extended Validation — we cover every
+                From a basic DV certificate to full Extended Validation, we cover every
                 site, every level of trust. Automated installation included on all OneNet Servers hosting plans.
               </p>
             </div>

@@ -1,7 +1,7 @@
 export const metadata = {
   title: "Hosting Agreement | OneNet Servers",
   description:
-    "OneNet Servers Hosting Agreement — SLA, resource limits, backup terms, migrations, and prohibited content for all hosting plans.",
+    "OneNet Servers Hosting Agreement: SLA, resource limits, backup terms, migrations, and prohibited content for all hosting plans.",
 };
 
 export default function HostingAgreementPage() {
@@ -20,7 +20,7 @@ export default function HostingAgreementPage() {
 
       {/* ── Shared hosting resource limits ── */}
       <div className="legal-card">
-        <p className="legal-card__title">Shared hosting — resource limits</p>
+        <p className="legal-card__title">Shared hosting: resource limits</p>
         <table className="legal-table">
           <thead>
             <tr><th>Resource</th><th>Limit per account</th><th>Consequence of breach</th></tr>
@@ -61,7 +61,7 @@ export default function HostingAgreementPage() {
         <details className="legal-accordion__item">
           <summary className="legal-accordion__trigger">
             <span className="legal-accordion__num">02</span>
-            Shared hosting — fair use
+            Shared hosting: fair use
             <svg className="legal-accordion__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </summary>
           <div className="legal-accordion__body">
@@ -84,12 +84,12 @@ export default function HostingAgreementPage() {
             <ul>
               <li>Keeping the OS and installed software up to date.</li>
               <li>Configuring and maintaining a firewall.</li>
-              <li>Implementing access controls — SSH key authentication is strongly recommended.</li>
+              <li>Implementing access controls. SSH key authentication is strongly recommended.</li>
             </ul>
             <table className="legal-table">
               <thead><tr><th>Bandwidth policy</th><th>Detail</th></tr></thead>
               <tbody>
-                <tr><td>Measurement</td><td>Outbound transfer only — inbound is not counted</td></tr>
+                <tr><td>Measurement</td><td>Outbound transfer only; inbound is not counted</td></tr>
                 <tr><td>Included</td><td>As specified per plan in your account dashboard</td></tr>
                 <tr><td>Overage</td><td>Charged at the rate shown in your dashboard</td></tr>
               </tbody>
@@ -108,9 +108,9 @@ export default function HostingAgreementPage() {
             <table className="legal-table">
               <thead><tr><th></th><th>Shared / WordPress / Reseller hosting</th><th>Cloud VPS</th></tr></thead>
               <tbody>
-                <tr><td>Automated backups</td><td>Daily, included</td><td>Not included by default — add-on available</td></tr>
+                <tr><td>Automated backups</td><td>Daily, included</td><td>Not included by default (add-on available)</td></tr>
                 <tr><td>Retention period</td><td>14 days</td><td>As per add-on plan</td></tr>
-                <tr><td>Restore via dashboard</td><td>Yes — up to 2 per month free</td><td>Yes if add-on enabled</td></tr>
+                <tr><td>Restore via dashboard</td><td>Yes, up to 2 per month free</td><td>Yes if add-on enabled</td></tr>
                 <tr><td>Extra restores</td><td>£10 per restoration above 2/month</td><td>Varies by plan</td></tr>
               </tbody>
             </table>

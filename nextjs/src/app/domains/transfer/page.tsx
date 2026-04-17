@@ -58,7 +58,7 @@ const steps = [
   {
     n: "01",
     title: "Unlock your domain",
-    body: "Log into your current registrar and disable the transfer lock (sometimes called \"registrar lock\" or \"EPP lock\"). Get your authorisation (EPP) code — you'll need it in step 3.",
+    body: "Log into your current registrar and disable the transfer lock (sometimes called \"registrar lock\" or \"EPP lock\"). Get your authorisation (EPP) code, which you'll need in step 3.",
   },
   {
     n: "02",
@@ -68,7 +68,7 @@ const steps = [
   {
     n: "03",
     title: "Enter your auth code",
-    body: "Paste your EPP authorisation code during checkout. We submit the transfer request to the registry. You'll receive an email from your old registrar to approve — approve it promptly.",
+    body: "Paste your EPP authorisation code during checkout. We submit the transfer request to the registry. You'll receive an email from your old registrar to approve. Approve it promptly.",
   },
   {
     n: "04",
@@ -97,7 +97,7 @@ const faqs = [
   },
   {
     q: "Will my website or email go down during a transfer?",
-    a: "No. DNS records are not changed during a transfer unless you explicitly update them. Your site and email continue to work throughout the process. The transfer only moves ownership — not your hosting.",
+    a: "No. DNS records are not changed during a transfer unless you explicitly update them. Your site and email continue to work throughout the process. The transfer only moves ownership, not your hosting.",
   },
   {
     q: "Can I transfer a .ng or .com.ng domain?",
@@ -148,7 +148,7 @@ export default function DomainsTransferPage() {
               <h1 style={{ margin: 0 }}>Move your domain. Keep everything else.</h1>
               <p className="section-lead">
                 Transfer to OneNet Servers in 5–7 days. Your DNS, email, and settings
-                stay exactly as they are — plus you get a free year added on every transfer.
+                stay exactly as they are, and you get a free year added on every transfer.
               </p>
             </div>
           </Fade>
@@ -176,7 +176,7 @@ export default function DomainsTransferPage() {
             <SectionHeader
               eyebrow="How it works"
               title="Four steps to bring your domain home."
-              lead="Most transfers complete in 5–7 days. We handle the technical side — you just approve one email."
+              lead="Most transfers complete in 5–7 days. We handle the technical side: you just approve one email."
             />
           </Fade>
 

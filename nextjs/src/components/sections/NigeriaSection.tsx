@@ -96,11 +96,11 @@ export function NigeriaSection() {
                   <ul className="nigeria-panel__list">
                     <li>
                       <CheckIcon />
-                      Direct .ng and .com.ng registration — no middleman
+                      Direct .ng and .com.ng registration, no middleman
                     </li>
                     <li>
                       <CheckIcon />
-                      Naira billing via Paystack — cards, USSD, bank transfer, Verve
+                      Naira billing via Paystack: cards, USSD, bank transfer, Verve
                     </li>
                     <li>
                       <CheckIcon />
@@ -108,11 +108,11 @@ export function NigeriaSection() {
                     </li>
                     <li>
                       <CheckIcon />
-                      SCUML registered — compliant under Nigerian law
+                      SCUML registered, compliant under Nigerian law
                     </li>
                     <li>
                       <CheckIcon />
-                      Digital Identity Initiative — free first year for qualifying founders
+                      Digital Identity Initiative: free first year for qualifying founders
                     </li>
                   </ul>
 

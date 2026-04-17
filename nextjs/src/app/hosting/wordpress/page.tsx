@@ -107,7 +107,7 @@ const wpFeatures = [
     icon: Shield,
     title: "Daily backups + one-click restore",
     description:
-      "Full site backup every day. Restore to any point in seconds from your dashboard — no support ticket needed.",
+      "Full site backup every day. Restore to any point in seconds from your dashboard, no support ticket needed.",
   },
   {
     icon: Database,
@@ -140,7 +140,7 @@ const audiences = [
     icon: Briefcase,
     title: "Small businesses",
     description:
-      "Professional website, contact forms, and local SEO — without hiring a developer.",
+      "Professional website, contact forms, and local SEO, without hiring a developer.",
   },
   {
     icon: Users,
@@ -159,23 +159,23 @@ const audiences = [
 const faqs = [
   {
     q: "Do I need technical knowledge?",
-    a: "No. One-click install, automatic updates — we handle the WordPress maintenance. If you can write an email, you can manage your WordPress site on OneNet Servers. No FTP, no server configuration, no technical background required.",
+    a: "No. One-click install, automatic updates: we handle the WordPress maintenance. If you can write an email, you can manage your WordPress site on OneNet Servers. No FTP, no server configuration, no technical background required.",
   },
   {
     q: "Can I use page builders like Elementor or Divi?",
-    a: "Yes — Elementor, Divi, Beaver Builder, and all major page builders work out of the box. Our LiteSpeed server is compatible with every major WordPress builder. Performance stays fast regardless of which builder you choose.",
+    a: "Yes, Elementor, Divi, Beaver Builder, and all major page builders work out of the box. Our LiteSpeed server is compatible with every major WordPress builder. Performance stays fast regardless of which builder you choose.",
   },
   {
     q: "Is WooCommerce supported?",
-    a: "Yes, WooCommerce runs on all plans. Premium and Ultimate are recommended for active stores — they include more resources and staging environments for testing checkout flows before going live.",
+    a: "Yes, WooCommerce runs on all plans. Premium and Ultimate are recommended for active stores: they include more resources and staging environments for testing checkout flows before going live.",
   },
   {
     q: "Can I migrate from another host?",
-    a: "Yes, free migration on all plans. Our team handles the full move — files, database, DNS, and email. Most migrations complete within 24 hours with zero downtime. We've moved sites from Bluehost, SiteGround, GoDaddy, and Kinsta.",
+    a: "Yes, free migration on all plans. Our team handles the full move: files, database, DNS, and email. Most migrations complete within 24 hours with zero downtime. We've moved sites from Bluehost, SiteGround, GoDaddy, and Kinsta.",
   },
   {
     q: "What's the difference between shared hosting and WordPress hosting?",
-    a: "Our WordPress plans are optimised shared hosting — LiteSpeed caching, WordPress-specific server configuration, and automatic updates all included. It's the performance of managed WordPress hosting at shared hosting prices.",
+    a: "Our WordPress plans are optimised shared hosting: LiteSpeed caching, WordPress-specific server configuration, and automatic updates all included. It's the performance of managed WordPress hosting at shared hosting prices.",
   },
 ];
 
@@ -240,7 +240,7 @@ export default function WordPressHostingPage() {
           <SectionHeader
             eyebrow="Pricing"
             title="Plans for every WordPress site."
-            lead="From a first blog to a busy WooCommerce store — all plans include one-click install, automatic updates, and free SSL."
+            lead="From a first blog to a busy WooCommerce store, all plans include one-click install, automatic updates, and free SSL."
             centered
           />
 
@@ -270,7 +270,7 @@ export default function WordPressHostingPage() {
               <span>EO</span>
             </div>
             <div className="wh-stars" aria-label="5 out of 5 stars" role="img">★★★★★</div>
-            <p>&ldquo;Load time dropped from four seconds to under 800ms. Zero downtime during migration.&rdquo; — Adebola O.</p>
+            <p>&ldquo;Load time dropped from four seconds to under 800ms. Zero downtime during migration.&rdquo; Adebola O.</p>
           </div>
 
           <div className="pricing-grid wh-pricing-grid">
@@ -387,7 +387,7 @@ export default function WordPressHostingPage() {
             <div className="wp-perf-strip">
               <div className="wp-perf-stat">
                 <strong>Sub-800ms</strong>
-                <span>average load time — measured on a standard WordPress site with WooCommerce active</span>
+                <span>average load time, measured on a standard WordPress site with WooCommerce active</span>
               </div>
               <div className="wp-perf-divider" aria-hidden />
               <div className="wp-perf-stat">

@@ -72,7 +72,7 @@ const features = [
   {
     icon: Shield,
     title: "Malware scanning and removal",
-    description: "We scan your site daily (continuous on Pro+) for malware, viruses, and injected code. If we find anything, we remove it automatically — no manual intervention needed.",
+    description: "We scan your site daily (continuous on Pro+) for malware, viruses, and injected code. If we find anything, we remove it automatically, no manual intervention needed.",
     bg: "var(--blue-xl)",
     color: "var(--blue)",
   },
@@ -86,21 +86,21 @@ const features = [
   {
     icon: AlertTriangle,
     title: "DDoS protection",
-    description: "Distributed denial-of-service attacks are detected and mitigated at the edge — before they impact your server or your visitors' experience.",
+    description: "Distributed denial-of-service attacks are detected and mitigated at the edge, before they impact your server or your visitors' experience.",
     bg: "rgb(245 158 11 / 10%)",
     color: "var(--amber)",
   },
   {
     icon: Eye,
     title: "Blacklist monitoring",
-    description: "We monitor 30+ blacklists — Google Safe Browsing, McAfee, Norton, and others. If your site is flagged, we alert you immediately and assist with delisting.",
+    description: "We monitor 30+ blacklists: Google Safe Browsing, McAfee, Norton, and others. If your site is flagged, we alert you immediately and assist with delisting.",
     bg: "var(--blue-xl)",
     color: "var(--blue)",
   },
   {
     icon: Activity,
     title: "Uptime and anomaly monitoring",
-    description: "OneGuard Pro and Enterprise include uptime checks every 60 seconds from multiple locations. Anomalies — traffic spikes, error rate changes — trigger instant alerts.",
+    description: "OneGuard Pro and Enterprise include uptime checks every 60 seconds from multiple locations. Traffic spikes and error rate changes trigger instant alerts.",
     bg: "rgb(16 185 129 / 12%)",
     color: "var(--green)",
   },
@@ -121,7 +121,7 @@ const features = [
   {
     icon: Shield,
     title: "Bot management",
-    description: "Distinguish real visitors from bots and scrapers. Block credential stuffing, content theft, and automated vulnerability probing — while keeping legitimate crawlers through.",
+    description: "Distinguish real visitors from bots and scrapers. Block credential stuffing, content theft, and automated vulnerability probing, while keeping legitimate crawlers through.",
     bg: "rgb(16 185 129 / 12%)",
     color: "var(--green)",
   },
@@ -130,7 +130,7 @@ const features = [
 const faqs = [
   {
     q: "What is OneGuard and how is it different from a standard SSL?",
-    a: "An SSL certificate encrypts data in transit between your visitors and your server. OneGuard goes much further: it scans your site for malware and removes it automatically, blocks attacks via a web application firewall, monitors blacklists, detects DDoS, and alerts you to anomalies. SSL and OneGuard work together — SSL is the foundation, OneGuard is the active defence.",
+    a: "An SSL certificate encrypts data in transit between your visitors and your server. OneGuard goes much further: it scans your site for malware and removes it automatically, blocks attacks via a web application firewall, monitors blacklists, detects DDoS, and alerts you to anomalies. SSL and OneGuard work together: SSL is the foundation, OneGuard is the active defence.",
   },
   {
     q: "How does automatic malware removal work?",
@@ -146,7 +146,7 @@ const faqs = [
   },
   {
     q: "What happens if my site gets blacklisted by Google?",
-    a: "OneGuard monitors Google Safe Browsing and 30+ other blacklists continuously. The moment your site is flagged, we alert you and begin the remediation process — malware removal, clean verification, and Google Search Console delisting request submission. Most sites are delisted within 24–48 hours of a successful clean.",
+    a: "OneGuard monitors Google Safe Browsing and 30+ other blacklists continuously. The moment your site is flagged, we alert you and begin the remediation process: malware removal, clean verification, and Google Search Console delisting request submission. Most sites are delisted within 24–48 hours of a successful clean.",
   },
   {
     q: "Is OneGuard required for PCI-DSS compliance?",
@@ -207,7 +207,7 @@ export default function SecurityOneguardPage() {
             <SectionHeader
               eyebrow="OneGuard plans"
               title="Active security for every site."
-              lead="Choose the level of protection that matches your risk. Upgrade any time — downgrade any time."
+              lead="Choose the level of protection that matches your risk. Upgrade any time, downgrade any time."
             />
           </Fade>
 
@@ -293,7 +293,7 @@ export default function SecurityOneguardPage() {
               <h2 style={{ color: "#fff", margin: "12px 0 16px" }}>Stop a breach before it happens.</h2>
               <p style={{ color: "rgba(255,255,255,0.72)", maxWidth: 480, margin: "0 auto 32px" }}>
                 The average time to detect a website compromise without a security tool is 6 months.
-                OneGuard finds and removes threats in minutes — from {format(4.99, 2)}/mo.
+                OneGuard finds and removes threats in minutes, from {format(4.99, 2)}/mo.
               </p>
               <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                 <a href="/security/ssl" className="btn btn-white">

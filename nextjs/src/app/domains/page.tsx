@@ -58,7 +58,7 @@ const features = [
   {
     icon: Globe,
     title: "30+ TLD extensions",
-    description: "Country codes, generics, industry-specific — we register them all. One dashboard, any extension.",
+    description: "Country codes, generics, industry-specific: we register them all. One dashboard, any extension.",
     bg: "rgb(16 185 129 / 12%)",
     color: "var(--green)",
   },
@@ -74,7 +74,7 @@ const features = [
 const faqs = [
   {
     q: "What makes OneNet Servers different for .ng domains?",
-    a: "We are a NiRA (Nigeria Internet Registration Association) accredited registrar. That means we register .ng and .com.ng domains directly — no middleman, no extra layer, faster activation and lower prices than resellers.",
+    a: "We are a NiRA (Nigeria Internet Registration Association) accredited registrar. That means we register .ng and .com.ng domains directly, with no middleman, no extra layer, faster activation and lower prices than resellers.",
   },
   {
     q: "How long does a .ng domain take to activate?",
@@ -90,7 +90,7 @@ const faqs = [
   },
   {
     q: "Can I buy a domain without buying hosting?",
-    a: "Yes — you can register a domain on its own. If you decide to add hosting later, you can point your domain to any host or use it with an OneNet Servers hosting plan.",
+    a: "Yes, you can register a domain on its own. If you decide to add hosting later, you can point your domain to any host or use it with an OneNet Servers hosting plan.",
   },
 ];
 

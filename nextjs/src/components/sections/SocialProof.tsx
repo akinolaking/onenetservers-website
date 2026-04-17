@@ -30,7 +30,7 @@ export function SocialProof() {
               </h2>
             </div>
             <p className="story-section__sub">
-              Business owners across Nigeria and the UK — live online in minutes, not months.
+              Business owners across Nigeria and the UK, live online in minutes, not months.
             </p>
           </div>
         </Fade>
@@ -42,7 +42,7 @@ export function SocialProof() {
                 <div className="story-card__img-wrap">
                   <Image
                     src={STORY_IMAGES[t.categoryKey] ?? STORY_IMAGES.food}
-                    alt={`${t.name} — ${t.business}`}
+                    alt={`${t.name}, ${t.business}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="story-card__img"

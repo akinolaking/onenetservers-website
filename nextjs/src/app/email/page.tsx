@@ -85,21 +85,21 @@ const features = [
   {
     icon: Mail,
     title: "Your name. Your domain.",
-    description: "hello@yourbusiness.com — not @gmail or @yahoo. Professional email on your own domain builds trust from the first message.",
+    description: "hello@yourbusiness.com, not @gmail or @yahoo. Professional email on your own domain builds trust from the first message.",
     bg: "var(--blue-xl)",
     color: "var(--blue)",
   },
   {
     icon: Video,
     title: "Video calls built in",
-    description: "No Zoom link required. CrossBox includes video conferencing directly in your inbox — one less subscription, one less tab.",
+    description: "No Zoom link required. CrossBox includes video conferencing directly in your inbox: one less subscription, one less tab.",
     bg: "rgb(16 185 129 / 12%)",
     color: "var(--green)",
   },
   {
     icon: MessageSquare,
     title: "Team chat included",
-    description: "Real-time messaging, file sharing, and channels for your team — without leaving your email workspace.",
+    description: "Real-time messaging, file sharing, and channels for your team, without leaving your email workspace.",
     bg: "rgb(245 158 11 / 10%)",
     color: "var(--amber)",
   },
@@ -129,11 +129,11 @@ const features = [
 const faqs = [
   {
     q: "Can I use my own domain with OneNet Servers email?",
-    a: "Yes. You can use any domain you own — whether registered with us or elsewhere. We walk you through the DNS setup, or our team can do it for you at no extra charge.",
+    a: "Yes. You can use any domain you own, whether registered with us or elsewhere. We walk you through the DNS setup, or our team can do it for you at no extra charge.",
   },
   {
     q: "What is CrossBox?",
-    a: "CrossBox is the professional email and collaboration platform included with all OneNet Servers email plans. It includes webmail, mobile apps, video conferencing, team chat, and shared file storage — all accessible from a single login.",
+    a: "CrossBox is the professional email and collaboration platform included with all OneNet Servers email plans. It includes webmail, mobile apps, video conferencing, team chat, and shared file storage, all accessible from a single login.",
   },
   {
     q: "Is the flat pricing really all-inclusive?",
@@ -141,7 +141,7 @@ const faqs = [
   },
   {
     q: "Can I migrate email from Gmail or another host?",
-    a: "Yes — free migration for all plans. Our team handles the IMAP migration, folder structure, and DNS cutover so your email history arrives intact before any downtime.",
+    a: "Yes, free migration for all plans. Our team handles the IMAP migration, folder structure, and DNS cutover so your email history arrives intact before any downtime.",
   },
   {
     q: "Do you offer email-only plans (without hosting)?",
@@ -176,7 +176,7 @@ export default function EmailPage() {
             <h1>Business email that earns trust.</h1>
             <p className="hero-sub">
               Your name on your domain. 5–100 addresses on one plan. Video calls, team chat, and
-              shared storage — all included. Starting from {showPrice(plans[0].monthly)}/mo.
+              shared storage, all included. Starting from {showPrice(plans[0].monthly)}/mo.
             </p>
             <div className="hero-actions">
               <a href="/cart.php?a=add&pid=262&billingcycle=annually" className="wh-btn-primary">
