@@ -1157,12 +1157,12 @@ select {
 }
 
 .homepage-section {
-  padding: 96px 24px;
+  padding: 96px 0;
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .homepage-section {
-    padding: 64px 24px;
+    padding: 64px 0;
   }
 }
 
@@ -1563,7 +1563,7 @@ h1 {
 }
 
 .footer-brand {
-  max-width: 320px;
+  max-width: 380px;
 }
 
 .footer-logo {
@@ -1785,14 +1785,32 @@ h1 {
 @media (max-width: 959px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 24px 40px;
   }
 
   .footer-brand {
     grid-column: 1 / -1;
+    max-width: 480px;
   }
 
   .footer-column--contact {
     grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 479px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-brand {
+    max-width: 100%;
+  }
+
+  .footer-band,
+  .footer-payments {
+    gap: 8px;
   }
 }
 
@@ -6083,8 +6101,10 @@ p.lead {
    ═══════════════════════════════════════════════════════════ */
 
 .about-hero {
-  padding: 80px 0 64px;
-  background: linear-gradient(145deg, #0f0f1a 60%, #1a1a3e);
+  padding: calc(var(--nav-h) + 64px) 0 88px;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgb(67 67 240 / 22%), transparent),
+    linear-gradient(160deg, #0a0912 0%, #100e22 55%, #0f0f1a 100%);
 }
 
 .about-hero__inner {
@@ -6093,16 +6113,24 @@ p.lead {
   margin: 0 auto;
 }
 
-.about-hero h1 {
-  color: #fff;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  margin: 0 0 16px;
+.about-hero .eyebrow {
+  margin-bottom: 20px;
 }
 
-.about-hero .hero-sub { color: rgba(255 255 255 / 0.72); }
+.about-hero h1 {
+  color: #fff;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  margin: 0 0 24px;
+}
+
+.about-hero .hero-sub {
+  color: rgb(255 255 255 / 72%);
+  font-weight: 400;
+  max-width: 58ch;
+}
 
 .about-stats {
   display: grid;
