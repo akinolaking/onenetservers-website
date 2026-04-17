@@ -6124,12 +6124,15 @@ p.lead {
   line-height: 1.12;
   letter-spacing: -0.04em;
   margin: 0 0 24px;
+  text-align: center;
 }
 
 .about-hero .hero-sub {
   color: rgb(255 255 255 / 72%);
   font-weight: 400;
   max-width: 58ch;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .about-stats {
@@ -7033,13 +7036,13 @@ p.lead {
 /* ── About hero ── */
 @media (max-width: 768px) {
   .about-hero {
-    padding: 64px 0 52px;
+    padding: calc(var(--nav-h) + 40px) 0 56px;
   }
 }
 
 @media (max-width: 480px) {
   .about-hero {
-    padding: 52px 0 40px;
+    padding: calc(var(--nav-h) + 28px) 0 44px;
   }
 
   .about-hero h1 {
