@@ -8033,34 +8033,6 @@ p.lead {
    LEGAL PAGES — sidebar layout + structured content
    ══════════════════════════════════════════════════════════ */
 
-/* Force nav into solid state on pages without a hero (legal, etc.) */
-body:has(.legal-shell) .site-nav {
-  background: rgb(255 255 255 / 96%);
-  border-color: rgb(228 228 240 / 72%);
-  backdrop-filter: blur(22px) saturate(1.12);
-  box-shadow: var(--sh-sm);
-}
-body:has(.legal-shell) .site-nav .nav-trigger { color: var(--ink-2); }
-body:has(.legal-shell) .site-nav .nav-trigger:hover,
-body:has(.legal-shell) .site-nav .nav-trigger[data-open],
-body:has(.legal-shell) .site-nav .nav-trigger[data-popup-open] {
-  background: rgb(245 245 255 / 96%);
-  color: var(--ink);
-}
-body:has(.legal-shell) .site-nav .nav-secondary-link {
-  border-color: var(--line);
-  background: rgb(255 255 255 / 94%);
-  color: var(--ink-2);
-}
-body:has(.legal-shell) .site-nav .currency-trigger {
-  border-color: var(--line);
-  background: rgb(255 255 255 / 94%);
-  color: var(--ink-2);
-  box-shadow: 0 1px 2px rgb(15 15 26 / 4%);
-}
-body:has(.legal-shell) .site-nav .nav-brand-name { color: var(--ink); }
-body:has(.legal-shell) .site-nav .nav-brand img { filter: none; }
-body:has(.legal-shell) .site-nav .nav-toggle svg { color: var(--ink-2); }
 
 /* ── Shell: sidebar + content ── */
 .legal-shell {

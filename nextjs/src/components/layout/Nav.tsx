@@ -20,6 +20,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import {
   Globe,
@@ -259,12 +260,17 @@ function CurrencyPicker({
 }
 
 /* ─── Main Nav ───────────────────────────────────────────────────── */
+/* Pages without a hero — nav should always appear solid */
+const SOLID_NAV_PATHS = ["/legal", "/about", "/contact", "/community", "/digital-identity"];
+
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const { currency: activeCurrency, setCurrency: setActiveCurrency } = useCurrency();
   const [isScrolled, setIsScrolled] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+  const pathname = usePathname();
+  const forceSolid = SOLID_NAV_PATHS.some((p) => pathname?.startsWith(p));
 
   useEffect(() => { setHasMounted(true); }, []);
 
@@ -281,7 +287,7 @@ export function Nav() {
 
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
 
-      <header className={cn("site-nav", isScrolled && "site-nav--scrolled")}>
+      <header className={cn("site-nav", (isScrolled || forceSolid) && "site-nav--scrolled")}>
         <div className="shell nav-shell">
 
           {/* ── Brand ── */}
