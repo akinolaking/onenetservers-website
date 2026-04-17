@@ -8493,7 +8493,7 @@ details[open] .legal-accordion__chevron {
    ══════════════════════════════════════════════════════════ */
 
 .feat-section {
-  background: var(--bg-2);
+  background: #fff;
 }
 
 .feat-grid {
