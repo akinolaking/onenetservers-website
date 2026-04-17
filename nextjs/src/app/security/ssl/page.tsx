@@ -207,8 +207,10 @@ export default function SecuritySslPage() {
           </Fade>
 
           <div className="billing-toggle">
-            <button className={billing === "monthly" ? "is-active" : ""} onClick={() => setBilling("monthly")}>Monthly</button>
-            <button className={billing === "annual" ? "is-active" : ""} onClick={() => setBilling("annual")}>Annual</button>
+            <div className="billing-tabs">
+              <button className={billing === "monthly" ? "is-active" : ""} onClick={() => setBilling("monthly")}>Monthly</button>
+              <button className={billing === "annual" ? "is-active" : ""} onClick={() => setBilling("annual")}>Annual</button>
+            </div>
             <span className="wh-savings-badge">Save up to 35% · +2 months free</span>
           </div>
 
