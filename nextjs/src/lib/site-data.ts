@@ -64,9 +64,7 @@ export const navGroups: NavGroup[] = [
       { label: "Contact Us", href: "/contact", description: "Sales and support" },
       { label: "Future of Productivity", href: "/community", description: "Community and editorial" },
       { label: "Digital Identity Initiative", href: "/digital-identity", description: "Identity programme" },
-      { label: "Terms of Service", href: "/legal/terms", description: "Platform terms" },
-      { label: "Privacy Policy", href: "/legal/privacy", description: "How we handle data" },
-      { label: "Hosting Agreement", href: "/legal/agreement", description: "Service agreement" },
+      { label: "Legal", href: "/legal/terms", description: "Terms, privacy, and agreements" },
     ],
   },
 ];

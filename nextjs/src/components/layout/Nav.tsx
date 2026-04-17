@@ -37,6 +37,7 @@ import {
   Building2,
   Cpu,
   Users,
+  Scale,
 } from "lucide-react";
 
 import {
@@ -87,6 +88,7 @@ const groupIcons: Record<string, React.ReactNode> = {
   "Contact Us":            <Phone className="h-4 w-4" />,
   "Future of Productivity":<Users className="h-4 w-4" />,
   "Digital Identity Initiative": <Globe className="h-4 w-4" />,
+  "Legal":                       <Scale className="h-4 w-4" />,
 };
 
 /* ─── flag SVGs for currency ─────────────────────────────────────── */
