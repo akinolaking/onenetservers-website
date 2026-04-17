@@ -116,7 +116,14 @@ export function DomainSearch() {
     const newQuery = base.length > 0 ? `${base}${ext}` : ext;
     setQuery(newQuery);
     setState({ kind: "idle" });
-    inputRef.current?.focus();
+    /* Place cursor before the extension so the user can type their base name */
+    const cursorPos = newQuery.length - ext.length;
+    requestAnimationFrame(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+        inputRef.current.setSelectionRange(cursorPos, cursorPos);
+      }
+    });
     if (base.length > 2) {
       doSearch(base);
     }

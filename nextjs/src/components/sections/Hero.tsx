@@ -21,7 +21,7 @@ export function Hero() {
       <div className="hero-inner shell">
         <h1 className="hero-h1">
           Your business deserves<br />
-          to be <span className="hero-h1__accent">online.</span>
+          to be online.
         </h1>
 
         <p className="hero-sub">

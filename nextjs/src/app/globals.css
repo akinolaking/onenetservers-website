@@ -2336,7 +2336,7 @@ h1 {
 
 .hero-inner {
   display: grid;
-  gap: 32px;
+  gap: 22px;
   max-width: 780px;
   margin: 0 auto;
   text-align: center;
@@ -2353,9 +2353,6 @@ h1 {
   font-weight: 500;
 }
 
-.hero-h1__accent {
-  color: #ffd66e;
-}
 
 .hero-sub {
   max-width: 56ch;
@@ -2363,7 +2360,7 @@ h1 {
   color: rgb(255 255 255 / 82%);
   font-family: var(--font-copy), serif;
   font-size: clamp(1rem, 2.2vw, 1.15rem);
-  line-height: 1.75;
+  line-height: 1.5;
   font-weight: 400;
 }
 
@@ -6562,8 +6559,8 @@ p.lead {
 
   .hero-sub {
     font-size: 15px;
-    line-height: 1.65;
-    margin-top: 14px;
+    line-height: 1.45;
+    margin-top: 8px;
   }
 
   .hero-search-wrap {
