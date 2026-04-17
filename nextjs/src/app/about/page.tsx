@@ -48,15 +48,17 @@ export default function AboutPage() {
       {/* ── Hero ── */}
       <section className="about-hero">
         <div className="shell">
-          <Fade inView inViewOnce className="about-hero__inner">
-            <div className="eyebrow eyebrow--centered">About OneNet Servers</div>
-            <h1>Global presence.<br />Nigerian roots.<br />London registered.</h1>
-            <p className="hero-sub">
-              We are ConqolX Technologies Limited — a hosting and domain registrar incorporated in
-              England & Wales and Nigeria, NiRA accredited, Tech Nation Endorsed, and resident in
-              Africa&apos;s first Digital Special Economic Zone.
-            </p>
-          </Fade>
+          <div className="about-hero__inner">
+            <Fade inView inViewOnce>
+              <div className="eyebrow eyebrow--centered">About OneNet Servers</div>
+              <h1>Global presence.<br />Nigerian roots.<br />London registered.</h1>
+              <p className="hero-sub">
+                We are ConqolX Technologies Limited — a hosting and domain registrar incorporated in
+                England & Wales and Nigeria, NiRA accredited, Tech Nation Endorsed, and resident in
+                Africa&apos;s first Digital Special Economic Zone.
+              </p>
+            </Fade>
+          </div>
         </div>
       </section>
 
