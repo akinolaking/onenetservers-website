@@ -1,65 +1,227 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardContent from "@mui/material/CardContent";
-import Chip from "@mui/material/Chip";
-import Typography from "@mui/material/Typography";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 
-const CARDS = [
+/* ── Feature bullets ─────────────────────────────────────────────── */
+function FeatureDot() {
+  return (
+    <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true" style={{ flexShrink: 0, marginTop: 5 }}>
+      <rect width="8" height="8" rx="2" fill="currentColor" />
+    </svg>
+  );
+}
+
+/* ── Business Email — CSS email client mockup ────────────────────── */
+function EmailVisual() {
+  return (
+    <div className="feat-visual feat-visual--email">
+      {/* Floating shield badge */}
+      <div className="feat-email-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <polyline points="9 12 11 14 15 10"/>
+        </svg>
+        <span>name@yourcompany.com</span>
+      </div>
+      {/* Email client shell */}
+      <div className="feat-email-client">
+        <div className="feat-email-sidebar">
+          <div className="feat-email-sidebar__head">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            Mail
+          </div>
+          <div className="feat-email-newbtn">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New message
+          </div>
+          <div className="feat-email-nav">
+            <div className="feat-email-navitem feat-email-navitem--active">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
+              Inbox
+            </div>
+            <div className="feat-email-navitem">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Starred
+            </div>
+            <div className="feat-email-navitem">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Updates
+            </div>
+          </div>
+        </div>
+        <div className="feat-email-main">
+          <div className="feat-email-main__head">Inbox</div>
+          <div className="feat-email-tabs">
+            <span className="feat-email-tab feat-email-tab--active">All mail</span>
+            <span className="feat-email-tab">Unread</span>
+            <span className="feat-email-tab">Read</span>
+            <span className="feat-email-tab">Promotions</span>
+          </div>
+          <div className="feat-email-rows">
+            {[80, 60, 90].map((w, i) => (
+              <div key={i} className="feat-email-row">
+                <div className="feat-email-row__bar" style={{ width: `${w}%` }} />
+                <div className="feat-email-row__bar feat-email-row__bar--sm" style={{ width: `${w - 25}%` }} />
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Floating mail pill */}
+        <div className="feat-email-fab">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Web Hosting — performance dashboard mockup ──────────────────── */
+function HostingVisual() {
+  return (
+    <div className="feat-visual feat-visual--hosting">
+      <div className="feat-hosting-panel">
+        {/* Header row */}
+        <div className="feat-hosting-header">
+          <div className="feat-hosting-dots">
+            <span style={{ background: "#ef4444" }} />
+            <span style={{ background: "#f59e0b" }} />
+            <span style={{ background: "#10b981" }} />
+          </div>
+          <span className="feat-hosting-url">onenetservers.net</span>
+        </div>
+        {/* Stats row */}
+        <div className="feat-hosting-stats">
+          <div className="feat-hosting-stat">
+            <div className="feat-hosting-stat__val">99.9<span>%</span></div>
+            <div className="feat-hosting-stat__label">Uptime SLA</div>
+          </div>
+          <div className="feat-hosting-divider" />
+          <div className="feat-hosting-stat">
+            <div className="feat-hosting-stat__val">780<span>ms</span></div>
+            <div className="feat-hosting-stat__label">Avg load time</div>
+          </div>
+          <div className="feat-hosting-divider" />
+          <div className="feat-hosting-stat">
+            <div className="feat-hosting-stat__val">A<span>+</span></div>
+            <div className="feat-hosting-stat__label">SSL grade</div>
+          </div>
+        </div>
+        {/* Sparkline bars */}
+        <div className="feat-hosting-bars">
+          {[55, 70, 60, 85, 75, 90, 80, 95, 88, 92, 85, 98].map((h, i) => (
+            <div key={i} className="feat-hosting-bar" style={{ height: `${h}%` }} />
+          ))}
+        </div>
+        <div className="feat-hosting-bar-label">Response time — last 30 days</div>
+        {/* Badge row */}
+        <div className="feat-hosting-badges">
+          <span className="feat-hosting-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Free SSL
+          </span>
+          <span className="feat-hosting-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            Free domain
+          </span>
+          <span className="feat-hosting-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            LiteSpeed
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Cloud VPS — terminal mockup ─────────────────────────────────── */
+function VPSVisual() {
+  const lines = [
+    { prompt: true,  text: "ssh root@shuri.onenetservers.net" },
+    { prompt: false, text: "Welcome to Ubuntu 24.04 LTS" },
+    { prompt: false, text: "" },
+    { prompt: true,  text: "docker ps" },
+    { prompt: false, text: "CONTAINER ID   IMAGE       STATUS" },
+    { prompt: false, text: "a1b2c3d4e5f6   n8n         Up 3 days" },
+    { prompt: false, text: "9f8e7d6c5b4a   nextcloud   Up 3 days" },
+    { prompt: true,  text: "htop" },
+    { prompt: false, text: "CPU  ██████░░░░  62%   RAM  ████░░░░  3.2/8 GB" },
+  ];
+  return (
+    <div className="feat-visual feat-visual--vps">
+      <div className="feat-terminal">
+        <div className="feat-terminal__bar">
+          <span style={{ background: "#ef4444" }} />
+          <span style={{ background: "#f59e0b" }} />
+          <span style={{ background: "#10b981" }} />
+          <span className="feat-terminal__title">root@shuri — ssh</span>
+        </div>
+        <div className="feat-terminal__body">
+          {lines.map((l, i) => (
+            <div key={i} className="feat-terminal__line">
+              {l.prompt && <span className="feat-terminal__prompt">$&nbsp;</span>}
+              <span className={l.prompt ? "feat-terminal__cmd" : "feat-terminal__out"}>
+                {l.text}
+              </span>
+            </div>
+          ))}
+          <div className="feat-terminal__line">
+            <span className="feat-terminal__prompt">$&nbsp;</span>
+            <span className="feat-terminal__cursor" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Card data ───────────────────────────────────────────────────── */
+const FEAT_CARDS = [
   {
-    key:         "hosting",
-    href:        "/hosting/web",
-    label:       "Web Hosting",
-    headline:    "Your site. Fast, secure, live.",
-    description: "LiteSpeed + CloudLinux isolation. Free SSL, daily backups, and a free domain on every plan.",
-    image:       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
-    imageAlt:    "Data centre servers with blue lighting",
-    objectPos:   "center",
-    chipColor:   "#4343F0",
-    chipBg:      "#EEEEFF",
+    key:      "email",
+    href:     "/email",
+    label:    "Business Email",
+    headline: "Inbox that means business.",
+    features: [
+      "100+ business email addresses",
+      "No per-user fees, ever",
+      "Webmail and mobile app",
+      "Video calls built in",
+      "Anti-spam and virus protection",
+    ],
+    visual: <EmailVisual />,
   },
   {
-    key:         "domain",
-    href:        "/domains",
-    label:       "Domain Registration",
-    headline:    "Own the name that matters.",
-    description: "NiRA-accredited .ng registrar. Search 500+ TLDs with instant WHOIS privacy included.",
-    image:       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
-    imageAlt:    "Globe and digital network representing internet domains",
-    objectPos:   "center",
-    chipColor:   "#059669",
-    chipBg:      "#ECFDF5",
+    key:      "hosting",
+    href:     "/hosting/web",
+    label:    "Web Hosting",
+    headline: "Fast, secure, and always on.",
+    features: [
+      "LiteSpeed web server",
+      "Free SSL on every plan",
+      "Daily backups, 14-day retention",
+      "Free domain included",
+      "99.9% uptime SLA",
+    ],
+    visual: <HostingVisual />,
   },
   {
-    key:         "email",
-    href:        "/email",
-    label:       "Business Email",
-    headline:    "Inbox that means business.",
-    description: "Up to 100 addresses, no per-user fees. Webmail, mobile app, and video calls built in.",
-    image:       "https://images.unsplash.com/photo-1596526131083-e8c633964948?auto=format&fit=crop&w=800&q=80",
-    imageAlt:    "Professional working on laptop with business email open",
-    objectPos:   "center top",
-    chipColor:   "#7C3AED",
-    chipBg:      "#F5F3FF",
-  },
-  {
-    key:         "vps",
-    href:        "/hosting/vps",
-    label:       "Cloud VPS",
-    headline:    "Root access. Zero limits.",
-    description: "8 GB RAM · 4 vCPU · unlimited bandwidth. Docker, n8n, and Nextcloud, one click away.",
-    image:       "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=800&q=80",
-    imageAlt:    "Terminal screen showing server commands and code",
-    objectPos:   "center top",
-    chipColor:   "#0369A1",
-    chipBg:      "#E0F2FE",
+    key:      "vps",
+    href:     "/hosting/vps",
+    label:    "Cloud VPS",
+    headline: "Root access. Zero limits.",
+    features: [
+      "Full root access via SSH",
+      "Docker, n8n, Nextcloud ready",
+      "9 global data centre regions",
+      "NVMe SSD storage",
+      "Scalable RAM and vCPU",
+    ],
+    visual: <VPSVisual />,
   },
 ] as const;
 
+/* ── Section ─────────────────────────────────────────────────────── */
 export function PricingBestsellers() {
   return (
     <section className="feat-section homepage-section" id="products" aria-label="Products">
@@ -75,122 +237,26 @@ export function PricingBestsellers() {
         </Fade>
 
         <div className="feat-grid">
-          {CARDS.map((card, i) => (
-            <Fade key={card.key} inView inViewOnce delay={i * 80}>
-              <Card
-                elevation={0}
-                sx={{
-                  borderRadius: "16px",
-                  border: "1px solid var(--line)",
-                  height: "100%",
-                  transition: "box-shadow 0.22s ease, transform 0.22s ease",
-                  "&:hover": {
-                    boxShadow: "0 8px 32px rgba(0,0,0,0.10)",
-                    transform: "translateY(-3px)",
-                  },
-                  bgcolor: "#fff",
-                  overflow: "hidden",
-                }}
-              >
-                <CardActionArea
-                  component={Link}
-                  href={card.href}
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "stretch",
-                    "& .MuiCardActionArea-focusHighlight": { borderRadius: "16px" },
-                  }}
-                >
-                  {/* Image */}
-                  <div className="feat-card__img-wrap">
-                    <Image
-                      src={card.image}
-                      alt={card.imageAlt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 25vw"
-                      className="feat-card__img"
-                      style={{ objectPosition: card.objectPos }}
-                    />
-                    {/* Category chip over image */}
-                    <Chip
-                      label={card.label}
-                      size="small"
-                      sx={{
-                        position: "absolute",
-                        top: 14,
-                        left: 14,
-                        zIndex: 1,
-                        bgcolor: "rgba(255,255,255,0.92)",
-                        color: card.chipColor,
-                        fontWeight: 500,
-                        fontSize: "11px",
-                        height: "24px",
-                        backdropFilter: "blur(6px)",
-                        "& .MuiChip-label": { px: "10px" },
-                        border: `1px solid ${card.chipColor}22`,
-                      }}
-                    />
-                  </div>
+          {FEAT_CARDS.map((card, i) => (
+            <Fade key={card.key} inView inViewOnce delay={i * 100}>
+              <Link href={card.href} className="feat-spotlight-card">
+                {/* Label badge */}
+                <div className="feat-spotlight-badge">{card.label}</div>
 
-                  {/* Content */}
-                  <CardContent
-                    sx={{
-                      p: "20px 20px 22px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "6px",
-                      flex: 1,
-                    }}
-                  >
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontSize: "15px",
-                        fontWeight: 600,
-                        color: "var(--ink)",
-                        lineHeight: 1.3,
-                        fontFamily: "var(--font-ui), system-ui, sans-serif",
-                      }}
-                    >
-                      {card.headline}
-                    </Typography>
+                {/* Text block */}
+                <h3 className="feat-spotlight-headline">{card.headline}</h3>
+                <ul className="feat-spotlight-features">
+                  {card.features.map((f) => (
+                    <li key={f}>
+                      <FeatureDot />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
 
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontSize: "13px",
-                        color: "var(--body)",
-                        lineHeight: 1.65,
-                        flex: 1,
-                        fontFamily: "var(--font-ui), system-ui, sans-serif",
-                      }}
-                    >
-                      {card.description}
-                    </Typography>
-
-                    <Typography
-                      component="span"
-                      sx={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "4px",
-                        fontSize: "12.5px",
-                        fontWeight: 500,
-                        color: card.chipColor,
-                        mt: "6px",
-                        fontFamily: "var(--font-ui), system-ui, sans-serif",
-                      }}
-                    >
-                      Explore
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-                      </svg>
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+                {/* Visual */}
+                {card.visual}
+              </Link>
             </Fade>
           ))}
         </div>
