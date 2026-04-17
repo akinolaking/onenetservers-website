@@ -84,7 +84,7 @@ export function Differentiators() {
       <div className="shell">
         <SectionHeader
           eyebrow="Why OneNet Servers"
-          title="Seven reasons builders choose us."
+          title="Reasons founders choose us."
           lead="Every claim is specific. None of them are vague."
           centered
         />

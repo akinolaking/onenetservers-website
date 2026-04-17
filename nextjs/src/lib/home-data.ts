@@ -309,13 +309,6 @@ export const differentiators = [
     tag: "UK Home Office recognised",
   },
   {
-    icon: "support",
-    size: "normal",
-    headline: "Human support under 2 hours.",
-    body: "Real engineers from Lagos and London. Not bots. Not offshore scripts. People who understand your business context.",
-    tag: "<2hr response",
-  },
-  {
     icon: "globe",
     size: "normal",
     headline: "9 regions. 99.9% uptime SLA.",
