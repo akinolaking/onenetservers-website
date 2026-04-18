@@ -3,6 +3,7 @@ import { Inter, Lato } from "next/font/google";
 
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
+import { ZohoChat } from "@/components/layout/ZohoChat";
 import { CurrencyProvider } from "@/lib/currency-context";
 
 import "./globals.css";
@@ -43,6 +44,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </div>
+          <ZohoChat />
         </CurrencyProvider>
       </body>
     </html>
