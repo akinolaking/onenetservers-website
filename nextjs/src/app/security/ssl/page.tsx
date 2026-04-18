@@ -7,7 +7,6 @@ import { FeaturedPricingWrapper } from "@/components/shared/FeaturedPricingWrapp
 import { useCurrency } from "@/lib/currency-context";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
-import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
 /* ── Pricing data ────────────────────────────────────────────── */
@@ -18,7 +17,7 @@ const plans = [
     audience: "Personal sites and blogs",
     monthly: { usd: 1.99,  ngn: 1499,  gbp: 1.49  },
     annual:  { usd: 13.02, ngn: 10013, gbp: 9.31  },
-    description: "Fastest issuance. Validates domain ownership only. The padlock your visitors expect.",
+    renewal: "Renews annually at the same rate. Cancel anytime.",
     features: [
       "256-bit encryption",
       "Free automated installation",
@@ -36,7 +35,7 @@ const plans = [
     audience: "Sites with multiple domains",
     monthly: { usd: 5.99,  ngn: 4499,  gbp: 4.29  },
     annual:  { usd: 47.69, ngn: 36688, gbp: 34.12 },
-    description: "One certificate covers multiple domains. Ideal for businesses running several web properties.",
+    renewal: "Renews annually at the same rate. Cancel anytime.",
     features: [
       "256-bit encryption",
       "Up to 3 domains included",
@@ -54,7 +53,7 @@ const plans = [
     audience: "E-commerce and enterprise",
     monthly: { usd: 38.99,  ngn: 29999, gbp: 27.99 },
     annual:  { usd: 333.12, ngn: 256246, gbp: 238.31 },
-    description: "The highest level of trust. Full company vetting with Subject Alternative Names for enterprise deployments.",
+    renewal: "Renews annually at the same rate. Cancel anytime.",
     features: [
       "256-bit encryption",
       "Full company vetting (EV)",
@@ -162,203 +161,184 @@ export default function SecuritySslPage() {
         <link rel="canonical" href="https://onenetservers.net/security/ssl" />
       </head>
 
-      {/* ── Hero ── */}
-      <section className="homepage-section wh-hero" aria-label="SSL certificates">
-        <div className="shell">
-          <Fade inView inViewOnce>
-            <div className="hero-trust-strip">
-              <span>256-bit encryption</span>
-              <span>Auto-installation</span>
-              <span>99.9% browser compatibility</span>
-              <span>Trusted CAs</span>
-              <span>30-Day MBG</span>
-            </div>
-          </Fade>
-
-          <Fade inView inViewOnce delay={0.05}>
-            <div className="section-header" style={{ maxWidth: 640, margin: "0 auto 40px", textAlign: "center" }}>
-              <p className="section-eyebrow">SSL Certificates</p>
-              <h1 style={{ margin: 0 }}>The padlock your visitors trust.</h1>
-              <p className="section-lead">
-                From a basic DV certificate to full Extended Validation, we cover every
-                site, every level of trust. Automated installation included on all OneNet Servers hosting plans.
+      <main className="page-shell">
+        {/* ── Hero ── */}
+        <section className="wh-hero">
+          <div className="shell">
+            <Fade inView inViewOnce className="wh-hero__inner">
+              <div className="wh-trust-strip">
+                <Slides inView inViewOnce direction="up" holdDelay={60}>
+                  {["256-bit Encryption", "Auto-installation", "Browser Compatible", "Trusted CAs", "30-Day MBG"].map((item) => (
+                    <span key={item} className="wh-trust-badge">{item}</span>
+                  ))}
+                </Slides>
+              </div>
+              <h1>The padlock your visitors trust.</h1>
+              <p className="hero-sub">
+                From DV to Extended Validation, every level of trust covered. Automated
+                installation included on all OneNet Servers hosting plans. From {showPrice(plans[0].annual)}/yr.
               </p>
-            </div>
-          </Fade>
+              <div className="hero-actions">
+                <a href="/cart.php?a=add&pid=19&billingcycle=annually" className="wh-btn-primary">
+                  Get started <ArrowRight size={16} />
+                </a>
+              </div>
+              <div className="hero-reassurance">
+                <span>No credit card required</span>
+                <span>Cancel anytime</span>
+                <span>30-day money-back</span>
+              </div>
+            </Fade>
+          </div>
+        </section>
 
-          <Fade inView inViewOnce delay={0.1}>
-            <div className="hero-reassurance" style={{ justifyContent: "center" }}>
-              <span>No credit card required to start</span>
-              <span>Cancel anytime</span>
-              <span>30-day money-back guarantee</span>
-            </div>
-          </Fade>
-        </div>
-      </section>
-
-      {/* ── Pricing ── */}
-      <section className="homepage-section" id="plans">
-        <div className="shell">
-          <Fade inView inViewOnce>
+        {/* ── Pricing ── */}
+        <section className="homepage-section" id="plans">
+          <div className="shell">
             <SectionHeader
               eyebrow="SSL plans"
               title="Every level of validation. One trusted registrar."
               lead="All plans include 256-bit encryption, auto-renewal, and free reissues. Choose your validation level."
+              centered
             />
-          </Fade>
 
-          <div className="billing-toggle">
-            <div className="billing-tabs">
-              <button className={billing === "monthly" ? "is-active" : ""} onClick={() => setBilling("monthly")}>Monthly</button>
-              <button className={billing === "annual" ? "is-active" : ""} onClick={() => setBilling("annual")}>Annual</button>
+            <div className="billing-toggle">
+              <div className="billing-tabs">
+                <button className={billing === "monthly" ? "is-active" : ""} onClick={() => setBilling("monthly")}>Monthly</button>
+                <button className={billing === "annual" ? "is-active" : ""} onClick={() => setBilling("annual")}>Annual</button>
+              </div>
+              <span className="wh-savings-badge">Save up to 35% · +2 months free</span>
             </div>
-            <span className="wh-savings-badge">Save up to 35% · +2 months free</span>
-          </div>
 
-          <div className="plans-grid plans-grid--3" style={{ marginTop: 48 }}>
-            <Slides inView inViewOnce direction="up" holdDelay={70}>
-              {plans.map((plan) =>
-                plan.featured ? (
-                  <FeaturedPricingWrapper key={plan.key} badgeAlign="center">
-                    <article className="plan-card plan-card--featured">
-                      <div className="plan-card__header">
-                        <p className="plan-card__audience">{plan.audience}</p>
-                        <h3>{plan.name}</h3>
-                        <p className="plan-card__desc">{plan.description}</p>
-                      </div>
-                      <div className="plan-card__price">
-                        <span className="plan-card__amount">{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</span>
-                        <span className="plan-card__period">{period}</span>
-                      </div>
-                      <ul className="plan-card__features">
-                        {plan.features.map((f) => (
-                          <li key={f}>
-                            <Check size={14} aria-hidden="true" />
-                            <span>{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <Shine>
-                        <a
-                          href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`}
-                          className="btn btn-primary btn-full"
-                        >
+            <div className="pricing-grid wh-pricing-grid wh-pricing-grid--3">
+              <Slides inView inViewOnce direction="up" holdDelay={80}>
+                {plans.map((plan) =>
+                  plan.featured ? (
+                    <FeaturedPricingWrapper key={plan.key}>
+                      <div className="pricing-card pricing-card--featured pricing-card--mui-inner">
+                        <div>
+                          <h3>{plan.name}</h3>
+                          <p>{plan.audience}</p>
+                        </div>
+                        <div className="pricing-card__price">
+                          <strong>{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</strong>
+                          <span>{period}</span>
+                        </div>
+                        <p className="pricing-card__renewal">{plan.renewal}</p>
+                        <ul className="wh-features-list">
+                          {plan.features.map((f) => (
+                            <li key={f}><Check size={14} className="wh-check-icon" />{f}</li>
+                          ))}
+                          <li><Check size={14} className="wh-check-icon" /><span className="wh-mbg-badge">30-day MBG</span></li>
+                        </ul>
+                        <a href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`} className="wh-card-cta wh-card-cta--featured">
                           Get {plan.name}
                         </a>
-                      </Shine>
-                      <p className="plan-card__renewal">Renews at same rate. Cancel anytime.</p>
-                    </article>
-                  </FeaturedPricingWrapper>
-                ) : (
-                  <article key={plan.key} className="plan-card plan-card--standalone">
-                    <div className="plan-card__header">
-                      <p className="plan-card__audience">{plan.audience}</p>
-                      <h3>{plan.name}</h3>
-                      <p className="plan-card__desc">{plan.description}</p>
-                    </div>
-                    <div className="plan-card__price">
-                      <span className="plan-card__amount">{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</span>
-                      <span className="plan-card__period">{period}</span>
-                    </div>
-                    <ul className="plan-card__features">
-                      {plan.features.map((f) => (
-                        <li key={f}>
-                          <Check size={14} aria-hidden="true" />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Shine>
-                      <a
-                        href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`}
-                        className="btn btn-ghost btn-full"
-                      >
+                      </div>
+                    </FeaturedPricingWrapper>
+                  ) : (
+                    <div key={plan.key} className="pricing-card">
+                      <div>
+                        <h3>{plan.name}</h3>
+                        <p>{plan.audience}</p>
+                      </div>
+                      <div className="pricing-card__price">
+                        <strong>{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</strong>
+                        <span>{period}</span>
+                      </div>
+                      <p className="pricing-card__renewal">{plan.renewal}</p>
+                      <ul className="wh-features-list">
+                        {plan.features.map((f) => (
+                          <li key={f}><Check size={14} className="wh-check-icon" />{f}</li>
+                        ))}
+                        <li><Check size={14} className="wh-check-icon" /><span className="wh-mbg-badge">30-day MBG</span></li>
+                      </ul>
+                      <a href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`} className="wh-card-cta">
                         Get {plan.name}
                       </a>
-                    </Shine>
-                    <p className="plan-card__renewal">Renews at same rate. Cancel anytime.</p>
-                  </article>
-                )
-              )}
-            </Slides>
+                    </div>
+                  )
+                )}
+              </Slides>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── Features ── */}
-      <section className="homepage-section homepage-section--tinted" id="features">
-        <div className="shell">
-          <SectionHeader
-            eyebrow="What's included"
-            title="Enterprise-grade security. Starter-friendly price."
-            centered
-          />
-          <div className="wh-features-grid">
-            <Slides inView inViewOnce direction="up" holdDelay={70}>
-              {features.map((f) => {
-                const Icon = f.icon;
-                return (
-                  <Tilt key={f.title}>
-                    <TiltContent>
-                      <div className="wh-feature-card">
-                        <div className="wh-feature-icon" style={{ background: f.bg, color: f.color }}>
-                          <Icon size={20} />
+        {/* ── Features ── */}
+        <section className="homepage-section homepage-section--tinted" id="features">
+          <div className="shell">
+            <SectionHeader
+              eyebrow="What's included"
+              title="Enterprise-grade security. Starter-friendly price."
+              centered
+            />
+            <div className="wh-features-grid">
+              <Slides inView inViewOnce direction="up" holdDelay={70}>
+                {features.map((f) => {
+                  const Icon = f.icon;
+                  return (
+                    <Tilt key={f.title}>
+                      <TiltContent>
+                        <div className="wh-feature-card">
+                          <div className="wh-feature-icon" style={{ background: f.bg, color: f.color }}>
+                            <Icon size={20} />
+                          </div>
+                          <h3>{f.title}</h3>
+                          <p>{f.description}</p>
                         </div>
-                        <h3>{f.title}</h3>
-                        <p>{f.description}</p>
-                      </div>
-                    </TiltContent>
-                  </Tilt>
-                );
-              })}
-            </Slides>
+                      </TiltContent>
+                    </Tilt>
+                  );
+                })}
+              </Slides>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── FAQ ── */}
-      <section className="homepage-section homepage-section--tinted" id="faq">
-        <div className="shell">
-          <SectionHeader eyebrow="FAQs" title="SSL questions answered." centered />
-          <Fade inView inViewOnce>
-            <div className="wh-faq-list">
-              {faqs.map((faq, i) => (
-                <div key={i} className={`wh-faq-item${openFaq === i ? " wh-faq-item--open" : ""}`}>
-                  <button
-                    className="wh-faq-trigger"
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    aria-expanded={openFaq === i}
-                  >
-                    {faq.q}
-                    <span className="wh-faq-chevron" aria-hidden="true">{openFaq === i ? "−" : "+"}</span>
-                  </button>
-                  {openFaq === i && <div className="wh-faq-answer"><p>{faq.a}</p></div>}
-                </div>
-              ))}
-            </div>
-          </Fade>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="homepage-section wh-cta-section">
-        <div className="shell">
-          <Fade inView inViewOnce>
-            <div className="wh-cta-box">
-              <h2>The padlock your visitors trust.</h2>
-              <p>Automated installation. 256-bit encryption. 30-day money-back guarantee.</p>
-              <a href="/cart.php?a=add&pid=19&billingcycle=annually" className="wh-btn-primary">
-                Get started free <ArrowRight size={16} />
-              </a>
-              <div className="hero-reassurance">
-                <span>30-day money-back</span>
-                <span>Auto-installation</span>
-                <span>Auto-renewal</span>
+        {/* ── FAQ ── */}
+        <section className="homepage-section homepage-section--tinted" id="faq">
+          <div className="shell">
+            <SectionHeader eyebrow="FAQs" title="SSL questions answered." centered />
+            <Fade inView inViewOnce>
+              <div className="wh-faq-list">
+                {faqs.map((faq, i) => (
+                  <div key={i} className={`wh-faq-item${openFaq === i ? " wh-faq-item--open" : ""}`}>
+                    <button
+                      className="wh-faq-trigger"
+                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                      aria-expanded={openFaq === i}
+                    >
+                      {faq.q}
+                      <span className="wh-faq-chevron" aria-hidden="true">{openFaq === i ? "−" : "+"}</span>
+                    </button>
+                    {openFaq === i && <div className="wh-faq-answer"><p>{faq.a}</p></div>}
+                  </div>
+                ))}
               </div>
-            </div>
-          </Fade>
-        </div>
-      </section>
+            </Fade>
+          </div>
+        </section>
+
+        {/* ── CTA ── */}
+        <section className="homepage-section wh-cta-section">
+          <div className="shell">
+            <Fade inView inViewOnce>
+              <div className="wh-cta-box">
+                <h2>The padlock your visitors trust.</h2>
+                <p>Automated installation. 256-bit encryption. 30-day money-back guarantee.</p>
+                <a href="/cart.php?a=add&pid=19&billingcycle=annually" className="wh-btn-primary">
+                  Get started free <ArrowRight size={16} />
+                </a>
+                <div className="hero-reassurance">
+                  <span>30-day money-back</span>
+                  <span>Auto-installation</span>
+                  <span>Auto-renewal</span>
+                </div>
+              </div>
+            </Fade>
+          </div>
+        </section>
+      </main>
     </>
   );
 }

@@ -7,7 +7,6 @@ import { FeaturedPricingWrapper } from "@/components/shared/FeaturedPricingWrapp
 import { useCurrency } from "@/lib/currency-context";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
-import { Shine } from "@/components/animate-ui/primitives/effects/shine";
 import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
 /* ── Pricing data ────────────────────────────────────────────── */
@@ -18,7 +17,7 @@ const plans = [
     audience: "Single website",
     monthly: { usd: 4.58,  ngn: 3499,  gbp: 3.49 },
     annual:  { usd: 3.82,  ngn: 2899,  gbp: 2.99 },
-    description: "Daily malware scanning, automatic removal, and web application firewall for one site.",
+    renewal: "Renews at $4.58/mo after the first term.",
     features: [
       "Daily malware scanning",
       "Automatic malware removal",
@@ -36,7 +35,7 @@ const plans = [
     audience: "Growing businesses",
     monthly: { usd: 9.52,  ngn: 7499,  gbp: 6.99 },
     annual:  { usd: 7.93,  ngn: 6249,  gbp: 5.99 },
-    description: "Everything in Essential plus continuous scanning, priority removal, and site seal.",
+    renewal: "Renews at $9.52/mo after the first term.",
     features: [
       "Continuous malware scanning",
       "Priority automatic removal",
@@ -55,7 +54,7 @@ const plans = [
     audience: "High-traffic and e-commerce",
     monthly: { usd: 38.89, ngn: 29999, gbp: 28.99 },
     annual:  { usd: 32.41, ngn: 24999, gbp: 24.99 },
-    description: "Comprehensive security suite: SIEM-grade logging, emergency response, and dedicated analyst support.",
+    renewal: "Renews at $38.89/mo after the first term.",
     features: [
       "Real-time threat detection",
       "SIEM-grade audit logs",
@@ -168,8 +167,7 @@ export default function SecurityOneguardPage() {
   }
 
   const billingCycle = billing === "annual" ? "annually" : "monthly";
-  const periodLabel = billing === "annual" ? "/mo, billed annually" : "/mo";
-  const renewalLabel = billing === "annual" ? "Billed annually. Cancel anytime." : "Renews monthly. Cancel anytime.";
+  const periodLabel = billing === "annual" ? "/mo billed annually" : "/mo";
 
   return (
     <>
@@ -179,203 +177,184 @@ export default function SecurityOneguardPage() {
         <link rel="canonical" href="https://onenetservers.net/security/oneguard" />
       </head>
 
-      {/* ── Hero ── */}
-      <section className="homepage-section wh-hero" aria-label="OneGuard security">
-        <div className="shell">
-          <Fade inView inViewOnce>
-            <div className="hero-trust-strip">
-              <span>Malware Scanning</span>
-              <span>Auto Removal</span>
-              <span>WAF Protection</span>
-              <span>DDoS Mitigation</span>
-              <span>30-Day MBG</span>
-            </div>
-          </Fade>
-
-          <Fade inView inViewOnce delay={0.05}>
-            <div className="section-header" style={{ maxWidth: 640, margin: "0 auto 40px", textAlign: "center" }}>
-              <p className="section-eyebrow">OneGuard Security</p>
-              <h1 style={{ margin: 0 }}>Your site defended. Around the clock.</h1>
-              <p className="section-lead">
+      <main className="page-shell">
+        {/* ── Hero ── */}
+        <section className="wh-hero">
+          <div className="shell">
+            <Fade inView inViewOnce className="wh-hero__inner">
+              <div className="wh-trust-strip">
+                <Slides inView inViewOnce direction="up" holdDelay={60}>
+                  {["Malware Scanning", "Auto Removal", "WAF Protection", "DDoS Mitigation", "30-Day MBG"].map((item) => (
+                    <span key={item} className="wh-trust-badge">{item}</span>
+                  ))}
+                </Slides>
+              </div>
+              <h1>Your site defended. Around the clock.</h1>
+              <p className="hero-sub">
                 OneGuard combines malware scanning, automatic removal, web application firewall,
-                and DDoS protection into one plan. No security expertise required.
+                and DDoS protection into one plan. From {showPrice(plans[0].annual)}/mo.
               </p>
-            </div>
-          </Fade>
+              <div className="hero-actions">
+                <a href="/cart.php?a=add&pid=237&billingcycle=annually" className="wh-btn-primary">
+                  Activate OneGuard <ArrowRight size={16} />
+                </a>
+              </div>
+              <div className="hero-reassurance">
+                <span>No credit card required</span>
+                <span>Cancel anytime</span>
+                <span>30-day money-back</span>
+              </div>
+            </Fade>
+          </div>
+        </section>
 
-          <Fade inView inViewOnce delay={0.1}>
-            <div className="hero-reassurance" style={{ justifyContent: "center" }}>
-              <span>No credit card required</span>
-              <span>Cancel anytime</span>
-              <span>30-day money-back guarantee</span>
-            </div>
-          </Fade>
-        </div>
-      </section>
-
-      {/* ── Pricing ── */}
-      <section className="homepage-section" id="plans">
-        <div className="shell">
-          <Fade inView inViewOnce>
+        {/* ── Pricing ── */}
+        <section className="homepage-section" id="plans">
+          <div className="shell">
             <SectionHeader
               eyebrow="OneGuard plans"
               title="Active security for every site."
               lead="Choose the level of protection that matches your risk. Upgrade any time, downgrade any time."
+              centered
             />
-          </Fade>
 
-          <div className="billing-toggle">
-            <div className="billing-tabs">
-              <button className={billing === "monthly" ? "is-active" : ""} onClick={() => setBilling("monthly")}>Monthly</button>
-              <button className={billing === "annual" ? "is-active" : ""} onClick={() => setBilling("annual")}>Annual</button>
+            <div className="billing-toggle">
+              <div className="billing-tabs">
+                <button className={billing === "monthly" ? "is-active" : ""} onClick={() => setBilling("monthly")}>Monthly</button>
+                <button className={billing === "annual" ? "is-active" : ""} onClick={() => setBilling("annual")}>Annual</button>
+              </div>
+              <span className="wh-savings-badge">Save up to 17% · +2 months free</span>
             </div>
-            <span className="wh-savings-badge">Save up to 17% · +2 months free</span>
-          </div>
 
-          <div className="plans-grid plans-grid--3" style={{ marginTop: 48 }}>
-            <Slides inView inViewOnce direction="up" holdDelay={70}>
-              {plans.map((plan) =>
-                plan.featured ? (
-                  <FeaturedPricingWrapper key={plan.key} badgeAlign="center">
-                    <article className="plan-card plan-card--featured">
-                      <div className="plan-card__header">
-                        <p className="plan-card__audience">{plan.audience}</p>
-                        <h3>{plan.name}</h3>
-                        <p className="plan-card__desc">{plan.description}</p>
-                      </div>
-                      <div className="plan-card__price">
-                        <span className="plan-card__amount">{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</span>
-                        <span className="plan-card__period">{periodLabel}</span>
-                      </div>
-                      <ul className="plan-card__features">
-                        {plan.features.map((f) => (
-                          <li key={f}>
-                            <Check size={14} aria-hidden="true" />
-                            <span>{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <Shine>
-                        <a
-                          href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`}
-                          className="btn btn-primary btn-full"
-                        >
+            <div className="pricing-grid wh-pricing-grid wh-pricing-grid--3">
+              <Slides inView inViewOnce direction="up" holdDelay={80}>
+                {plans.map((plan) =>
+                  plan.featured ? (
+                    <FeaturedPricingWrapper key={plan.key}>
+                      <div className="pricing-card pricing-card--featured pricing-card--mui-inner">
+                        <div>
+                          <h3>{plan.name}</h3>
+                          <p>{plan.audience}</p>
+                        </div>
+                        <div className="pricing-card__price">
+                          <strong>{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</strong>
+                          <span>{periodLabel}</span>
+                        </div>
+                        <p className="pricing-card__renewal">{plan.renewal}</p>
+                        <ul className="wh-features-list">
+                          {plan.features.map((f) => (
+                            <li key={f}><Check size={14} className="wh-check-icon" />{f}</li>
+                          ))}
+                          <li><Check size={14} className="wh-check-icon" /><span className="wh-mbg-badge">30-day MBG</span></li>
+                        </ul>
+                        <a href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`} className="wh-card-cta wh-card-cta--featured">
                           Get {plan.name.replace("OneGuard ", "")}
                         </a>
-                      </Shine>
-                      <p className="plan-card__renewal">{renewalLabel}</p>
-                    </article>
-                  </FeaturedPricingWrapper>
-                ) : (
-                  <article key={plan.key} className="plan-card plan-card--standalone">
-                    <div className="plan-card__header">
-                      <p className="plan-card__audience">{plan.audience}</p>
-                      <h3>{plan.name}</h3>
-                      <p className="plan-card__desc">{plan.description}</p>
-                    </div>
-                    <div className="plan-card__price">
-                      <span className="plan-card__amount">{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</span>
-                      <span className="plan-card__period">{periodLabel}</span>
-                    </div>
-                    <ul className="plan-card__features">
-                      {plan.features.map((f) => (
-                        <li key={f}>
-                          <Check size={14} aria-hidden="true" />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Shine>
-                      <a
-                        href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`}
-                        className={`btn btn-ghost btn-full`}
-                      >
+                      </div>
+                    </FeaturedPricingWrapper>
+                  ) : (
+                    <div key={plan.key} className="pricing-card">
+                      <div>
+                        <h3>{plan.name}</h3>
+                        <p>{plan.audience}</p>
+                      </div>
+                      <div className="pricing-card__price">
+                        <strong>{showPrice(billing === "annual" ? plan.annual : plan.monthly)}</strong>
+                        <span>{periodLabel}</span>
+                      </div>
+                      <p className="pricing-card__renewal">{plan.renewal}</p>
+                      <ul className="wh-features-list">
+                        {plan.features.map((f) => (
+                          <li key={f}><Check size={14} className="wh-check-icon" />{f}</li>
+                        ))}
+                        <li><Check size={14} className="wh-check-icon" /><span className="wh-mbg-badge">30-day MBG</span></li>
+                      </ul>
+                      <a href={`/cart.php?a=add&pid=${plan.pid}&billingcycle=${billingCycle}`} className="wh-card-cta">
                         Get {plan.name.replace("OneGuard ", "")}
                       </a>
-                    </Shine>
-                    <p className="plan-card__renewal">{renewalLabel}</p>
-                  </article>
-                )
-              )}
-            </Slides>
+                    </div>
+                  )
+                )}
+              </Slides>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── Features ── */}
-      <section className="homepage-section homepage-section--tinted" id="features">
-        <div className="shell">
-          <SectionHeader
-            eyebrow="How OneGuard protects you"
-            title="Eight layers of active defence."
-            centered
-          />
-          <div className="wh-features-grid">
-            <Slides inView inViewOnce direction="up" holdDelay={60}>
-              {features.map((f) => {
-                const Icon = f.icon;
-                return (
-                  <Tilt key={f.title}>
-                    <TiltContent>
-                      <div className="wh-feature-card">
-                        <div className="wh-feature-icon" style={{ background: f.bg, color: f.color }}>
-                          <Icon size={20} />
+        {/* ── Features ── */}
+        <section className="homepage-section homepage-section--tinted" id="features">
+          <div className="shell">
+            <SectionHeader
+              eyebrow="How OneGuard protects you"
+              title="Eight layers of active defence."
+              centered
+            />
+            <div className="wh-features-grid">
+              <Slides inView inViewOnce direction="up" holdDelay={60}>
+                {features.map((f) => {
+                  const Icon = f.icon;
+                  return (
+                    <Tilt key={f.title}>
+                      <TiltContent>
+                        <div className="wh-feature-card">
+                          <div className="wh-feature-icon" style={{ background: f.bg, color: f.color }}>
+                            <Icon size={20} />
+                          </div>
+                          <h3>{f.title}</h3>
+                          <p>{f.description}</p>
                         </div>
-                        <h3>{f.title}</h3>
-                        <p>{f.description}</p>
-                      </div>
-                    </TiltContent>
-                  </Tilt>
-                );
-              })}
-            </Slides>
+                      </TiltContent>
+                    </Tilt>
+                  );
+                })}
+              </Slides>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── FAQ ── */}
-      <section className="homepage-section homepage-section--tinted" id="faq">
-        <div className="shell">
-          <SectionHeader eyebrow="FAQs" title="Security questions answered." centered />
-          <Fade inView inViewOnce>
-            <div className="wh-faq-list">
-              {faqs.map((faq, i) => (
-                <div key={i} className={`wh-faq-item${openFaq === i ? " wh-faq-item--open" : ""}`}>
-                  <button
-                    className="wh-faq-trigger"
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    aria-expanded={openFaq === i}
-                  >
-                    {faq.q}
-                    <span className="wh-faq-chevron" aria-hidden="true">{openFaq === i ? "−" : "+"}</span>
-                  </button>
-                  {openFaq === i && <div className="wh-faq-answer"><p>{faq.a}</p></div>}
-                </div>
-              ))}
-            </div>
-          </Fade>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="homepage-section wh-cta-section">
-        <div className="shell">
-          <Fade inView inViewOnce>
-            <div className="wh-cta-box">
-              <h2>Your site, actively defended.</h2>
-              <p>Stop threats before they reach your visitors. 30-day money-back guarantee. Cancel anytime.</p>
-              <a href="/cart.php?a=add&pid=237&billingcycle=annually" className="wh-btn-primary">
-                Activate OneGuard <ArrowRight size={16} />
-              </a>
-              <div className="hero-reassurance">
-                <span>30-day money-back</span>
-                <span>Cancel anytime</span>
-                <span>No expertise needed</span>
+        {/* ── FAQ ── */}
+        <section className="homepage-section homepage-section--tinted" id="faq">
+          <div className="shell">
+            <SectionHeader eyebrow="FAQs" title="Security questions answered." centered />
+            <Fade inView inViewOnce>
+              <div className="wh-faq-list">
+                {faqs.map((faq, i) => (
+                  <div key={i} className={`wh-faq-item${openFaq === i ? " wh-faq-item--open" : ""}`}>
+                    <button
+                      className="wh-faq-trigger"
+                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                      aria-expanded={openFaq === i}
+                    >
+                      {faq.q}
+                      <span className="wh-faq-chevron" aria-hidden="true">{openFaq === i ? "−" : "+"}</span>
+                    </button>
+                    {openFaq === i && <div className="wh-faq-answer"><p>{faq.a}</p></div>}
+                  </div>
+                ))}
               </div>
-            </div>
-          </Fade>
-        </div>
-      </section>
+            </Fade>
+          </div>
+        </section>
+
+        {/* ── CTA ── */}
+        <section className="homepage-section wh-cta-section">
+          <div className="shell">
+            <Fade inView inViewOnce>
+              <div className="wh-cta-box">
+                <h2>Your site, actively defended.</h2>
+                <p>Stop threats before they reach your visitors. 30-day money-back guarantee. Cancel anytime.</p>
+                <a href="/cart.php?a=add&pid=237&billingcycle=annually" className="wh-btn-primary">
+                  Activate OneGuard <ArrowRight size={16} />
+                </a>
+                <div className="hero-reassurance">
+                  <span>30-day money-back</span>
+                  <span>Cancel anytime</span>
+                  <span>No expertise needed</span>
+                </div>
+              </div>
+            </Fade>
+          </div>
+        </section>
+      </main>
     </>
   );
 }

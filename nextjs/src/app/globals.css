@@ -3873,6 +3873,9 @@ h1 {
   .wh-pricing-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+  .wh-pricing-grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 /* ── Feature list inside pricing card ── */
