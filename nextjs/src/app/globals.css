@@ -9346,7 +9346,6 @@ details[open] .legal-accordion__chevron {
 .ftabs-image-panel {
   position: relative;
   aspect-ratio: 4 / 3;
-  border-radius: 20px;
   overflow: hidden;
   background: var(--bg-2);
   flex-shrink: 0;
