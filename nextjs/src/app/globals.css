@@ -5778,48 +5778,11 @@ p.lead {
    ═══════════════════════════════════════════════════════════ */
 
 .dii-hero {
-  padding: calc(var(--nav-h) + 48px) 0 64px;
   background: linear-gradient(145deg, #0f0f1a 60%, #1a1a4e);
-}
-
-.dii-hero__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
 }
 
 .dii-hero h1 {
   max-width: none;
-}
-
-.dii-hero__badge {
-  display: inline-block;
-  background: rgba(67 67 240 / 0.3);
-  border: 1px solid rgba(67 67 240 / 0.5);
-  color: #a5b4fc;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  padding: 5px 14px;
-  border-radius: 99px;
-  margin-bottom: 20px;
-}
-
-.dii-hero h1 {
-  color: #fff;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  margin: 0 0 16px;
-}
-
-.dii-hero .hero-sub {
-  color: rgba(255 255 255 / 0.72);
 }
 
 .dii-who-grid {
@@ -7075,31 +7038,6 @@ p.lead {
   }
 }
 
-/* ── DII hero ── */
-@media (max-width: 768px) {
-  .dii-hero {
-    padding: calc(var(--nav-h) + 32px) 0 52px;
-  }
-}
-
-@media (max-width: 480px) {
-  .dii-hero {
-    padding: calc(var(--nav-h) + 20px) 0 40px;
-  }
-
-  .dii-hero h1 {
-    font-size: clamp(1.6rem, 7.5vw, 2.2rem);
-  }
-
-  .dii-hero .hero-sub {
-    font-size: 14px;
-  }
-
-  .dii-hero__badge {
-    font-size: 10.5px;
-    padding: 4px 12px;
-  }
-}
 
 /* ── DII who grid — 1-col on small phones ── */
 @media (max-width: 400px) {

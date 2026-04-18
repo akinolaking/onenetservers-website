@@ -156,11 +156,15 @@ export default function DigitalIdentityPage() {
   return (
     <main className="page-shell">
       {/* ── Hero ── */}
-      <section className="dii-hero">
+      <section className="wh-hero dii-hero">
         <div className="shell">
-          <Fade inView inViewOnce className="dii-hero__inner">
-            <div className="dii-hero__badge" aria-label="Programme name">
-              Digital Identity Initiative
+          <Fade inView inViewOnce className="wh-hero__inner">
+            <div className="wh-trust-strip">
+              <Slides inView inViewOnce direction="up" holdDelay={60}>
+                {["Free Domain", "Free Hosting", "Free Email", "No Credit Card", "Year One Free"].map((item) => (
+                  <span key={item} className="wh-trust-badge">{item}</span>
+                ))}
+              </Slides>
             </div>
             <h1>Your first year online. On us.</h1>
             <p className="hero-sub">
