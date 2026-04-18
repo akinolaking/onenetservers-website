@@ -286,15 +286,13 @@ export default function SecuritySslPage() {
       </section>
 
       {/* ── Features ── */}
-      <section className="homepage-section homepage-section--alt" id="features">
+      <section className="homepage-section homepage-section--tinted" id="features">
         <div className="shell">
-          <Fade inView inViewOnce>
-            <SectionHeader
-              eyebrow="What's included"
-              title="Enterprise-grade security. Starter-friendly price."
-            />
-          </Fade>
-
+          <SectionHeader
+            eyebrow="What's included"
+            title="Enterprise-grade security. Starter-friendly price."
+            centered
+          />
           <div className="wh-features-grid">
             <Slides inView inViewOnce direction="up" holdDelay={70}>
               {features.map((f) => {
@@ -318,56 +316,47 @@ export default function SecuritySslPage() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="homepage-section homepage-section--dark" id="cta">
-        <div className="shell" style={{ textAlign: "center" }}>
-          <Shine>
-            <div className="bottom-cta-card">
-              <p className="section-eyebrow" style={{ color: "rgba(255,255,255,0.6)" }}>Secure your site today</p>
-              <h2 style={{ color: "#fff", margin: "12px 0 16px" }}>Your visitors are watching the padlock.</h2>
-              <p style={{ color: "rgba(255,255,255,0.72)", maxWidth: 480, margin: "0 auto 32px" }}>
-                A single SSL certificate protects your reputation, your Google ranking, and your
-                customers&apos; trust. From {showPrice(plans[0].annual)} per year.
-              </p>
-              <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                <a href="/security/oneguard" className="btn btn-white">
-                  See OneGuard Security <ArrowRight size={14} style={{ marginLeft: 4 }} />
-                </a>
-                <a href="/cart.php?a=add&pid=19&billingcycle=annually" className="btn btn-primary">
-                  Get PositiveSSL
-                </a>
-              </div>
+      {/* ── FAQ ── */}
+      <section className="homepage-section homepage-section--tinted" id="faq">
+        <div className="shell">
+          <SectionHeader eyebrow="FAQs" title="SSL questions answered." centered />
+          <Fade inView inViewOnce>
+            <div className="wh-faq-list">
+              {faqs.map((faq, i) => (
+                <div key={i} className={`wh-faq-item${openFaq === i ? " wh-faq-item--open" : ""}`}>
+                  <button
+                    className="wh-faq-trigger"
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    aria-expanded={openFaq === i}
+                  >
+                    {faq.q}
+                    <span className="wh-faq-chevron" aria-hidden="true">{openFaq === i ? "−" : "+"}</span>
+                  </button>
+                  {openFaq === i && <div className="wh-faq-answer"><p>{faq.a}</p></div>}
+                </div>
+              ))}
             </div>
-          </Shine>
+          </Fade>
         </div>
       </section>
 
-      {/* ── FAQ ── */}
-      <section className="homepage-section" id="faq">
-        <div className="shell" style={{ maxWidth: 780 }}>
+      {/* ── CTA ── */}
+      <section className="homepage-section wh-cta-section">
+        <div className="shell">
           <Fade inView inViewOnce>
-            <SectionHeader eyebrow="FAQs" title="SSL questions answered." />
-          </Fade>
-
-          <div className="faq-list" style={{ marginTop: 48 }}>
-            {faqs.map((faq, i) => (
-              <div key={i} className="faq-item">
-                <button
-                  className="faq-question"
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  aria-expanded={openFaq === i}
-                >
-                  {faq.q}
-                  <span className="faq-chevron" aria-hidden="true">{openFaq === i ? "−" : "+"}</span>
-                </button>
-                {openFaq === i && (
-                  <div className="faq-answer">
-                    <p>{faq.a}</p>
-                  </div>
-                )}
+            <div className="wh-cta-box">
+              <h2>The padlock your visitors trust.</h2>
+              <p>Automated installation. 256-bit encryption. 30-day money-back guarantee.</p>
+              <a href="/cart.php?a=add&pid=19&billingcycle=annually" className="wh-btn-primary">
+                Get started free <ArrowRight size={16} />
+              </a>
+              <div className="hero-reassurance">
+                <span>30-day money-back</span>
+                <span>Auto-installation</span>
+                <span>Auto-renewal</span>
               </div>
-            ))}
-          </div>
+            </div>
+          </Fade>
         </div>
       </section>
     </>

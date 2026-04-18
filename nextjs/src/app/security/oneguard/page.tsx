@@ -303,15 +303,13 @@ export default function SecurityOneguardPage() {
       </section>
 
       {/* ── Features ── */}
-      <section className="homepage-section homepage-section--alt" id="features">
+      <section className="homepage-section homepage-section--tinted" id="features">
         <div className="shell">
-          <Fade inView inViewOnce>
-            <SectionHeader
-              eyebrow="How OneGuard protects you"
-              title="Eight layers of active defence."
-            />
-          </Fade>
-
+          <SectionHeader
+            eyebrow="How OneGuard protects you"
+            title="Eight layers of active defence."
+            centered
+          />
           <div className="wh-features-grid">
             <Slides inView inViewOnce direction="up" holdDelay={60}>
               {features.map((f) => {
@@ -335,56 +333,47 @@ export default function SecurityOneguardPage() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="homepage-section homepage-section--dark" id="cta">
-        <div className="shell" style={{ textAlign: "center" }}>
-          <Shine>
-            <div className="bottom-cta-card">
-              <p className="section-eyebrow" style={{ color: "rgba(255,255,255,0.6)" }}>Activate today</p>
-              <h2 style={{ color: "#fff", margin: "12px 0 16px" }}>Stop a breach before it happens.</h2>
-              <p style={{ color: "rgba(255,255,255,0.72)", maxWidth: 480, margin: "0 auto 32px" }}>
-                The average time to detect a website compromise without a security tool is 6 months.
-                OneGuard finds and removes threats in minutes, from {showPrice(plans[0].annual)}/mo.
-              </p>
-              <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                <a href="/security/ssl" className="btn btn-white">
-                  View SSL Certificates <ArrowRight size={14} style={{ marginLeft: 4 }} />
-                </a>
-                <a href="/cart.php?a=add&pid=237&billingcycle=annually" className="btn btn-primary">
-                  Get OneGuard Basic
-                </a>
-              </div>
+      {/* ── FAQ ── */}
+      <section className="homepage-section homepage-section--tinted" id="faq">
+        <div className="shell">
+          <SectionHeader eyebrow="FAQs" title="Security questions answered." centered />
+          <Fade inView inViewOnce>
+            <div className="wh-faq-list">
+              {faqs.map((faq, i) => (
+                <div key={i} className={`wh-faq-item${openFaq === i ? " wh-faq-item--open" : ""}`}>
+                  <button
+                    className="wh-faq-trigger"
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    aria-expanded={openFaq === i}
+                  >
+                    {faq.q}
+                    <span className="wh-faq-chevron" aria-hidden="true">{openFaq === i ? "−" : "+"}</span>
+                  </button>
+                  {openFaq === i && <div className="wh-faq-answer"><p>{faq.a}</p></div>}
+                </div>
+              ))}
             </div>
-          </Shine>
+          </Fade>
         </div>
       </section>
 
-      {/* ── FAQ ── */}
-      <section className="homepage-section" id="faq">
-        <div className="shell" style={{ maxWidth: 780 }}>
+      {/* ── CTA ── */}
+      <section className="homepage-section wh-cta-section">
+        <div className="shell">
           <Fade inView inViewOnce>
-            <SectionHeader eyebrow="FAQs" title="Security questions answered." />
-          </Fade>
-
-          <div className="faq-list" style={{ marginTop: 48 }}>
-            {faqs.map((faq, i) => (
-              <div key={i} className="faq-item">
-                <button
-                  className="faq-question"
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  aria-expanded={openFaq === i}
-                >
-                  {faq.q}
-                  <span className="faq-chevron" aria-hidden="true">{openFaq === i ? "−" : "+"}</span>
-                </button>
-                {openFaq === i && (
-                  <div className="faq-answer">
-                    <p>{faq.a}</p>
-                  </div>
-                )}
+            <div className="wh-cta-box">
+              <h2>Your site, actively defended.</h2>
+              <p>Stop threats before they reach your visitors. 30-day money-back guarantee. Cancel anytime.</p>
+              <a href="/cart.php?a=add&pid=237&billingcycle=annually" className="wh-btn-primary">
+                Activate OneGuard <ArrowRight size={16} />
+              </a>
+              <div className="hero-reassurance">
+                <span>30-day money-back</span>
+                <span>Cancel anytime</span>
+                <span>No expertise needed</span>
               </div>
-            ))}
-          </div>
+            </div>
+          </Fade>
         </div>
       </section>
     </>
