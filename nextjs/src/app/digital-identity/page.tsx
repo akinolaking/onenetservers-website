@@ -162,7 +162,7 @@ export default function DigitalIdentityPage() {
             <div className="dii-hero__badge" aria-label="Programme name">
               Digital Identity Initiative
             </div>
-            <h1>Your first year online.<br />On us.</h1>
+            <h1>Your first year online. On us.</h1>
             <p className="hero-sub">
               Free domain, hosting, and business email for qualifying Nigerian founders,
               students, freelancers, and creators. No credit card required.
