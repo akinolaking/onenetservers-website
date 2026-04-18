@@ -8,6 +8,7 @@ import { useCurrency } from "@/lib/currency-context";
 import { Fade } from "@/components/animate-ui/primitives/effects/fade";
 import { Slides } from "@/components/animate-ui/primitives/effects/slide";
 import { Shine } from "@/components/animate-ui/primitives/effects/shine";
+import { Tilt, TiltContent } from "@/components/animate-ui/primitives/effects/tilt";
 
 /* ── Pricing data ────────────────────────────────────────────── */
 const plans = [
@@ -311,22 +312,22 @@ export default function SecurityOneguardPage() {
             />
           </Fade>
 
-          <div className="features-grid" style={{ marginTop: 48 }}>
+          <div className="wh-features-grid">
             <Slides inView inViewOnce direction="up" holdDelay={60}>
               {features.map((f) => {
                 const Icon = f.icon;
                 return (
-                  <article key={f.title} className="feature-card">
-                    <div
-                      className="feature-card__icon"
-                      style={{ background: f.bg, color: f.color }}
-                      aria-hidden="true"
-                    >
-                      <Icon size={20} />
-                    </div>
-                    <h3>{f.title}</h3>
-                    <p>{f.description}</p>
-                  </article>
+                  <Tilt key={f.title}>
+                    <TiltContent>
+                      <div className="wh-feature-card">
+                        <div className="wh-feature-icon" style={{ background: f.bg, color: f.color }}>
+                          <Icon size={20} />
+                        </div>
+                        <h3>{f.title}</h3>
+                        <p>{f.description}</p>
+                      </div>
+                    </TiltContent>
+                  </Tilt>
                 );
               })}
             </Slides>

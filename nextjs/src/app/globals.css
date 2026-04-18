@@ -1372,11 +1372,22 @@ select {
 
 .billing-toggle {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 8px;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   margin-top: 28px;
+}
+
+/* Plain text underneath the pill — override badge pill styling */
+.billing-toggle .wh-savings-badge {
+  border: none;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
 }
 
 /* Segmented pill track */
