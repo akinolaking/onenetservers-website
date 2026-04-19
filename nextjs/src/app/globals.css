@@ -9346,8 +9346,7 @@ details[open] .legal-accordion__chevron {
 .ftabs-image-panel {
   position: relative;
   aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: var(--bg-2);
+  background: transparent;
   flex-shrink: 0;
 }
 
@@ -9356,6 +9355,9 @@ details[open] .legal-accordion__chevron {
   inset: 0;
   opacity: 0;
   transition: opacity 0.45s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ftabs-img-wrap--active {
@@ -9363,8 +9365,8 @@ details[open] .legal-accordion__chevron {
 }
 
 .ftabs-img {
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center center;
 }
 
 /* ── Tab list ── */
